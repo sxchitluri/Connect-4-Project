@@ -54,7 +54,6 @@ public class GameModel {
     }
     
 
-    
 
     public static void Save (GameDomainObject gameToSave) {
         GameDataObject gameDataObject = new GameDataObject(gameToSave);
