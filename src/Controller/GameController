@@ -1,0 +1,13 @@
+Package Controller;
+
+import DataAccess.GameDataAccess;
+import DataObjects.GameDataObject;
+import DomainObjects.GameDomainObject;
+
+public class GameController {
+    public GameDataObject startNewGame(int gameTypeId, int player1Id, int player2Id) {
+        GameDataObject gameData = GameDataAccess.createGame(gameTypeId, player1Id, player2Id);
+        GameDomainObject gameDomain = new GameDomainObject(gameData);
+        return gameData;
+    }
+}
