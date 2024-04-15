@@ -29,7 +29,7 @@ public class GameTypeModel {
   
     }
     
-    //Sprint/Story???????
+    //Sprint/Story 3
     private static void validateGameType(GameTypeDomainObject gameType) {
 
     }

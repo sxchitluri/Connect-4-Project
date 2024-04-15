@@ -9,6 +9,7 @@ import restService.response.PlayerResponse;
 
 public class PlayerController {
     
+    //CREATING NEW PLAYER
     public static PlayerResponse registerPlayer(RegisterPlayerRequest request) {
         try {
             // PlayerDomainObject domainToCreate = new PlayerDomainObject(request.getUsername(), request.getPassword());
@@ -20,6 +21,21 @@ public class PlayerController {
 
         } catch (Exception ex) {
             PlayerResponse response = new PlayerResponse(ex.getMessage());
+            return response;
+        }
+    }
+
+    //GETTING PLAYER DETAILS - STORY 6 - also edit PlayerResponse.java
+    public static PlayerResponse GetPlayer(int id) {
+
+        try {
+            if (id = playerid) {
+             return new PlayerResponse(1, request.getUsername(), request.getGamesPlayed(), request.getGamesWon(), request.getGamesLost() );   
+            }
+            
+            return null;
+        } catch (Exception ex) {
+            PlayerResponse response = new PlayerResponse(ex.getMessage()); //cannot find x player id details
             return response;
         }
     }

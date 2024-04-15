@@ -13,7 +13,7 @@ import restService.response.GameResponse;
 
 public class GameController {
     
-
+    //GETTING GAME DETAILS - making sure game exists??? [STORY 2]
     public static GameResponse GetGame(int gameId) {
         try {
 
@@ -28,10 +28,13 @@ public class GameController {
 
     }
     
+    //MAKING MOVES
     public static GameResponse PlayGame(PlayGameRequest request) {
 
         try {
             
         }
     }
+
+    
 }

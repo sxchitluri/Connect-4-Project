@@ -45,7 +45,7 @@ public class PlayerModel {
   
     }
     
-    //validation methods also go here for playerModel?????
+    //STORY 1 - validation methods also go here for playerModel?????
     private static void validatePlayer(PlayerDomainObject player) {
         //Sprint 1 - Story 1:  validate player registation
 
@@ -60,6 +60,8 @@ public class PlayerModel {
         //validate 6-20 characters
 
     }
+
+    //STORY 3 - validate the players 1 and 2 exist for creating a game
 
     public static void Save (PlayerDomainObject playerToSave) {
         PlayerDataObject playerDataObject = new PlayerDataObject(playerToSave);

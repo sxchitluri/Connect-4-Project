@@ -12,8 +12,9 @@ public class GameDataAccess {
         initialize();
     }
 
+    //default values for game
     private void initialize() {
-        games.add(new GameDataObject(0, 1, 2, "Playing", 2, 0));
+        games.add(new GameDataObject(0, 0, 1, "Playing", 1, -1));
         nextId = 2;
     }
 
