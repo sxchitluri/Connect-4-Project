@@ -14,6 +14,7 @@ public class GameTypeDataAccess {
 
     private void initialize() {
         gameTypes.add(new GameTypeDataObject(0, "Classic"));
+        //gameTypes.add(new GameTypeDataObject(1, "Connect-3");
         // nextId = 1;
     }
 

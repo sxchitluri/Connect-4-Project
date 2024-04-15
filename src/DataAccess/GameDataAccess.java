@@ -13,8 +13,8 @@ public class GameDataAccess {
     }
 
     private void initialize() {
-        games.add(new GameDataObject(0, 0, 1, "Playing", 0, -1));
-        nextId = 1;
+        games.add(new GameDataObject(0, 1, 2, "Playing", 2, 0));
+        nextId = 2;
     }
 
     private static int getNextId() {
@@ -43,14 +43,14 @@ public class GameDataAccess {
     }
 
     // fix for game
-    public static GameDataObject GetAvailableGame() {
-        for( GameDataObject game : games) {
-            if (game.boardId == -1) {
-                return new GameDataObject(game);
-            }
-        }
-        return null;
-    }
+    // public static GameDataObject GetAvailableGame() {
+    //     for( GameDataObject game : games) {
+    //         if (game.id == -1) {
+    //             return new GameDataObject(game);
+    //         }
+    //     }
+    //     return null;
+    // }
 
 
     public static GameDataObject AddGame(GameDataObject newGame) {
@@ -59,12 +59,15 @@ public class GameDataAccess {
         return newGame;
     }
 
-    //fix for game
+    //save the game
     public static void Save(GameDataObject gameToSave) {
         for( GameDataObject game : games) {
             if (game.id == gameToSave.id) {
-                game.name = gameToSave.name;
-                game.rackId = gameToSave.rackId;
+                game.player1Id = gameToSave.player1Id;
+                game.player2Id = gameToSave.player2Id;
+                game.currentTurnPlayer = gameToSave.currentTurnPlayer;
+                game.winnerId = gameToSave.winnerId;
+                game.status = gameToSave.status;
             }
         }
     }

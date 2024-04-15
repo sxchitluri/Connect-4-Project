@@ -31,7 +31,7 @@ public class GameDataObject {
     }
 
     public GameDataObject(GameDomainObject game) {
-        this.id = game.GetId();
+        this.id = game.GetGameId();
         this.player1Id = game.GetPlayer1Id();
         this.player2Id = game.GetPlayer2Id();
         this.status = game.GetStatus();
@@ -39,3 +39,6 @@ public class GameDataObject {
         this.winnerId = game.GetWinnerId();
     }
 }
+
+//QUESTION TO ASK: are the default values for game from the GameDataAccess.initilize() or do the default values go here?
+

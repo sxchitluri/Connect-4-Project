@@ -13,13 +13,13 @@ public class GameTypeDataObject {
     }
 
     //Copy Constructor
-    public GameTypeDataObject (GameTypeDataObject itemType) {
-        this.id = itemType.id;
-        this.name = itemType.name;
+    public GameTypeDataObject (GameTypeDataObject gameType) {
+        this.id = gameType.id;
+        this.name = gameType.name;
     }
 
-    public GameTypeDataObject (GameTypeDomainObject itemType) {
-        this.id = itemType.GetId();
-        this.name = itemType.GetName();
+    public GameTypeDataObject (GameTypeDomainObject gameType) {
+        this.id = gameType.GetId();
+        this.name = gameType.GetName();
     }
 }

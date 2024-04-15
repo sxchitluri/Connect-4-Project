@@ -13,7 +13,7 @@ public class BoardDataAccess {
     }
 
     private void initialize() {
-        boards.add(new BoardDataObject(0, 0, "NEED BOARD"));
+        boards.add(new BoardDataObject(0, 0, "                                          "));
         nextId = 1;
     }
 

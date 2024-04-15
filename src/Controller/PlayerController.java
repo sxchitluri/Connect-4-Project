@@ -16,7 +16,7 @@ public class PlayerController {
             // PlayerResponse response = new PlayerResponse(domainCreated.GetId(), domainCreate.getUserName());
 
             return new PlayerResponse(1, request.getUsername());
-
+            //then save the player to the player array list
 
         } catch (Exception ex) {
             PlayerResponse response = new PlayerResponse(ex.getMessage());

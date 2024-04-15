@@ -13,9 +13,8 @@ public class PlayerDataAccess {
     }
 
     private void initialize() {
-        players.add(new PlayerDataObject(0, "rflorin"));
-        players.add(new PlayerDataObject(1, "kfindley"));
-        nextId = 2;
+        players.add(new PlayerDataObject(0, "doomsmith", "smashriptear"));
+        nextId = 1;
     }
 
     private static int getNextId() {
@@ -43,10 +42,34 @@ public class PlayerDataAccess {
         return null;
     }
 
+    // trying to match the player id to the a game's player1Id or player2Id
+    // that helps the PlayerModel.java
+    // this is from the itemDataAccess.java file
+      public static ArrayList<PlayerDataObject> GetPlayersByGameId(int gameId) {
+        ArrayList<GameDataObject> playersById = new ArrayList<PlayerDataObject>();
+
+        for( PlayerDataObject player : players) {
+            if (player.id == gameId.player1Id) {
+                playersById.add(new PlayerDataObject(player));
+            }
+        }
+        return playersById;
+    }
+
     public static PlayerDataObject AddPlayer(PlayerDataObject newPlayer) {
         newPlayer.id = getNextId();
         players.add(newPlayer);
         return newPlayer;
+    }
+
+    //save players, Need it ??????
+    public static void Save(PlayerDataObject playerToSave) {
+        for( PlayersDataObject player : players) {
+            if (player.id == playerToSave.id) {
+                player.username = playerToSave.username;
+                player.password = playerToSave.password;
+            }
+        }
     }
 
 }
