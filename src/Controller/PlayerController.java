@@ -2,6 +2,7 @@ package Controller;
 
 import java.util.ArrayList;
 
+import restService.request.GetPlayerDetailsRequest;
 // import DomainObjects.PlayerDomainObject;
 // import Models.PlayerModel;
 import restService.request.RegisterPlayerRequest;
@@ -26,7 +27,7 @@ public class PlayerController {
     }
 
     //GETTING PLAYER DETAILS - STORY 6 - also edit PlayerResponse.java
-    public static PlayerResponse GetPlayer(int id) {
+    public static PlayerResponse GetPlayerDetails(GetPlayerDetailsRequest request) {
 
         try {
             if (id = playerid) {
