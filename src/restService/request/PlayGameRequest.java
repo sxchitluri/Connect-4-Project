@@ -3,34 +3,31 @@ package restService.request;
 import DataAccess.BoardDataAccess;
 import DataObjects.BoardDataObject;
 
+//story 4 play game request
 public class PlayGameRequest {
-
+    //inputs from controller
     private final int gameId;
-    private final int gameTypeId;
-    private final int player1Id;
-    private final int player2Id;
-    private final String status;
-    private final int currentTurnPlayer;
-    private final int winnerId;
-    private final BoardDataObject board;
+    private final int playerId;
+    private final int column;
 
-    //GET BACK TO DOING THIS AND ADDING ALL THE GETS FOR EACH VARIABLE
-
-    // default playgame request that has default values and creates a new board?????????????????
-    public PlayGameRequest(int gameId, int gameTypeId, int player1Id, int player2Id, String status,
-            int currentTurnPlayer, int winnerId, BoardDataObject board) {
+    
+    // playgame request when a player wants to make a move
+    public PlayGameRequest(int gameId, int playerId, int column) {
         this.gameId = gameId;
-        this.gameTypeId = gameTypeId;
-        this.player1Id = player1Id;
-        this.player2Id = player2Id;
-        this.currentTurnPlayer = currentTurnPlayer; 
-        this.status = status; 
-        this.winnerId = winnerId; 
-        this.board = board;
+        this.playerId = playerId;
+        this.column = column;
     }
 
-    public int GetGameTypeId() {
-        return this.gameTypeId;
+    public int GetGameId() {
+        return this.gameId;
+    }
+
+    public int GetPlayerId() {
+        return this.playerId;
+    }
+    
+    public int GetColumn() {
+        return this.column;
     }
 
 }
