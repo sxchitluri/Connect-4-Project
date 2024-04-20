@@ -1,5 +1,6 @@
 package restService.response;
 
+// story 2's AND story 4's response definition 
 public class GameResponse {
     
     private final boolean isValid;
@@ -37,7 +38,7 @@ public class GameResponse {
         this.winnerId = -1;
         this.board = "";
         this.isValid = false;
-        this.errorMessage = errorMessage;
+        this.errorMessage = errorMessage; //Does this need to be a message sentence here or in the MODEL???
     }
 
     public int GetGameId() {

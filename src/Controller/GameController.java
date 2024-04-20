@@ -14,6 +14,8 @@ import restService.response.GameResponse;
 public class GameController {
     
     //GETTING GAME DETAILS - making sure game exists??? [STORY 2]
+    // request is getgamedetailsrequest.java
+    // reponse is gameresponse.java
     public static GameResponse GetGame(int gameId) {
         try {
 
@@ -28,7 +30,9 @@ public class GameController {
 
     }
     
-    //MAKING MOVES
+    //MAKING MOVES - STORY 4,
+    // request is playgamerequest.java
+    // reponse is gameresponse.java
     public static GameResponse PlayGame(PlayGameRequest request) {
 
         try {
