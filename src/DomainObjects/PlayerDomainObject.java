@@ -33,7 +33,7 @@ public class PlayerDomainObject {
         }
         return playerDomain;
     }
-    
+
     public int GetId() {
         return this.id;
     }
@@ -47,35 +47,42 @@ public class PlayerDomainObject {
     }
 
     public BoardDomainObject GetBoard() {
-        //Lazy Load the Rack
+        // Lazy Load the Rack
         if (this.board == null) {
-            this.board = BoardModel.GetBoardById(board.id);  //again, need to be very careful here
+            this.board = BoardModel.GetBoardById(board.GetId());
+            if (this.board == null) {
+                throw new IllegalStateException(
+                        "Board data for Board " + this.board + " could not be loaded.");
+            }
         }
         return this.board;
     }
 
-    /*public GameTypeDomainObject GetGameType() {
-        //Lazy Load the ItemType
-        if (this.gameType == null) {
-            this.gameType = GameTypeModel.GetGameTypeById(gameTypeId);
-        }
-        return this.gameType;
-    }*/
+    /*
+     * public GameTypeDomainObject GetGameType() {
+     * //Lazy Load the ItemType
+     * if (this.gameType == null) {
+     * this.gameType = GameTypeModel.GetGameTypeById(gameTypeId);
+     * }
+     * return this.gameType;
+     * }
+     */
 
-    public GameTypeDomainObject getGameType() {
+    public GameTypeDomainObject GetGameType() {
+        // Lazy Load the ItemType
         if (this.gameType == null) {
-            this.gameType = GameTypeModel.GetGameTypeById(this.gameTypeId);
+            this.gameType = GameTypeModel.GetGameTypeById(gameType.GetId());
             if (this.gameType == null) {
-                throw new IllegalStateException("GameType data for gameType ID " + this.gameTypeId + " could not be loaded.");
+                throw new IllegalStateException(
+                        "GameType data for gameType ID " + this.gameTypeId + " could not be loaded.");
             }
         }
         return this.gameType;
     }
 
-
     // public void SetStatus(String status) {
-    //     this.status = status;
-    //     PlayerModel.Save(this);
+    // this.status = status;
+    // PlayerModel.Save(this);
     // }
-    
+
 }
