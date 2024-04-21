@@ -89,9 +89,16 @@ public class PlayerModel {
             throw new IllegalArgumentException("Invalid Username");
         }
         // validate username is unique
-        ArrayList<PlayerDataObject> playerData = PlayerDataAccess.GetAllPlayers();
-        if (playerData == null) {
-            throw new IllegalArgumentException("Username is not unique");
+        ArrayList<PlayerDataObject> playerUnique = PlayerDataAccess.GetAllPlayers();
+        // ArrayList<PlayerDomainObject> playerU2 =
+        // PlayerDomainObject.MapList(playerUnique);
+
+        for (PlayerDataObject playerUsername : playerUnique) {
+            int i;
+            int size = playerUnique.size();
+            if (playerUser == playerUnique) {
+                throw new IllegalArgumentException("Username is not unique");
+            }
         }
 
         // Validate Password
