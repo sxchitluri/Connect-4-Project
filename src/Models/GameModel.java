@@ -1,12 +1,14 @@
 package Models;
 
-import java.util.ArrayList;
 
 import DataAccess.PlayerDataAccess;
 import DataAccess.GameDataAccess;
+import DataAccess.BoardDataAccess;
 import DataObjects.PlayerDataObject;
+import DataObjects.BoardDataObject;
 import DataObjects.GameDataObject;
-import DomainObjects.PlayerDomainObject;
+
+import DomainObjects.BoardDomainObject;
 import DomainObjects.GameDomainObject;
 
 public class GameModel {
@@ -16,60 +18,79 @@ public class GameModel {
         return new GameDomainObject(gameData);
     }
 
-    public static GameDomainObject GetAvailableGame() {
-        GameDataObject gameData = GameDataAccess.GetAvailableGame();
+    /* public static GameDomainObject GetAvailableGame() {
+        GameDataObject gameData = GameDataAccess.GetAvailableGame(); //commented out in other code; idk what we are doing with it
         
         if (gameData == null) {
             return null;
         }
 
         return new GameDomainObject(gameData);
-    }
+    } */
 
     //STORY 4
-    public static GameDomainObject PlayGame(int gameId, int playerId, int column) {
-        //Finish this in Sprint
 
-        //Validate the inputs
-
-        //check if gameId exists
-        GameDataObject game = GameDataAccess.GetGameById(gameId);
-        if (game == null) {
-            //throw an error message
+    public static GameDomainObject playGame(int gameId, int playerId, int column) {
+        // Step 1: Validate inputs and state
+        GameDataObject gameData = GameDataAccess.GetGameById(gameId);
+        if (gameData == null) {
+            throw new IllegalArgumentException("Game ID not found");
         }
 
-        //validate the playerId exists at all
-        PlayerDataObject player = PlayerDataAccess.GetPlayerById(playerId);
-        if (player == null) {
-            //throw an error message
+        PlayerDataObject playerData = PlayerDataAccess.getPlayerById(playerId);
+        if (playerData == null) {
+            throw new IllegalArgumentException("Player ID not found");
         }
 
-        //validate the playerid to be one of the game's players
+        if (!(playerId == gameData.player1Id || playerId == gameData.player2Id)) {
+            throw new IllegalArgumentException("Player ID " + playerId + " is not part of this game.");
+        }
 
-        //validate the playerid to be the current turn player id
+        if (gameData.currentTurnPlayer != playerId) {
+            throw new IllegalArgumentException("It is not player " + playerId + "'s turn.");
+        }
 
-        //Validate the column
-        //Make sure not passing a negative column, return errorMessage if column is filled, 
+        if (gameData.status.equals("Completed")) {
+            throw new IllegalArgumentException("Game is already completed.");
+        }
 
-        //check status, return errorMessage if game is done
+        // Step 2: Get and update board
+        BoardDomainObject board = BoardModel.GetBoardByGameId(gameData.id);
+        if (board == null) {
+            throw new IllegalStateException("Board not found for the game");
+        }
 
-        //if everything is valid, Update the Board with move
+        if (!board.isValidColumn(column)) {
+            throw new IllegalArgumentException("Column is full.");
+        }
 
+        board.updateBoard(column, playerId);
 
-        // check method for Winner, winner method
+        // Step 3: Check for winner
+        if (board.checkForWinner()) {
+            gameData.status = "Completed";
+            gameData.winnerId = playerId;
+        } else {
+            // Update turn to the next player
+            gameData.currentTurnPlayer = gameData.currentTurnPlayer == gameData.player1Id ? gameData.player2Id : gameData.player1Id;
+        }
 
-        //check the status of the board again, if complete = exit Play game and not update currentturn player
+        // Step 4: Save updates
+        GameDataAccess.Save(new GameDataObject(gameData));
+        BoardDataAccess.Save(new BoardDataObject(board));
 
-        //update current turn player id to the other player's id
-
-        return null;
+        return new GameDomainObject(gameData);
     }
+
+
     
     //STORY 5 - GETTING WINNER DETAILS FOR A GAME??- tied to GameResponse PlayGame???
-    public static GameDomainObject CheckWinner(int gameId) {
-        //Validate gameId exists, if not return error message
-
-        //Validate the board string for Connect 4, if not return error message; if winner - update game status to complete and update winnerId
+    private static boolean checkForWinner(int gameId) {
+        BoardDomainObject board = BoardModel.GetBoardByGameId(gameId); //Same as above; need to check and fix if so.
+        if (board == null) {
+            throw new IllegalStateException("Board not found when checking for winner");
+        }
+        return board.checkForWinner();
     }
 
     public static void Save (GameDomainObject gameToSave) {
