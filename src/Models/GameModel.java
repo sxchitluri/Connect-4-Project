@@ -1,6 +1,5 @@
 package Models;
 
-
 import DataAccess.PlayerDataAccess;
 import DataAccess.GameDataAccess;
 import DataAccess.BoardDataAccess;
@@ -18,17 +17,20 @@ public class GameModel {
         return new GameDomainObject(gameData);
     }
 
-    /* public static GameDomainObject GetAvailableGame() {
-        GameDataObject gameData = GameDataAccess.GetAvailableGame(); //commented out in other code; idk what we are doing with it
-        
-        if (gameData == null) {
-            return null;
-        }
+    /*
+     * public static GameDomainObject GetAvailableGame() {
+     * GameDataObject gameData = GameDataAccess.GetAvailableGame(); //commented out
+     * in other code; idk what we are doing with it
+     * 
+     * if (gameData == null) {
+     * return null;
+     * }
+     * 
+     * return new GameDomainObject(gameData);
+     * }
+     */
 
-        return new GameDomainObject(gameData);
-    } */
-
-    //STORY 4
+    // STORY 4
 
     public static GameDomainObject playGame(int gameId, int playerId, int column) {
         // Step 1: Validate inputs and state
@@ -64,7 +66,7 @@ public class GameModel {
             throw new IllegalArgumentException("Invalid Column Number");
         }
 
-        if(!board.hasSpaceAvailable(column)){
+        if (!board.hasSpaceAvailable(column)) {
             throw new IllegalArgumentException("Column is Full");
         }
 
@@ -76,7 +78,8 @@ public class GameModel {
             gameData.winnerId = playerId;
         } else {
             // Update turn to the next player
-            gameData.currentTurnPlayer = gameData.currentTurnPlayer == gameData.player1Id ? gameData.player2Id : gameData.player1Id;
+            gameData.currentTurnPlayer = gameData.currentTurnPlayer == gameData.player1Id ? gameData.player2Id
+                    : gameData.player1Id;
         }
 
         // Step 4: Save updates
@@ -86,18 +89,17 @@ public class GameModel {
         return new GameDomainObject(gameData);
     }
 
-
-    
-    //STORY 5 - GETTING WINNER DETAILS FOR A GAME??- tied to GameResponse PlayGame???
+    // STORY 5 - GETTING WINNER DETAILS FOR A GAME??- tied to GameResponse
+    // PlayGame???
     private static boolean checkForWinner(int gameId) {
-        BoardDomainObject board = BoardModel.GetBoardByGameId(gameId); //Same as above; need to check and fix if so.
+        BoardDomainObject board = BoardModel.GetBoardByGameId(gameId); // Same as above; need to check and fix if so.
         if (board == null) {
             throw new IllegalStateException("Board not found when checking for winner");
         }
         return board.checkForWinner();
     }
 
-    public static void Save (GameDomainObject gameToSave) {
+    public static void Save(GameDomainObject gameToSave) {
         GameDataObject gameDataObject = new GameDataObject(gameToSave);
         GameDataAccess.Save(gameDataObject);
     }
