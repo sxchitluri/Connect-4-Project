@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import DataObjects.PlayerDataObject;
 
 public class PlayerDataAccess {
-    
+
     private static ArrayList<PlayerDataObject> players = new ArrayList<PlayerDataObject>();
     private static int nextId = 0;
 
@@ -26,7 +26,7 @@ public class PlayerDataAccess {
     public static ArrayList<PlayerDataObject> GetAllPlayers() {
         ArrayList<PlayerDataObject> playersList = new ArrayList<PlayerDataObject>();
 
-        //Create a copy of games to return
+        // Create a copy of games to return
         for (PlayerDataObject player : players) {
             playersList.add(new PlayerDataObject(player));
         }
@@ -55,8 +55,9 @@ public class PlayerDataAccess {
         }
         return playersById;
     }
-    
-    // for playermode.java's PlayerDomainObject GetFirstAvailableByGameId(int gameId) method
+
+    // for playermode.java's PlayerDomainObject GetFirstAvailableByGameId(int
+    // gameId) method
     public static PlayerDataObject GetFirstAvailableByGameId(int gameId) {
         ArrayList<GameDataObject> playersById = new ArrayList<PlayerDataObject>();
 
@@ -74,16 +75,14 @@ public class PlayerDataAccess {
         return newPlayer;
     }
 
-    //save players, Need it ??????
+    // save players, Need it ??????
     public static void Save(PlayerDataObject playerToSave) {
-        for( PlayersDataObject player : players) {
+        for (PlayersDataObject player : players) {
             if (player.id == playerToSave.id) {
                 player.username = playerToSave.username;
                 player.password = playerToSave.password;
             }
         }
     }
-
-    
 
 }

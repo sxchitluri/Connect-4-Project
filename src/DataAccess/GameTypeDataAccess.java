@@ -46,15 +46,16 @@ public class GameTypeDataAccess {
     }
 
     /*
-    // idk, for playerdomainobject.java
-    public static GameTypeDataObject GetGameTypeById(GameTypeDomainObject gameType) {
-        for (GameTypeDataObject itemType : gameTypes) {
-            if (itemType.id == gameType) {
-                return new GameTypeDataObject(itemType);
-            }
-        }
-        return null;
-    }
-    */
+     * // idk, for playerdomainobject.java
+     * public static GameTypeDataObject GetGameTypeById(GameTypeDomainObject
+     * gameType) {
+     * for (GameTypeDataObject itemType : gameTypes) {
+     * if (itemType.id == gameType) {
+     * return new GameTypeDataObject(itemType);
+     * }
+     * }
+     * return null;
+     * }
+     */
 
 }

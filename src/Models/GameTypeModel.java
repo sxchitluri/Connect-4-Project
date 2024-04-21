@@ -15,11 +15,13 @@ public class GameTypeModel {
     }
 
     /*
-     // idk, for playerdomainobject.java
-     public static GameTypeDomainObject GetGameTypeById(GameTypeDomainObject gameType) {
-        GameTypeDataObject gameTypeData = GameTypeDataAccess.GetGameTypeById(gameType);
-        return new GameTypeDomainObject(gameTypeData);
-     }
+     * // idk, for playerdomainobject.java
+     * public static GameTypeDomainObject GetGameTypeById(GameTypeDomainObject
+     * gameType) {
+     * GameTypeDataObject gameTypeData =
+     * GameTypeDataAccess.GetGameTypeById(gameType);
+     * return new GameTypeDomainObject(gameTypeData);
+     * }
      */
 
     public static ArrayList<GameTypeDomainObject> GetAllGameTypes() {

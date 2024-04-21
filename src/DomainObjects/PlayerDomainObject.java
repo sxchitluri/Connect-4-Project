@@ -67,7 +67,8 @@ public class PlayerDomainObject {
     public GameTypeDomainObject GetGameType() {
         // Lazy Load the ItemType
         if (this.gameType == null) {
-            this.gameType = GameTypeModel.GetGameTypeById(gameType); // idk tried to fix this, made change to gametypemodel and gametypedataaccess
+            this.gameType = GameTypeModel.GetGameTypeById(gameType); // idk tried to fix this, made change to
+                                                                     // gametypemodel and gametypedataaccess
         }
         return this.gameType;
     }
