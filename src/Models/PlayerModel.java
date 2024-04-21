@@ -92,12 +92,14 @@ public class PlayerModel {
         ArrayList<PlayerDataObject> playerUnique = PlayerDataAccess.GetAllPlayers();
         // ArrayList<PlayerDomainObject> playerU2 =
         // PlayerDomainObject.MapList(playerUnique);
+        int i;
+        int size = playerUnique.size();
 
         for (PlayerDataObject playerUsername : playerUnique) {
-            int i;
-            int size = playerUnique.size();
-            if (playerUser == playerUnique) {
-                throw new IllegalArgumentException("Username is not unique");
+            for (i = 0; i < size; i++) {
+                if (playerUser == playerUnique.get(i).username) {
+                    throw new IllegalArgumentException("Username is not unique");
+                }
             }
         }
 
