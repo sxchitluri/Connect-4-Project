@@ -15,7 +15,7 @@ public class GameDataAccess {
     //default values for game
     private void initialize() {
         games.add(new GameDataObject(0, 0, 1, "Playing", 1, -1));
-        nextId = 2; //does this need to be 1?
+        nextId = 2; //Why?
     }
 
     private static int getNextId() {
@@ -60,7 +60,6 @@ public class GameDataAccess {
         return newGame;
     }
 
-    //save the game
     public static void Save(GameDataObject gameToSave) {
         for( GameDataObject game : games) {
             if (game.id == gameToSave.id) {
@@ -74,3 +73,4 @@ public class GameDataAccess {
     }
 
 }
+
