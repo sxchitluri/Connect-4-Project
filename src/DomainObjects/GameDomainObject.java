@@ -1,5 +1,4 @@
 package DomainObjects;
-
 import java.util.ArrayList;
 import DataObjects.GameDataObject;
 import Models.GameModel;
@@ -14,7 +13,6 @@ public class GameDomainObject {
     private String status;
     private int winnerId;
     //private String board;
-
     private BoardDomainObject board;
 
     public GameDomainObject (int gameId, int player1Id, int player2Id, int currentTurnPlayer, String status, int winnerId, BoardDomainObject board) {
@@ -24,9 +22,10 @@ public class GameDomainObject {
         this.status = status;
         this.currentTurnPlayer = currentTurnPlayer;
         this.winnerId = winnerId;
-        //this.board = board;
+        this.board = board;
     }
 
+    //Copy Constructor
     public GameDomainObject(GameDataObject game) {
         this.gameId = game.id;
         //this.gameTypeId = game.gameTypeId;
@@ -35,7 +34,7 @@ public class GameDomainObject {
         this.currentTurnPlayer = game.currentTurnPlayer;
         this.status = game.status;
         this.winnerId = game.winnerId;
-        //this.board = game.board
+        //this.board = game.board;
     }
 
     public static ArrayList<GameDomainObject> MapList(ArrayList<GameDataObject> gamedata) {
@@ -73,13 +72,22 @@ public class GameDomainObject {
     public BoardDomainObject GetBoard() {
         //Lazy Load the Rack
         if (this.board == null) {
-            this.board = BoardModel.GetBoardById(id);
+            this.board = BoardModel.GetBoardById(board.id); //to clarify, do we want this to get the board based off of gameid or boardid?
         }
         return this.board;
     }
+
     //?????
-    public void SetBoard(int id) {
+    /*public void SetBoard(int id) {
         this.id = id;
+        GameModel.Save(this);
+    }*/
+
+    public void setBoard(BoardDomainObject board) {
+        if (board == null) {
+            throw new IllegalArgumentException("Board cannot be null.");
+        }
+        this.board = board;
         GameModel.Save(this);
     }
 
