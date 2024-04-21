@@ -48,12 +48,22 @@ public class PlayerModel {
 
     }
 
-    // is this supposed to be add player method????
+    // this is the return the player domain object that was created once input validated
     public static PlayerDomainObject RegisterPlayer(PlayerDomainObject player) {
         validatePlayer(player);
 
         PlayerDataObject playerData = new PlayerDataObject(player);
+        //pass new player data object to data access to crate a new player, then pass to domain object
         PlayerDataAccess.AddPlayer(playerData); // give id for player after validation of username/password
+        return new PlayerDomainObject(playerData);
+    }
+
+    // this is to return the player domain object, once validated input, exists in player data access list
+    public static PlayerDomainObject ExistingPlayer(PlayerDomainObject player) {
+        
+        validatePlayer(player);
+
+        PlayerDataObject playerData = PlayerDataAccess.GetPlayerById(player.GetId()); // give id for player after validation of username/password
         return new PlayerDomainObject(playerData);
     }
 
