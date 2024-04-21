@@ -49,17 +49,21 @@ public class PlayerController {
 
             // validate request details in playermodel.validateplayer method, only getting
             // the playerId for the request, so only validating the playerId
-            // so first pass request to be a playerdomain object -> then can call the validate player method in model
+            // so first pass request to be a playerdomain object -> then can call the
+            // validate player method in model
 
             PlayerDomainObject domainToCheck = new PlayerDomainObject(request);
-            PlayerDomainObject domainExists = PlayerModel.ExistingPlayer(domainToCheck); // is this supposed to be add player method????
+            PlayerDomainObject domainExists = PlayerModel.ExistingPlayer(domainToCheck); // is this supposed to be add
+                                                                                         // player method????
 
-            PlayerResponse response = new PlayerResponse(domainExists.GetId(), domainExists.GetUsername(), domainExists.GetGamesPlayed(), domainExists.GetGamesWon(), domainExists.GetGamesLost());
+            PlayerResponse response = new PlayerResponse(domainExists.GetId(), domainExists.GetUsername(),
+                    domainExists.GetGamesPlayed(), domainExists.GetGamesWon(), domainExists.GetGamesLost());
             return response;
 
             // if (id = playerid) {
-            //     return new PlayerResponse(1, request.getUsername(), request.getGamesPlayed(), request.getGamesWon(),
-            //             request.getGamesLost());
+            // return new PlayerResponse(1, request.getUsername(), request.getGamesPlayed(),
+            // request.getGamesWon(),
+            // request.getGamesLost());
             // }
 
             // return null;
