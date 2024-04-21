@@ -1,11 +1,7 @@
 package DomainObjects;
 
 import java.util.ArrayList;
-
 import DataObjects.PlayerDataObject;
-import Models.PlayerModel;
-import restService.request.GetPlayerDetailsRequest;
-import restService.request.RegisterPlayerRequest;
 import Models.GameTypeModel;
 import Models.BoardModel;
 
@@ -14,7 +10,7 @@ public class PlayerDomainObject {
     private int id;
     private String username;
     private String password;
-
+    private int gameTypeId;
     private GameTypeDomainObject gameType;
     private BoardDomainObject board;
 
@@ -30,18 +26,6 @@ public class PlayerDomainObject {
         this.password = player.password;
     }
 
-    // made to appease for player controller
-    public PlayerDomainObject(RegisterPlayerRequest request) {
-        // this.id = request.id;
-        this.username = request.getUsername();
-        this.password = request.getPassword();
-    }
-
-    // made to appease for player controller
-    public PlayerDomainObject(GetPlayerDetailsRequest request) {
-        this.id = request.getPlayerId();
-    }
-
     public static ArrayList<PlayerDomainObject> MapList(ArrayList<PlayerDataObject> playerdata) {
         ArrayList<PlayerDomainObject> playerDomain = new ArrayList<PlayerDomainObject>();
         for (PlayerDataObject player : playerdata) {
@@ -49,7 +33,7 @@ public class PlayerDomainObject {
         }
         return playerDomain;
     }
-
+    
     public int GetId() {
         return this.id;
     }
@@ -63,25 +47,35 @@ public class PlayerDomainObject {
     }
 
     public BoardDomainObject GetBoard() {
-        // Lazy Load the Rack
+        //Lazy Load the Rack
         if (this.board == null) {
-            this.board = BoardModel.GetBoardById(id);
+            this.board = BoardModel.GetBoardById(board.id);  //again, need to be very careful here
         }
         return this.board;
     }
 
-    public GameTypeDomainObject GetGameType() {
-        // Lazy Load the ItemType
+    /*public GameTypeDomainObject GetGameType() {
+        //Lazy Load the ItemType
         if (this.gameType == null) {
-            this.gameType = GameTypeModel.GetGameTypeById(gameType); // idk tried to fix this, made change to
-                                                                     // gametypemodel and gametypedataaccess
+            this.gameType = GameTypeModel.GetGameTypeById(gameTypeId);
+        }
+        return this.gameType;
+    }*/
+
+    public GameTypeDomainObject getGameType() {
+        if (this.gameType == null) {
+            this.gameType = GameTypeModel.GetGameTypeById(this.gameTypeId);
+            if (this.gameType == null) {
+                throw new IllegalStateException("GameType data for gameType ID " + this.gameTypeId + " could not be loaded.");
+            }
         }
         return this.gameType;
     }
 
-    // public void SetStatus(String status) {
-    // this.status = status;
-    // PlayerModel.Save(this);
-    // }
 
+    // public void SetStatus(String status) {
+    //     this.status = status;
+    //     PlayerModel.Save(this);
+    // }
+    
 }

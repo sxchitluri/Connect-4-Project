@@ -13,6 +13,11 @@ public class BoardModel {
         return new BoardDomainObject(boardData);
     }
 
+    public static BoardDomainObject GetBoardByGameId(int gameid) {
+        BoardDataObject boardData = BoardDataAccess.GetBoardByGameId(gameid);
+        return new BoardDomainObject(boardData);
+    }
+
     public static ArrayList<BoardDomainObject> GetAllBoards() {
         ArrayList<BoardDataObject> boardDataList = BoardDataAccess.GetAllBoards();
         return BoardDomainObject.MapList(boardDataList);
@@ -40,3 +45,4 @@ public class BoardModel {
 
     
 }
+
