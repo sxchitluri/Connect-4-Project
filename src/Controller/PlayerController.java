@@ -10,7 +10,10 @@ import restService.response.PlayerResponse;
 
 public class PlayerController {
     
-    //CREATING NEW PLAYER
+    //CREATING NEW PLAYER - Story 1
+    // request is registerplayerrequest.java 
+    // reponse is playerreponse.java
+    // test is playerregistrationtest.java
     public static PlayerResponse registerPlayer(RegisterPlayerRequest request) {
         try {
             // PlayerDomainObject domainToCreate = new PlayerDomainObject(request.getUsername(), request.getPassword());
@@ -27,6 +30,9 @@ public class PlayerController {
     }
 
     //GETTING PLAYER DETAILS - STORY 6 - also edit PlayerResponse.java
+    // request is getplayerdetailsrequest.java
+    //reponse is playerreponse.java 
+    // test is ___.java
     public static PlayerResponse GetPlayerDetails(GetPlayerDetailsRequest request) {
 
         try {
