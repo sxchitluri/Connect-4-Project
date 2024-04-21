@@ -10,6 +10,7 @@ public class PlayerResponse {
     private final int gamesPlayed;
     private final int gamesWon;
     private final int gamesLost;
+    // private final String password;
 
     // method with registering a player, input request only player id and username
     public PlayerResponse(int playerId, String username) {

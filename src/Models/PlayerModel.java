@@ -1,6 +1,7 @@
 package Models;
 
 import java.util.ArrayList;
+import java.util.regex.Pattern;
 
 import DataAccess.PlayerDataAccess;
 import DataObjects.PlayerDataObject;
@@ -76,15 +77,30 @@ public class PlayerModel {
         // Sprint 1 - Story 1: validate player registation
 
         // Validate Username
+        String playerUser = player.GetUsername();
+
         // validate 6-20 characters
-
+        if (playerUser.length() < 6 || playerUser.length() > 20) {
+            throw new IllegalArgumentException("Invalid Username");
+        }
         // validate only letters and numbers
-
+        String regexUsername = "[a-zA-Z0-9]+";
+        if (!Pattern.matches(regexUsername, playerUser)) {
+            throw new IllegalArgumentException("Invalid Username");
+        }
         // validate username is unique
+        ArrayList<PlayerDataObject> playerData = PlayerDataAccess.GetAllPlayers();
+        if (playerData == null) {
+            throw new IllegalArgumentException("Username is not unique");
+        }
 
         // Validate Password
-        // validate 6-20 characters
+        String playerPass = player.GetPassword();
 
+        // validate 6-20 characters
+        if (playerPass.length() < 6 || playerPass.length() > 20) {
+            throw new IllegalArgumentException("Invalid Password");
+        }
     }
 
     // STORY 3 - validate the players 1 and 2 exist for creating a game
