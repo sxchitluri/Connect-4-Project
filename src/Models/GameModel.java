@@ -61,7 +61,11 @@ public class GameModel {
         }
 
         if (!board.isValidColumn(column)) {
-            throw new IllegalArgumentException("Column is full.");
+            throw new IllegalArgumentException("Invalid Column Number");
+        }
+
+        if(!board.hasSpaceAvailable(column)){
+            throw new IllegalArgumentException("Column is Full");
         }
 
         board.updateBoard(column, playerId);
