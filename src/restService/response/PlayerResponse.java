@@ -2,7 +2,7 @@ package restService.response;
 
 // story 1's reponse definiton 
 public class PlayerResponse {
-    
+
     private final boolean isValid;
     private final String errorMessage;
     private final int playerId;
@@ -11,7 +11,19 @@ public class PlayerResponse {
     private final int gamesWon;
     private final int gamesLost;
 
-    public PlayerResponse(boolean isValid, String errorMessage, int playerId, String username, int gamesPlayed, int gamesWon, int gamesLost) {
+    // method with registering a player, input request only player id and username
+    public PlayerResponse(int playerId, String username) {
+        this.isValid = true;
+        this.errorMessage = null;
+        this.playerId = playerId;
+        this.username = username;
+        this.gamesPlayed = 0;
+        this.gamesWon = 0;
+        this.gamesLost = 0;
+    }
+
+    // method for getting player details???
+    public PlayerResponse(int playerId, String username, int gamesPlayed, int gamesWon, int gamesLost) {
         this.isValid = true;
         this.errorMessage = null;
         this.playerId = playerId;
@@ -31,7 +43,7 @@ public class PlayerResponse {
         this.gamesLost = -1;
     }
 
-    //GET methods
+    // GET methods
 
     public boolean GetIsValid() {
         return this.isValid;
@@ -60,6 +72,5 @@ public class PlayerResponse {
     public int getGamesLost() {
         return this.gamesLost;
     }
-     
 
 }
