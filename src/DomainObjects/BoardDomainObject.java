@@ -91,10 +91,18 @@ public class BoardDomainObject {
     }
 
     public boolean isValidColumn(int column) {
-        if (column < 0 || column >= 7) {
+        if (column < 0 || column >= 6) {
             return false; // Column index out of bounds
         }
-        // Check if the top slot of the column is empty
+
+        else{
+            return true;
+        }
+    }
+
+
+    // Check if the top slot of the column is empty
+    public boolean hasSpaceAvailable(int column){
         return occupancy.charAt(column) == ' ';
     }
 
