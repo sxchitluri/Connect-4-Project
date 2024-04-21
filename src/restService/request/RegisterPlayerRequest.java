@@ -1,5 +1,6 @@
 package restService.request;
 
+// Story 1's request definition 
 public class RegisterPlayerRequest {
     
     private final String username;
