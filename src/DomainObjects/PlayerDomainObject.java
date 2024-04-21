@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import DataObjects.PlayerDataObject;
 import Models.PlayerModel;
+import restService.request.RegisterPlayerRequest;
 import Models.GameTypeModel;
 import Models.BoardModel;
 
@@ -28,6 +29,13 @@ public class PlayerDomainObject {
         this.password = player.password;
     }
 
+    // made to appease for player controller
+    public PlayerDomainObject(RegisterPlayerRequest request) {
+        // this.id = request.id;
+        this.username = request.getUsername();
+        this.password = request.getPassword();
+    }
+
     public static ArrayList<PlayerDomainObject> MapList(ArrayList<PlayerDataObject> playerdata) {
         ArrayList<PlayerDomainObject> playerDomain = new ArrayList<PlayerDomainObject>();
         for (PlayerDataObject player : playerdata) {
@@ -35,7 +43,7 @@ public class PlayerDomainObject {
         }
         return playerDomain;
     }
-    
+
     public int GetId() {
         return this.id;
     }
@@ -49,7 +57,7 @@ public class PlayerDomainObject {
     }
 
     public BoardDomainObject GetBoard() {
-        //Lazy Load the Rack
+        // Lazy Load the Rack
         if (this.board == null) {
             this.board = BoardModel.GetBoardById(id);
         }
@@ -57,16 +65,16 @@ public class PlayerDomainObject {
     }
 
     public GameTypeDomainObject GetGameType() {
-        //Lazy Load the ItemType
+        // Lazy Load the ItemType
         if (this.gameType == null) {
-            this.gameType = GameTypeModel.GetGameTypeById(gameTypeId);
+            this.gameType = GameTypeModel.GetGameTypeById(gameType); // idk tried to fix this, made change to gametypemodel and gametypedataaccess
         }
         return this.gameType;
     }
 
     // public void SetStatus(String status) {
-    //     this.status = status;
-    //     PlayerModel.Save(this);
+    // this.status = status;
+    // PlayerModel.Save(this);
     // }
-    
+
 }

@@ -2,7 +2,7 @@ package restService.request;
 
 // Story 1's request definition 
 public class RegisterPlayerRequest {
-    
+
     private final String username;
     private final String password;
 
@@ -12,10 +12,10 @@ public class RegisterPlayerRequest {
     }
 
     public String getUsername() {
-        return username;
+        return this.username;
     }
 
     public String getPassword() {
-        return password;
+        return this.password;
     }
 }

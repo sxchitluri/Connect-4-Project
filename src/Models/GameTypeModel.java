@@ -8,32 +8,38 @@ import DomainObjects.GameTypeDomainObject;
 
 public class GameTypeModel {
 
-    //used in the playerdomainobject.java
+    // used in the playerdomainobject.java
     public static GameTypeDomainObject GetGameTypeById(int id) {
         GameTypeDataObject gameTypeData = GameTypeDataAccess.GetGameTypeById(id);
         return new GameTypeDomainObject(gameTypeData);
     }
+
+    /*
+     // idk, for playerdomainobject.java
+     public static GameTypeDomainObject GetGameTypeById(GameTypeDomainObject gameType) {
+        GameTypeDataObject gameTypeData = GameTypeDataAccess.GetGameTypeById(gameType);
+        return new GameTypeDomainObject(gameTypeData);
+     }
+     */
 
     public static ArrayList<GameTypeDomainObject> GetAllGameTypes() {
         ArrayList<GameTypeDataObject> gameTypeDataList = GameTypeDataAccess.GetAllGameTypes();
         return GameTypeDomainObject.MapList(gameTypeDataList);
     }
 
-    public static GameTypeDomainObject AddGameType(GameTypeDomainObject gameType){
+    public static GameTypeDomainObject AddGameType(GameTypeDomainObject gameType) {
 
-        validateGameType(gameType); //validate gameType?? for id and string??
+        validateGameType(gameType); // validate gameType?? for id and string??
 
         GameTypeDataObject gameTypeData = new GameTypeDataObject(gameType);
-        GameTypeDataAccess.AddGameType(gameTypeData); //not a method we have in GameTypeDataAccess
+        GameTypeDataAccess.AddGameType(gameTypeData); // not a method we have in GameTypeDataAccess
         return new GameTypeDomainObject(gameTypeData);
-  
+
     }
-    
-    //Sprint/Story 3
+
+    // Sprint/Story 3
     private static void validateGameType(GameTypeDomainObject gameType) {
 
     }
- 
-    
 
 }

@@ -45,10 +45,22 @@ public class PlayerDataAccess {
     // trying to match the player id to the a game's player1Id or player2Id
     // that helps the PlayerModel.java
     // this is from the itemDataAccess.java file
-      public static ArrayList<PlayerDataObject> GetPlayersByGameId(int gameId) {
+    public static ArrayList<PlayerDataObject> GetPlayersByGameId(int gameId) {
         ArrayList<GameDataObject> playersById = new ArrayList<PlayerDataObject>();
 
-        for( PlayerDataObject player : players) {
+        for (PlayerDataObject player : players) {
+            if (player.id == gameId.player1Id) {
+                playersById.add(new PlayerDataObject(player));
+            }
+        }
+        return playersById;
+    }
+    
+    // for playermode.java's PlayerDomainObject GetFirstAvailableByGameId(int gameId) method
+    public static PlayerDataObject GetFirstAvailableByGameId(int gameId) {
+        ArrayList<GameDataObject> playersById = new ArrayList<PlayerDataObject>();
+
+        for (PlayerDataObject player : players) {
             if (player.id == gameId.player1Id) {
                 playersById.add(new PlayerDataObject(player));
             }
@@ -71,5 +83,7 @@ public class PlayerDataAccess {
             }
         }
     }
+
+    
 
 }
