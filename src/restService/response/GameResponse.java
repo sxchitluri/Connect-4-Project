@@ -12,10 +12,12 @@ public class GameResponse {
     private final String status;
     private final int currentTurnPlayer;
     private final int winnerId;
-    private final String board;
+    private final String board; //QUESTION: does this need to be String or the board data object that gets returned???? and the data object takes care of the String part???
 
-    public GameResponse(int gameId, int gameTypeId, int player1Id, int player2Id, String status, int currentTurnPlayer,
-            int winnerId, String board) {
+    // this method is if request inputs are valid (which the game model tests)
+    public GameResponse(int gameId, int gameTypeId, int player1Id, int player2Id, String status, int currentTurnPlayer, int winnerId, String board) {
+        this.isValid = true;
+        this.errorMessage = null;
         this.gameId = gameId;
         this.gameTypeId = gameTypeId;
         this.player1Id = player1Id;
@@ -24,11 +26,12 @@ public class GameResponse {
         this.currentTurnPlayer = currentTurnPlayer;
         this.winnerId = winnerId;
         this.board = board;
-        this.isValid = true;
-        this.errorMessage = null;
     }
     
+    // this method is if request inputs are not valid (which the game model tests)
     public GameResponse(String errorMessage) {
+        this.isValid = false;
+        this.errorMessage = errorMessage; // QUESTION: Does this need to be a message sentence here or in the MODEL???
         this.gameId = -1;
         this.gameTypeId = -1;
         this.player1Id = -1;
@@ -37,10 +40,10 @@ public class GameResponse {
         this.currentTurnPlayer = -1;
         this.winnerId = -1;
         this.board = "";
-        this.isValid = false;
-        this.errorMessage = errorMessage; //Does this need to be a message sentence here or in the MODEL???
     }
 
+    //GET methods
+    
     public int GetGameId() {
         return this.gameId;
     }
