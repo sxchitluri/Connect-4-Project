@@ -15,6 +15,7 @@ public class PlayerRegistrationTest {
     PlayerResponse response = PlayerController.registerPlayer(request);
 
     // tests for valid inputs
+    // testing scenerios #
     @Test
     public void PlayerController_RegisterPlayer_SuccessTest() {
 
