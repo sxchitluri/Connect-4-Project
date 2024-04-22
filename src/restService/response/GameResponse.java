@@ -50,7 +50,7 @@ public class GameResponse {
     // this method is if request inputs are not valid (which the game model tests)
     public GameResponse(String errorMessage) {
         this.isValid = false;
-        this.errorMessage = errorMessage; // QUESTION: Does this need to be a message sentence here or in the MODEL???
+        this.errorMessage = errorMessage;
         this.gameId = -1;
         this.gameTypeId = -1;
         this.player1Id = -1;
