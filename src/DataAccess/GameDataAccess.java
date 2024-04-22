@@ -15,8 +15,8 @@ public class GameDataAccess {
     // default values for game
     private void initialize() {
         games.add(new GameDataObject(0, 0, 1, "Playing", 1, -1));
-        games.add(new GameDataObject(251, 1, 2, "Playing", 1, -1))
-        nextId = 1; //does this need to be 1?
+        games.add(new GameDataObject(251, 1, 2, "Playing", 1, -1));
+        nextId = 1; // does this need to be 1?
     }
 
     private static int getNextId() {
@@ -74,4 +74,3 @@ public class GameDataAccess {
     }
 
 }
-

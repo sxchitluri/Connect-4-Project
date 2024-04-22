@@ -1,12 +1,12 @@
 package Controller;
 
-import java.util.ArrayList;
+//import java.util.ArrayList;
 
-import DataObjects.PlayerDataObject;
-import DomainObjects.BoardDomainObject;
-import DomainObjects.PlayerDomainObject;
+// import DataObjects.PlayerDataObject;
+// import DomainObjects.BoardDomainObject;
+// import DomainObjects.PlayerDomainObject;
 import DomainObjects.GameDomainObject;
-import Models.BoardModel;
+//import Models.BoardModel;
 import Models.GameModel;
 import restService.request.PlayGameRequest;
 import restService.response.GameResponse;
@@ -58,7 +58,10 @@ public class GameController {
     public static GameResponse CreateGame(PlayGameRequest request) {
 
         try {
-            
+
+        } catch (Exception ex) {
+            GameResponse response = new GameResponse(ex.getMessage());
+            return response;
         }
     }
 

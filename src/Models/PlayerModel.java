@@ -16,10 +16,9 @@ public class PlayerModel {
 
     // Need fixing, getting player details on 1 player object using gameId
     public static PlayerDomainObject GetFirstAvailableByGameId(int gameId) {
-        PlayerDataObject playerData = PlayerDataAccess.GetFirstAvailableByGameId(gameId); // added new method in
-                                                                                          // playerdataaccess, or should
-                                                                                          // it be the getplayerbygameid
-                                                                                          // method???
+        PlayerDataObject playerData = PlayerDataAccess.GetPlayerByGameId(gameId); // added new method in
+                                                                                  // playerdataaccess, or should it be
+                                                                                  // the getplayerbygameid method???
 
         if (playerData == null) {
             return null;

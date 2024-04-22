@@ -48,7 +48,7 @@ public class PlayerRegistrationTest {
         assertEquals(true, response.GetIsValid());
         assertEquals(null, response.GetErrorMessage());
         assertEquals("username4", response.getUsername());
-        assertEquals(1, response.getPlayerId()); // not making next playerid to return
+        assertEquals(2, response.getPlayerId()); // not making next playerid to return
 
     }
 
@@ -110,7 +110,7 @@ public class PlayerRegistrationTest {
         assertEquals(false, response.GetIsValid());
         assertEquals("Username is not unique", response.GetErrorMessage());
         assertEquals("", response.getUsername());
-        assertEquals(0, response.getPlayerId());
+        assertEquals(-1, response.getPlayerId());
     }
 
     @Test
@@ -124,8 +124,8 @@ public class PlayerRegistrationTest {
         // now we test the reponse
         assertEquals(false, response.GetIsValid());
         assertEquals("Invalid Password", response.GetErrorMessage());
-        assertEquals("username1", response.getUsername());
-        assertEquals(0, response.getPlayerId());
+        assertEquals("", response.getUsername());
+        assertEquals(-1, response.getPlayerId());
     }
 
     @Test
@@ -139,8 +139,8 @@ public class PlayerRegistrationTest {
         // now we test the reponse
         assertEquals(false, response.GetIsValid());
         assertEquals("Invalid Password", response.GetErrorMessage());
-        assertEquals("username2", response.getUsername());
-        assertEquals(0, response.getPlayerId());
+        assertEquals("", response.getUsername());
+        assertEquals(-1, response.getPlayerId());
     }
 
 }

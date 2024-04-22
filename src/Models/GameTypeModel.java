@@ -34,7 +34,8 @@ public class GameTypeModel {
         validateGameType(gameType); // validate gameType?? for id and string??
 
         GameTypeDataObject gameTypeData = new GameTypeDataObject(gameType);
-        GameTypeDataAccess.AddGameType(gameTypeData); // not a method we have in GameTypeDataAccess
+        // GameTypeDataAccess.AddGameType(gameTypeData); // not a method we have in
+        // GameTypeDataAccess
         return new GameTypeDomainObject(gameTypeData);
 
     }
