@@ -1,0 +1,122 @@
+package Controller;
+
+import java.util.ArrayList;
+
+import DataObjects.PlayerDataObject;
+import DataObjects.GameDataObject;
+import DataObjects.BoardDataObject;
+import DomainObjects.BoardDomainObject;
+import DomainObjects.PlayerDomainObject;
+import DomainObjects.GameDomainObject;
+import DataAccess.GameDataAccess;
+import DataAccess.BoardDataAccess;
+import Models.BoardModel;
+import Models.GameModel;
+import restService.request.PlayGameRequest;
+import restService.response.GameResponse;
+
+public class GameController {
+    
+    //GETTING GAME DETAILS - making sure game exists??? [STORY 2]
+    public static GameResponse GetGame(int gameId) {
+        try {
+            GameDataObject gameData = GameDataAccess.GetGameById(gameId);
+            if (gameData == null) {
+                return new GameResponse("Game not found");
+            }
+
+            // Convert GameDataObject to GameDomainObject using a new constructor or factory method
+            GameDomainObject game = new GameDomainObject(gameData);
+
+            BoardDataObject boardData = BoardDataAccess.GetBoardByGameId(gameId);
+            if (boardData == null) {
+                return new GameResponse("Board not found for the game");
+            }
+            
+            // Convert BoardDataObject to BoardDomainObject if needed
+            BoardDomainObject board = new BoardDomainObject(boardData);
+
+            // Use getters from GameDomainObject
+            return new GameResponse(
+                game.GetGameId(),
+                game.GetPlayer1Id(),
+                game.GetPlayer2Id(),
+                game.GetStatus(),
+                game.GetCurrentTurnPlayer(),
+                game.GetWinnerId(),
+                board.getOccupancy()  //Need to sort this part out
+            );
+
+        } catch (Exception ex) {
+            //log exception maybe
+            return new GameResponse(ex.getMessage());
+        }
+    }
+    
+    //MAKING MOVES
+    public static GameResponse PlayGame(PlayGameRequest request) {
+        try {
+            // Fetch the game using the request's gameId
+            GameDataObject game = GameDataAccess.GetGameById(request.getGameId());
+            if (game == null) {
+                return new GameResponse("Invalid game ID");
+            }
+
+            // Check if it's the correct player's turn
+            if (game.getCurrentTurnPlayer() != request.getPlayerId()) {
+                return new GameResponse("It's not your turn!");
+            }
+
+            // Fetch the board associated with the game
+            BoardDataObject board = BoardDataAccess.GetBoardByGameId(game.getId());
+            if (board == null) {
+                return new GameResponse("Board not found!");
+            }
+
+            // Check the validity of the column provided in the request
+            int column = request.getColumn(); // Need to add to  PlayGameRequest class
+            if (!isValidColumn(column, board)) {
+                return new GameResponse("Invalid column selected.");
+            }
+
+            // Update the board with the player's move  //Need to add getPlayerId to PlayGameRequest
+            updateBoard(column, request.getPlayerId(), board);
+            
+            // Check for a winner
+            boolean winnerExists = checkForWinner(board);
+            if (winnerExists) {
+                game.setStatus("Completed");
+                game.setWinnerId(request.getPlayerId());
+            } else {
+                // Change turn to the other player
+                game.setCurrentTurnPlayer(game.getCurrentTurnPlayer() == game.getPlayer1Id() ? game.getPlayer2Id() : game.getPlayer1Id());
+            }
+
+            // Save the updated game and board states
+            GameDataAccess.Save(game);
+            BoardDataAccess.Save(board);
+
+            // Return updated game information
+            return new GameResponse(game.getId(), game.getGameTypeId(), game.getPlayer1Id(), game.getPlayer2Id(), game.getStatus(), game.getCurrentTurnPlayer(), game.getWinnerId(), BoardModel.convertBoardToString(board));
+
+        } catch (Exception e) {
+            return new GameResponse(e.getMessage());
+        }
+    }
+
+    private static boolean isValidColumn(int column, BoardDataObject board) {
+        // Check if column is within range and not full
+        return true; // Placeholder: replace with actual logic
+    }
+
+    private static void updateBoard(int column, int playerId, BoardDataObject board) {
+        // Placeholder: replace with logic to update the board based on the move
+    }
+
+    private static boolean checkForWinner(BoardDataObject board) {
+        // Placeholder: replace with logic to check for four in a row
+        return false;
+    }
+
+    
+}
