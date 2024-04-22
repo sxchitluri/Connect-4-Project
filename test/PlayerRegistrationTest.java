@@ -5,6 +5,7 @@ import Controller.PlayerController;
 import restService.request.RegisterPlayerRequest;
 import restService.response.PlayerResponse;
 
+// Story 1 test
 public class PlayerRegistrationTest {
 
     // Default values

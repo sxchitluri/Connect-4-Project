@@ -5,13 +5,16 @@ import Controller.GameController;
 import restService.request.PlayGameRequest;
 import restService.response.GameResponse;
 
+// Story 4 test
 public class PlayGameTest {
+
+    // write the initial default game values from game data access here
 
     // testing valid inputs
     @Test
     public void GameController_PlayGame_SuccessTest() {
 
-        int gameId = 0;
+        int gameId = 251;
         int playerId = 1;
         int column = 3;
 
