@@ -33,6 +33,50 @@ public class GameModel {
     // STORY 4
 
     public static GameDomainObject playGame(int gameId, int playerId, int column) {
+        // validate inputs
+        validatePlayGame(gameId, playerId, column);
+
+        GameDataObject gameData = GameDataAccess.GetGameById(gameId);
+        BoardDomainObject board = BoardModel.GetBoardByGameId(gameData.id);
+
+        // update board
+        board.updateBoard(column, playerId);
+
+        // Step 3: Check for winner
+
+        if (checkForWinnerGame(gameId)) {
+            gameData.status = "Completed";
+            gameData.winnerId = playerId;
+        } else {
+            // Update turn to the next player
+            gameData.currentTurnPlayer = gameData.currentTurnPlayer == gameData.player1Id ? gameData.player2Id
+                    : gameData.player1Id;
+        }
+
+        // Step 4: Save updates
+        GameDataAccess.Save(new GameDataObject(gameData));
+        BoardDataAccess.Save(new BoardDataObject(board));
+
+        return new GameDomainObject(gameData);
+    }
+
+    // STORY 5 - GETTING WINNER DETAILS FOR A GAME??- tied to GameResponse
+    // PlayGame???
+    private static boolean checkForWinnerGame(int gameId) {
+        BoardDomainObject board = BoardModel.GetBoardByGameId(gameId);
+        if (board == null) {
+            throw new IllegalStateException("Board not found when checking for winner");
+        }
+        return board.checkForWinner();
+    }
+
+    public static void Save(GameDomainObject gameToSave) {
+        GameDataObject gameDataObject = new GameDataObject(gameToSave);
+        GameDataAccess.Save(gameDataObject);
+    }
+
+    // validation for play game inputs/request
+    private static void validatePlayGame(int gameId, int playerId, int column) {
         // Step 1: Validate inputs and state
         GameDataObject gameData = GameDataAccess.GetGameById(gameId);
         if (gameData == null) {
@@ -69,39 +113,6 @@ public class GameModel {
         if (!board.hasSpaceAvailable(column)) {
             throw new IllegalArgumentException("Column is Full");
         }
-
-        board.updateBoard(column, playerId);
-
-        // Step 3: Check for winner
-        if (board.checkForWinner()) {
-            gameData.status = "Completed";
-            gameData.winnerId = playerId;
-        } else {
-            // Update turn to the next player
-            gameData.currentTurnPlayer = gameData.currentTurnPlayer == gameData.player1Id ? gameData.player2Id
-                    : gameData.player1Id;
-        }
-
-        // Step 4: Save updates
-        GameDataAccess.Save(new GameDataObject(gameData));
-        BoardDataAccess.Save(new BoardDataObject(board));
-
-        return new GameDomainObject(gameData);
-    }
-
-    // STORY 5 - GETTING WINNER DETAILS FOR A GAME??- tied to GameResponse
-    // PlayGame???
-    private static boolean checkForWinner(int gameId) {
-        BoardDomainObject board = BoardModel.GetBoardByGameId(gameId); // Same as above; need to check and fix if so.
-        if (board == null) {
-            throw new IllegalStateException("Board not found when checking for winner");
-        }
-        return board.checkForWinner();
-    }
-
-    public static void Save(GameDomainObject gameToSave) {
-        GameDataObject gameDataObject = new GameDataObject(gameToSave);
-        GameDataAccess.Save(gameDataObject);
     }
 
 }

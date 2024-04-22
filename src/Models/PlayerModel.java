@@ -39,6 +39,7 @@ public class PlayerModel {
         return PlayerDomainObject.MapList(playerDataList);
     }
 
+    // from inventory framework
     public static PlayerDomainObject AddPlayer(PlayerDomainObject player) {
 
         validatePlayer(player);

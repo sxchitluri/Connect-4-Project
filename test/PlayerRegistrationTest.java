@@ -7,6 +7,12 @@ import restService.response.PlayerResponse;
 
 public class PlayerRegistrationTest {
 
+    // Default values
+    String username = "doomsmith";
+    String password = "smashriptear";
+    RegisterPlayerRequest request = new RegisterPlayerRequest(username, password);
+    PlayerResponse response = PlayerController.registerPlayer(request);
+
     // tests for valid inputs
     @Test
     public void PlayerController_RegisterPlayer_SuccessTest() {
@@ -25,7 +31,7 @@ public class PlayerRegistrationTest {
         assertEquals(true, response.GetIsValid());
         assertEquals(null, response.GetErrorMessage());
         assertEquals("username3", response.getUsername());
-        assertEquals(1, response.getPlayerId());
+        assertEquals(1, response.getPlayerId()); // not making next playerid to return
         // do we need an assertEquals for password?, if we are not storing them here?
     }
 
@@ -42,7 +48,7 @@ public class PlayerRegistrationTest {
         assertEquals(true, response.GetIsValid());
         assertEquals(null, response.GetErrorMessage());
         assertEquals("username4", response.getUsername());
-        assertEquals(2, response.getPlayerId());
+        assertEquals(1, response.getPlayerId()); // not making next playerid to return
 
     }
 
@@ -58,8 +64,8 @@ public class PlayerRegistrationTest {
         // now we test the reponse
         assertEquals(false, response.GetIsValid());
         assertEquals("Invalid Username", response.GetErrorMessage());
-        assertEquals(null, response.getUsername());
-        assertEquals(0, response.getPlayerId());
+        assertEquals("", response.getUsername());
+        assertEquals(-1, response.getPlayerId());
     }
 
     @Test
@@ -73,8 +79,8 @@ public class PlayerRegistrationTest {
         // now we test the reponse
         assertEquals(false, response.GetIsValid());
         assertEquals("Invalid Username", response.GetErrorMessage());
-        assertEquals(null, response.getUsername());
-        assertEquals(0, response.getPlayerId());
+        assertEquals("", response.getUsername());
+        assertEquals(-1, response.getPlayerId());
     }
 
     @Test
@@ -88,8 +94,8 @@ public class PlayerRegistrationTest {
         // now we test the reponse
         assertEquals(false, response.GetIsValid());
         assertEquals("Invalid Username", response.GetErrorMessage());
-        assertEquals(null, response.getUsername());
-        assertEquals(0, response.getPlayerId());
+        assertEquals("", response.getUsername());
+        assertEquals(-1, response.getPlayerId());
     }
 
     @Test
@@ -103,7 +109,7 @@ public class PlayerRegistrationTest {
         // now we test the reponse
         assertEquals(false, response.GetIsValid());
         assertEquals("Username is not unique", response.GetErrorMessage());
-        assertEquals(null, response.getUsername());
+        assertEquals("", response.getUsername());
         assertEquals(0, response.getPlayerId());
     }
 

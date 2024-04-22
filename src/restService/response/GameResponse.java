@@ -1,8 +1,11 @@
 package restService.response;
 
+import DomainObjects.BoardDomainObject;
+//import DomainObjects.GameDomainObject;
+
 // story 2's AND story 4's response definition 
 public class GameResponse {
-    
+
     private final boolean isValid;
     private final String errorMessage;
     private final int gameId;
@@ -12,10 +15,12 @@ public class GameResponse {
     private final String status;
     private final int currentTurnPlayer;
     private final int winnerId;
-    private final String board; //QUESTION: does this need to be String or the board data object that gets returned???? and the data object takes care of the String part???
+    private final String board; // QUESTION: does this need to be String or the board data object that gets
+                                // returned???? and the data object takes care of the String part???
 
     // this method is if request inputs are valid (which the game model tests)
-    public GameResponse(int gameId, int gameTypeId, int player1Id, int player2Id, String status, int currentTurnPlayer, int winnerId, String board) {
+    public GameResponse(int gameId, int gameTypeId, int player1Id, int player2Id, String status, int currentTurnPlayer,
+            int winnerId, String board) {
         this.isValid = true;
         this.errorMessage = null;
         this.gameId = gameId;
@@ -27,7 +32,21 @@ public class GameResponse {
         this.winnerId = winnerId;
         this.board = board;
     }
-    
+
+    public GameResponse(int gameId, int player1Id, int player2Id, String status, int currentTurnPlayer,
+            int winnerId, BoardDomainObject board) {
+        this.isValid = true;
+        this.errorMessage = null;
+        this.gameId = gameId;
+        this.gameTypeId = 0;
+        this.player1Id = player1Id;
+        this.player2Id = player2Id;
+        this.status = status;
+        this.currentTurnPlayer = currentTurnPlayer;
+        this.winnerId = winnerId;
+        this.board = board.GetOccupancy();
+    }
+
     // this method is if request inputs are not valid (which the game model tests)
     public GameResponse(String errorMessage) {
         this.isValid = false;
@@ -42,8 +61,8 @@ public class GameResponse {
         this.board = "";
     }
 
-    //GET methods
-    
+    // GET methods
+
     public int GetGameId() {
         return this.gameId;
     }
@@ -59,7 +78,7 @@ public class GameResponse {
     public int GetPlayer2Id() {
         return this.player2Id;
     }
-    
+
     public String GetStatus() {
         return this.status;
     }

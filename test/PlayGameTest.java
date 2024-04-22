@@ -11,7 +11,7 @@ public class PlayGameTest {
     @Test
     public void GameController_PlayGame_SuccessTest() {
 
-        int gameId = 251;
+        int gameId = 0;
         int playerId = 1;
         int column = 3;
 

@@ -1,10 +1,8 @@
-import Controller.OrderController;
+import Controller.GameController;
 import Controller.PlayerController;
 import DataAccess.*;
-import restService.request.OrderRequest;
-import restService.request.RegisterPlayerRequest;
-import restService.response.PlayGameResponse;
-import restService.response.PlayerResponse;
+import restService.request.*;
+import restService.response.*;
 
 public class App {
     public static void main(String[] args) throws Exception {
@@ -17,16 +15,15 @@ public class App {
         // OrderRequest request = new OrderRequest(1);
         // OrderResponse response = OrderController.OrderItem(request);
 
-
         System.out.println("Code is finished");
     }
 
     public static void initialize() {
-        ItemTypeDataAccess itemTypeDataAccess = new ItemTypeDataAccess();
-        RackDataAccess rackDataAccess = new RackDataAccess();
-        RobotDataAccess robotDataAccess = new RobotDataAccess();
-        ItemDataAccess itemDataAccess = new ItemDataAccess();
+        GameTypeDataAccess gameTypeDataAccess = new GameTypeDataAccess();
+        BoardDataAccess boardDataAccess = new BoardDataAccess();
+        GameDataAccess gameDataAccess = new GameDataAccess();
+        PlayerDataAccess itemDataAccess = new PlayerDataAccess();
 
     }
-   
+
 }
