@@ -17,7 +17,7 @@ public class BoardDataAccess {
         nextId = 1;
     }
 
-    private static int getNextId() {
+    public static int getNextId() {
         int thisId = nextId;
         nextId++;
         return thisId;
