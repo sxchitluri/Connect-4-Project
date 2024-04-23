@@ -35,6 +35,25 @@ public class PlayGameTest {
     CreateGameRequest requestCG2 = new CreateGameRequest(1, 2, 0);
     GameResponse responseCG2 = GameController.CreateGame(requestCG2);
 
+    // play game to fill up column 7 for game 1
+    // row 1
+    PlayGameRequest requestPG1 = new PlayGameRequest(0, 1, 7);
+    GameResponse responsePG1 = GameController.PlayGame(requestPG1);
+    //row 2
+    PlayGameRequest requestPG2 = new PlayGameRequest(0, 0, 7);
+    GameResponse responsePG2 = GameController.PlayGame(requestPG2);
+    //row 3
+    PlayGameRequest requestPG3 = new PlayGameRequest(0, 1, 7);
+    GameResponse responsePG3 = GameController.PlayGame(requestPG3);
+    //row 4
+    PlayGameRequest requestPG4 = new PlayGameRequest(0, 0, 7);
+    GameResponse responsePG4 = GameController.PlayGame(requestPG4);
+    //row 5
+    PlayGameRequest requestPG5 = new PlayGameRequest(0, 1, 7);
+    GameResponse responsePG5 = GameController.PlayGame(requestPG5);
+    //row 6
+    PlayGameRequest requestPG6 = new PlayGameRequest(0, 0, 7);
+    GameResponse responsePG6 = GameController.PlayGame(requestPG6);
     
 
     // testing valid inputs
@@ -96,16 +115,45 @@ public class PlayGameTest {
         assertEquals(-1, response.GetWinnerId());
     }
 
-    // scenario 4.2: Column Input Test - not a number
+    // scenario 4.2: Column Input Test - not a number 
+    // NOTES: the variable Column cannot take any other input here than a number, cannot be tested
     @Test
     public void GameController_PlayGame_ColumnNum() {
+        int gameId = 1;
+        int playerId = 1;
+        int column = left3;
 
+        PlayGameRequest request = new PlayGameRequest(gameId, playerId,column);
+        GameResponse response = GameController.PlayGame(request);
+
+        assertEquals(false, response.GetIsValid());
+        assertEquals("Invalid Column Number", response.GetErrorMessage());
+        assertEquals(-1, response.GetGameId());
+        assertEquals(-1, response.GetCurrentTurnPlayer()); 
+        assertEquals(-1, response.GetPlayer1Id());
+        assertEquals(-1, response.GetPlayer2Id());
+        assertEquals("", response.GetStatus());
+        assertEquals(-1, response.GetWinnerId());
     }
 
     // scenario 4.3: Column Input Test - availability 
     @Test
     public void GameController_PlayGame_ColumnAvail() {
+        int gameId = 0;
+        int playerId = 1;
+        int column = 7; // this column has been filled above
 
+        PlayGameRequest request = new PlayGameRequest(gameId, playerId,column);
+        GameResponse response = GameController.PlayGame(request);
+
+        assertEquals(false, response.GetIsValid());
+        assertEquals("Column is filled. Please choose another column.", response.GetErrorMessage());
+        assertEquals(-1, response.GetGameId());
+        assertEquals(-1, response.GetCurrentTurnPlayer()); 
+        assertEquals(-1, response.GetPlayer1Id());
+        assertEquals(-1, response.GetPlayer2Id());
+        assertEquals("", response.GetStatus());
+        assertEquals(-1, response.GetWinnerId());
     }
 
     // game id test
