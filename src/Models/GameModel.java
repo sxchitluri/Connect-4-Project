@@ -112,7 +112,7 @@ public class GameModel {
         }
 
         if (!board.hasSpaceAvailable(column)) {
-            throw new IllegalArgumentException("Column is Full");
+            throw new IllegalArgumentException("Column is filled. Please choose another column.");
         }
     }
 
