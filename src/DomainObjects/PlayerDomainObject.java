@@ -3,6 +3,7 @@ package DomainObjects;
 import java.util.ArrayList;
 import DataObjects.PlayerDataObject;
 import Models.GameTypeModel;
+import restService.request.GetPlayerDetailsRequest;
 import restService.request.RegisterPlayerRequest;
 import Models.BoardModel;
 
@@ -27,10 +28,15 @@ public class PlayerDomainObject {
         this.password = player.password;
     }
 
-    // made to appease for player controller
+    // made to appease for player controller register player method
     public PlayerDomainObject(RegisterPlayerRequest request) {
         this.username = request.getUsername();
         this.password = request.getPassword();
+    }
+
+    // made to appease for player controller get player details method
+    public PlayerDomainObject(GetPlayerDetailsRequest request) {
+        this.id = request.getPlayerId();
     }
 
     public static ArrayList<PlayerDomainObject> MapList(ArrayList<PlayerDataObject> playerdata) {
