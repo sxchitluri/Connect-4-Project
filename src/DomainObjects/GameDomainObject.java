@@ -7,7 +7,7 @@ import Models.BoardModel;
 
 public class GameDomainObject {
     private int gameId;
-    // private int gameTypeId;
+    private int gameTypeId;
     private int player1Id;
     private int player2Id;
     private int currentTurnPlayer;
@@ -48,6 +48,10 @@ public class GameDomainObject {
     }
 
     public int GetGameId() {
+        return this.gameId;
+    }
+
+    public int GetGameTypeId() {
         return this.gameId;
     }
 
