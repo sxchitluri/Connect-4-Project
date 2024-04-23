@@ -11,6 +11,8 @@ import restService.response.PlayerResponse;
 
 public class CreateGameTest {
 
+    //new GameTypeDataObject(0,"Classic");
+
     RegisterPlayerRequest requestP1 = new RegisterPlayerRequest("doomsmith", "smashriptear");
     PlayerResponse responseP1 = PlayerController.registerPlayer(requestP1);
     // register player 2 (playerid = 1)
@@ -52,11 +54,11 @@ public class CreateGameTest {
     @Test
     public void testCreateGame_AllInputsValid_Success() {
         // Test game creation with valid player IDs and game type ID
-        CreateGameRequest request = new CreateGameRequest(1, 2, 1); // Assuming these IDs are valid
+        CreateGameRequest request = new CreateGameRequest(1, 2, 0); // Assuming these IDs are valid
         GameResponse response = GameController.CreateGame(request);
 
         // Check for a successful game creation
-        assertTrue(response.GetIsValid());
+        assertEquals(true, response.GetIsValid());
         assertNull(response.GetErrorMessage());
         assertEquals(145, response.GetGameId());
         assertEquals(1, response.GetGameTypeId());
