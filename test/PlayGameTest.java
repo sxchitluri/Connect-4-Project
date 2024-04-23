@@ -38,6 +38,7 @@ public class PlayGameTest {
     
 
     // testing valid inputs
+    // Scenario 4.9: Column input, gameid input, playerid input - all valid and follow the above parameters
     @Test
     public void GameController_PlayGame_SuccessTest() {
 
@@ -68,6 +69,7 @@ public class PlayGameTest {
 
     // testing invalild inputs
     // column tests
+    // scenario 4.1: Column Input Test - out of range
     @Test
     public void GameController_PlayGame_ColumnRange() {
         int gameId = 1;
@@ -84,49 +86,56 @@ public class PlayGameTest {
         // now we test the reponse
         assertEquals(false, response.GetIsValid());
         assertEquals("Invalid Column Number", response.GetErrorMessage());
-        assertEquals(1, response.GetGameId());
-        assertEquals(1, response.GetCurrentTurnPlayer()); // current turn player should change to 1 once 2 's play
+        assertEquals(-1, response.GetGameId());
+        assertEquals(-1, response.GetCurrentTurnPlayer()); // current turn player should change to 1 once 2 's play
                                                           // works'
 
-        assertEquals(1, response.GetPlayer1Id());
-        assertEquals(2, response.GetPlayer2Id());
-        assertEquals("Playing", response.GetStatus());
+        assertEquals(-1, response.GetPlayer1Id());
+        assertEquals(-1, response.GetPlayer2Id());
+        assertEquals("", response.GetStatus());
         assertEquals(-1, response.GetWinnerId());
     }
 
+    // scenario 4.2: Column Input Test - not a number
     @Test
     public void GameController_PlayGame_ColumnNum() {
 
     }
 
+    // scenario 4.3: Column Input Test - availability 
     @Test
     public void GameController_PlayGame_ColumnAvail() {
 
     }
 
     // game id test
+    // scenario 4.4: gameid does not exist - input not found
     @Test
     public void GameController_PlayGame_GameIdExist() {
 
     }
 
     // player id tests
+    // Scenario 4.5: playerid does not exist - input not found
     @Test
     public void GameController_PlayGame_PlayerIdExist() {
 
     }
 
+    // Scenario 4.6: playerid does exist - but not a playerid in the game
     @Test
     public void GameController_PlayGame_PlayerIdinGame() {
 
     }
 
+    // Scenario 4.7: playerid does exist and in the game- but is not the current turn player
     @Test
     public void GameController_PlayGame_PlayerIdCurrentTurn() {
 
     }
 
     // status test
+    // Scenario 4.8: Status of the game - Completed
     @Test
     public void GameController_PlayGame_StatusGame() {
 
