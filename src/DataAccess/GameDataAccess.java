@@ -19,7 +19,7 @@ public class GameDataAccess {
         nextId = 1; // does this need to be 1?
     }
 
-    private static int getNextId() {
+    public static int getNextId() {
         int thisId = nextId;
         nextId++;
         return thisId;
