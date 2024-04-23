@@ -2,6 +2,7 @@ package Models;
 
 import DataAccess.PlayerDataAccess;
 import DataAccess.GameDataAccess;
+import DataAccess.GameTypeDataAccess;
 import DataAccess.BoardDataAccess;
 import DataObjects.PlayerDataObject;
 import DataObjects.BoardDataObject;
@@ -115,7 +116,7 @@ public class GameModel {
         }
     }
 
-     public static GameDomainObject createGame(int player1Id, int player2Id, int gameTypeId) {
+    public static GameDomainObject createGame(int player1Id, int player2Id, int gameTypeId) {
         // Validate player IDs
         if (PlayerDataAccess.GetPlayerById(player1Id) == null) {
             throw new IllegalArgumentException("Invalid player1 ID");
@@ -123,7 +124,7 @@ public class GameModel {
         if (PlayerDataAccess.GetPlayerById(player2Id) == null) {
             throw new IllegalArgumentException("Invalid player2 ID");
         }
-        
+
         // Validate game type ID
         if (GameTypeDataAccess.GetGameTypeById(gameTypeId) == null) {
             throw new IllegalArgumentException("Invalid gameTypeId");
@@ -138,7 +139,8 @@ public class GameModel {
         newBoard = BoardDataAccess.AddBoard(newBoard);
 
         // Return a domain object representing the new game
-        return new GameDomainObject(newGame.id, newGame.player1Id, newGame.player2Id, newGame.currentTurnPlayer, newGame.status, newGame.winnerId, new BoardDomainObject(newBoard));
+        return new GameDomainObject(newGame.id, newGame.player1Id, newGame.player2Id, newGame.currentTurnPlayer,
+                newGame.status, newGame.winnerId, new BoardDomainObject(newBoard));
     }
 
 }
