@@ -45,6 +45,12 @@ public class GameTypeDataAccess {
         return null;
     }
 
+    public static void AddGameType(GameTypeDataObject gameType) {
+        // Optionally, you can handle ID generation and avoid duplicates here
+        gameType.id = gameTypes.size();  // Simple ID assignment based on the size of the list
+        gameTypes.add(gameType);
+    }
+
     /*
      * // idk, for playerdomainobject.java
      * public static GameTypeDataObject GetGameTypeById(GameTypeDomainObject
