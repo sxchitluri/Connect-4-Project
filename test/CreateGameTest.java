@@ -3,8 +3,11 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 import Controller.GameController;
+import Controller.PlayerController;
 import restService.request.CreateGameRequest;
+import restService.request.RegisterPlayerRequest;
 import restService.response.GameResponse;
+import restService.response.PlayerResponse;
 
 public class CreateGameTest {
 
@@ -49,7 +52,7 @@ public class CreateGameTest {
     @Test
     public void testCreateGame_AllInputsValid_Success() {
         // Test game creation with valid player IDs and game type ID
-        CreateGameRequest request = new CreateGameRequest(1, 2, 1);  // Assuming these IDs are valid
+        CreateGameRequest request = new CreateGameRequest(1, 2, 1); // Assuming these IDs are valid
         GameResponse response = GameController.CreateGame(request);
 
         // Check for a successful game creation
@@ -65,6 +68,5 @@ public class CreateGameTest {
         assertNotNull(response.GetBoard());
         assertEquals("Initial Board State", response.GetBoard());
     }
-
 
 }
