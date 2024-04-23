@@ -160,33 +160,89 @@ public class PlayGameTest {
     // scenario 4.4: gameid does not exist - input not found
     @Test
     public void GameController_PlayGame_GameIdExist() {
+        int gameId = 943;
+        int playerId = 1;
+        int column = 4;
 
+        PlayGameRequest request = new PlayGameRequest(gameId, playerId,column);
+        GameResponse response = GameController.PlayGame(request);
+
+        assertEquals(false, response.GetIsValid());
+        assertEquals("Game ID not found", response.GetErrorMessage());
+        assertEquals(-1, response.GetGameId());
+        assertEquals(-1, response.GetCurrentTurnPlayer()); 
+        assertEquals(-1, response.GetPlayer1Id());
+        assertEquals(-1, response.GetPlayer2Id());
+        assertEquals("", response.GetStatus());
+        assertEquals(-1, response.GetWinnerId());
     }
 
     // player id tests
     // Scenario 4.5: playerid does not exist - input not found
     @Test
     public void GameController_PlayGame_PlayerIdExist() {
+        int gameId = 1;
+        int playerId = 9;
+        int column = 4;
 
+        PlayGameRequest request = new PlayGameRequest(gameId, playerId,column);
+        GameResponse response = GameController.PlayGame(request);
+
+        assertEquals(false, response.GetIsValid());
+        assertEquals("Player ID not found", response.GetErrorMessage());
+        assertEquals(-1, response.GetGameId());
+        assertEquals(-1, response.GetCurrentTurnPlayer()); 
+        assertEquals(-1, response.GetPlayer1Id());
+        assertEquals(-1, response.GetPlayer2Id());
+        assertEquals("", response.GetStatus());
+        assertEquals(-1, response.GetWinnerId());
     }
 
     // Scenario 4.6: playerid does exist - but not a playerid in the game
     @Test
     public void GameController_PlayGame_PlayerIdinGame() {
+        int gameId = 1;
+        int playerId = 0; //playerid=0 not in gameid=1
+        int column = 4;
 
+        PlayGameRequest request = new PlayGameRequest(gameId, playerId,column);
+        GameResponse response = GameController.PlayGame(request);
+
+        assertEquals(false, response.GetIsValid());
+        assertEquals("Player ID " + playerId + " is not part of this game.", response.GetErrorMessage());
+        assertEquals(-1, response.GetGameId());
+        assertEquals(-1, response.GetCurrentTurnPlayer()); 
+        assertEquals(-1, response.GetPlayer1Id());
+        assertEquals(-1, response.GetPlayer2Id());
+        assertEquals("", response.GetStatus());
+        assertEquals(-1, response.GetWinnerId());
     }
 
     // Scenario 4.7: playerid does exist and in the game- but is not the current turn player
     @Test
     public void GameController_PlayGame_PlayerIdCurrentTurn() {
+        int gameId = 1;
+        int playerId = 2; //currentturnplayer should be playerid=1
+        int column = 4;
 
+        PlayGameRequest request = new PlayGameRequest(gameId, playerId,column);
+        GameResponse response = GameController.PlayGame(request);
+
+        assertEquals(false, response.GetIsValid());
+        assertEquals("It is not player " + playerId + "'s turn.", response.GetErrorMessage());
+        assertEquals(-1, response.GetGameId());
+        assertEquals(-1, response.GetCurrentTurnPlayer()); 
+        assertEquals(-1, response.GetPlayer1Id());
+        assertEquals(-1, response.GetPlayer2Id());
+        assertEquals("", response.GetStatus());
+        assertEquals(-1, response.GetWinnerId());
     }
 
     // status test
     // Scenario 4.8: Status of the game - Completed
     @Test
     public void GameController_PlayGame_StatusGame() {
-
+        
     }
 
 }
