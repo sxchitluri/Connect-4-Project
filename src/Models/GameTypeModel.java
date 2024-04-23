@@ -31,7 +31,7 @@ public class GameTypeModel {
 
     public static GameTypeDomainObject AddGameType(GameTypeDomainObject gameType) {
 
-        validateGameType(gameType); // validate gameType?? for id and string??
+        // validateGameType(gameType); // validate gameType?? for id and string??
 
         GameTypeDataObject gameTypeData = new GameTypeDataObject(gameType);
         // GameTypeDataAccess.AddGameType(gameTypeData); // not a method we have in
