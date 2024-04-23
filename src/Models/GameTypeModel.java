@@ -30,14 +30,9 @@ public class GameTypeModel {
     }
 
     public static GameTypeDomainObject AddGameType(GameTypeDomainObject gameType) {
-
-        // validateGameType(gameType); // validate gameType?? for id and string??
-
         GameTypeDataObject gameTypeData = new GameTypeDataObject(gameType);
-        // GameTypeDataAccess.AddGameType(gameTypeData); // not a method we have in
-        // GameTypeDataAccess
+        GameTypeDataAccess.AddGameType(gameTypeData);  // This line should now be active
         return new GameTypeDomainObject(gameTypeData);
-
     }
 
     // Sprint/Story 3
