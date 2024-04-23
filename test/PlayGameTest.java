@@ -22,7 +22,7 @@ public class PlayGameTest {
 
     // gametype initialized
     // GameTypeDataAccess.GameTypeDataAccess();
-    //new GameTypeDataObject(0,"Classic");
+    // new GameTypeDataObject(0,"Classic");
 
     GameTypeRequest reqGT = new GameTypeRequest(0, "Classic");
     GameTypeResponse resGT = GameTypeController.setGT2(reqGT);
@@ -50,7 +50,10 @@ public class PlayGameTest {
     GameResponse responseCG3 = GameController.CreateGame(requestCG3);
 
     // set gameid=2 's status as complete
-    String status = responseCG3.GetStatus();status.SetStatus();responseCG3.SetStatus(status);
+    // String status = responseCG3.GetStatus();
+    // status.SetStatus(status);
+    // responseCG3.SetStatus(status);
+    GameResponse responseCG3Comp = GameController.SetGameStatus(responseCG3);
 
     // play game to fill up column 7 for game 1
     // row 1
@@ -124,7 +127,7 @@ public class PlayGameTest {
         assertEquals("Invalid Column Number", response.GetErrorMessage());
         assertEquals(-1, response.GetGameId());
         assertEquals(-1, response.GetCurrentTurnPlayer()); // current turn player should change to 1 once 2 's play
-                                                          // works'
+                                                           // works'
 
         assertEquals(-1, response.GetPlayer1Id());
         assertEquals(-1, response.GetPlayer2Id());
@@ -135,24 +138,26 @@ public class PlayGameTest {
     // scenario 4.2: Column Input Test - not a number
     // NOTES: the variable Column cannot take any other input here than a number,
     // cannot be tested
-    @Test
-    public void GameController_PlayGame_ColumnNum() {
-        int gameId = 1;
-        int playerId = 1;
-        int column = left3;
-
-        PlayGameRequest request = new PlayGameRequest(gameId, playerId,column);
-        GameResponse response = GameController.PlayGame(request);
-
-        assertEquals(false, response.GetIsValid());
-        assertEquals("Invalid Column Number", response.GetErrorMessage());
-        assertEquals(-1, response.GetGameId());
-        assertEquals(-1, response.GetCurrentTurnPlayer()); 
-        assertEquals(-1, response.GetPlayer1Id());
-        assertEquals(-1, response.GetPlayer2Id());
-        assertEquals("", response.GetStatus());
-        assertEquals(-1, response.GetWinnerId());
-    }
+    /*
+     * @Test
+     * public void GameController_PlayGame_ColumnNum() {
+     * int gameId = 1;
+     * int playerId = 1;
+     * int column = left3;
+     * 
+     * PlayGameRequest request = new PlayGameRequest(gameId, playerId, column);
+     * GameResponse response = GameController.PlayGame(request);
+     * 
+     * assertEquals(false, response.GetIsValid());
+     * assertEquals("Invalid Column Number", response.GetErrorMessage());
+     * assertEquals(-1, response.GetGameId());
+     * assertEquals(-1, response.GetCurrentTurnPlayer());
+     * assertEquals(-1, response.GetPlayer1Id());
+     * assertEquals(-1, response.GetPlayer2Id());
+     * assertEquals("", response.GetStatus());
+     * assertEquals(-1, response.GetWinnerId());
+     * }
+     */
 
     // scenario 4.3: Column Input Test - availability
     @Test
@@ -161,13 +166,13 @@ public class PlayGameTest {
         int playerId = 1;
         int column = 7; // this column has been filled above
 
-        PlayGameRequest request = new PlayGameRequest(gameId, playerId,column);
+        PlayGameRequest request = new PlayGameRequest(gameId, playerId, column);
         GameResponse response = GameController.PlayGame(request);
 
         assertEquals(false, response.GetIsValid());
         assertEquals("Column is filled. Please choose another column.", response.GetErrorMessage());
         assertEquals(-1, response.GetGameId());
-        assertEquals(-1, response.GetCurrentTurnPlayer()); 
+        assertEquals(-1, response.GetCurrentTurnPlayer());
         assertEquals(-1, response.GetPlayer1Id());
         assertEquals(-1, response.GetPlayer2Id());
         assertEquals("", response.GetStatus());
@@ -182,13 +187,13 @@ public class PlayGameTest {
         int playerId = 1;
         int column = 4;
 
-        PlayGameRequest request = new PlayGameRequest(gameId, playerId,column);
+        PlayGameRequest request = new PlayGameRequest(gameId, playerId, column);
         GameResponse response = GameController.PlayGame(request);
 
         assertEquals(false, response.GetIsValid());
         assertEquals("Game ID not found", response.GetErrorMessage());
         assertEquals(-1, response.GetGameId());
-        assertEquals(-1, response.GetCurrentTurnPlayer()); 
+        assertEquals(-1, response.GetCurrentTurnPlayer());
         assertEquals(-1, response.GetPlayer1Id());
         assertEquals(-1, response.GetPlayer2Id());
         assertEquals("", response.GetStatus());
@@ -203,13 +208,13 @@ public class PlayGameTest {
         int playerId = 9;
         int column = 4;
 
-        PlayGameRequest request = new PlayGameRequest(gameId, playerId,column);
+        PlayGameRequest request = new PlayGameRequest(gameId, playerId, column);
         GameResponse response = GameController.PlayGame(request);
 
         assertEquals(false, response.GetIsValid());
         assertEquals("Player ID not found", response.GetErrorMessage());
         assertEquals(-1, response.GetGameId());
-        assertEquals(-1, response.GetCurrentTurnPlayer()); 
+        assertEquals(-1, response.GetCurrentTurnPlayer());
         assertEquals(-1, response.GetPlayer1Id());
         assertEquals(-1, response.GetPlayer2Id());
         assertEquals("", response.GetStatus());
@@ -220,16 +225,16 @@ public class PlayGameTest {
     @Test
     public void GameController_PlayGame_PlayerIdinGame() {
         int gameId = 1;
-        int playerId = 0; //playerid=0 not in gameid=1
+        int playerId = 0; // playerid=0 not in gameid=1
         int column = 4;
 
-        PlayGameRequest request = new PlayGameRequest(gameId, playerId,column);
+        PlayGameRequest request = new PlayGameRequest(gameId, playerId, column);
         GameResponse response = GameController.PlayGame(request);
 
         assertEquals(false, response.GetIsValid());
         assertEquals("Player ID " + playerId + " is not part of this game.", response.GetErrorMessage());
         assertEquals(-1, response.GetGameId());
-        assertEquals(-1, response.GetCurrentTurnPlayer()); 
+        assertEquals(-1, response.GetCurrentTurnPlayer());
         assertEquals(-1, response.GetPlayer1Id());
         assertEquals(-1, response.GetPlayer2Id());
         assertEquals("", response.GetStatus());
@@ -241,16 +246,16 @@ public class PlayGameTest {
     @Test
     public void GameController_PlayGame_PlayerIdCurrentTurn() {
         int gameId = 1;
-        int playerId = 2; //currentturnplayer should be playerid=1
+        int playerId = 2; // currentturnplayer should be playerid=1
         int column = 4;
 
-        PlayGameRequest request = new PlayGameRequest(gameId, playerId,column);
+        PlayGameRequest request = new PlayGameRequest(gameId, playerId, column);
         GameResponse response = GameController.PlayGame(request);
 
         assertEquals(false, response.GetIsValid());
         assertEquals("It is not player " + playerId + "'s turn.", response.GetErrorMessage());
         assertEquals(-1, response.GetGameId());
-        assertEquals(-1, response.GetCurrentTurnPlayer()); 
+        assertEquals(-1, response.GetCurrentTurnPlayer());
         assertEquals(-1, response.GetPlayer1Id());
         assertEquals(-1, response.GetPlayer2Id());
         assertEquals("", response.GetStatus());
@@ -261,7 +266,21 @@ public class PlayGameTest {
     // Scenario 4.8: Status of the game - Completed
     @Test
     public void GameController_PlayGame_StatusGame() {
+        int gameId = 2;
+        int playerId = 2; // currentturnplayer should be playerid=1
+        int column = 4;
 
+        PlayGameRequest request = new PlayGameRequest(gameId, playerId, column);
+        GameResponse response = GameController.PlayGame(request);
+
+        assertEquals(false, response.GetIsValid());
+        assertEquals("Game is already completed.", response.GetErrorMessage());
+        assertEquals(-1, response.GetGameId());
+        assertEquals(-1, response.GetCurrentTurnPlayer());
+        assertEquals(-1, response.GetPlayer1Id());
+        assertEquals(-1, response.GetPlayer2Id());
+        assertEquals("", response.GetStatus());
+        assertEquals(-1, response.GetWinnerId());
     }
 
 }

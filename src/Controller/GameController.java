@@ -75,4 +75,18 @@ public class GameController {
         }
     }
 
+    public static GameResponse SetGameStatus(GameResponse response) {
+        try {
+
+            GameDomainObject domainToCreate = new GameDomainObject(response);
+            GameResponse response2 = new GameResponse(domainToCreate.SetStatus());
+            return response2;
+
+        } catch (Exception ex) {
+            GameResponse response2 = new GameResponse(ex.getMessage());
+            return response;
+        }
+
+    }
+
 }
