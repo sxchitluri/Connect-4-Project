@@ -1,21 +1,31 @@
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
+import java.util.ArrayList;
+import DataObjects.GameTypeDataObject;
+import DomainObjects.GameTypeDomainObject;
 import Controller.GameController;
+import Controller.GameTypeController;
 import Controller.PlayerController;
 import DataAccess.GameTypeDataAccess;
 import DomainObjects.GameDomainObject;
 import restService.request.CreateGameRequest;
+import restService.request.GameTypeRequest;
 import restService.request.PlayGameRequest;
 import restService.request.RegisterPlayerRequest;
 import restService.response.GameResponse;
+import restService.response.GameTypeResponse;
 import restService.response.PlayerResponse;
 
 // Story 4 test
 public class PlayGameTest {
 
-    //gametype initialized
-    GameTypeDataAccess.GameTypeDataAccess();
+    // gametype initialized
+    // GameTypeDataAccess.GameTypeDataAccess();
+    //new GameTypeDataObject(0,"Classic");
+
+    GameTypeRequest reqGT = new GameTypeRequest(0, "Classic");
+    GameTypeResponse resGT = GameTypeController.setGT2(reqGT);
 
     // register player 1 (playerid = 0)
     RegisterPlayerRequest requestP1 = new RegisterPlayerRequest("doomsmith", "smashriptear");
@@ -40,33 +50,31 @@ public class PlayGameTest {
     GameResponse responseCG3 = GameController.CreateGame(requestCG3);
 
     // set gameid=2 's status as complete
-    String status = responseCG3.GetStatus();
-    status.SetStatus();
-    responseCG3.SetStatus(status);
+    String status = responseCG3.GetStatus();status.SetStatus();responseCG3.SetStatus(status);
 
     // play game to fill up column 7 for game 1
     // row 1
     PlayGameRequest requestPG1 = new PlayGameRequest(0, 1, 7);
     GameResponse responsePG1 = GameController.PlayGame(requestPG1);
-    //row 2
+    // row 2
     PlayGameRequest requestPG2 = new PlayGameRequest(0, 0, 7);
     GameResponse responsePG2 = GameController.PlayGame(requestPG2);
-    //row 3
+    // row 3
     PlayGameRequest requestPG3 = new PlayGameRequest(0, 1, 7);
     GameResponse responsePG3 = GameController.PlayGame(requestPG3);
-    //row 4
+    // row 4
     PlayGameRequest requestPG4 = new PlayGameRequest(0, 0, 7);
     GameResponse responsePG4 = GameController.PlayGame(requestPG4);
-    //row 5
+    // row 5
     PlayGameRequest requestPG5 = new PlayGameRequest(0, 1, 7);
     GameResponse responsePG5 = GameController.PlayGame(requestPG5);
-    //row 6
+    // row 6
     PlayGameRequest requestPG6 = new PlayGameRequest(0, 0, 7);
     GameResponse responsePG6 = GameController.PlayGame(requestPG6);
-    
 
     // testing valid inputs
-    // Scenario 4.9: Column input, gameid input, playerid input - all valid and follow the above parameters
+    // Scenario 4.9: Column input, gameid input, playerid input - all valid and
+    // follow the above parameters
     @Test
     public void GameController_PlayGame_SuccessTest() {
 
@@ -124,8 +132,9 @@ public class PlayGameTest {
         assertEquals(-1, response.GetWinnerId());
     }
 
-    // scenario 4.2: Column Input Test - not a number 
-    // NOTES: the variable Column cannot take any other input here than a number, cannot be tested
+    // scenario 4.2: Column Input Test - not a number
+    // NOTES: the variable Column cannot take any other input here than a number,
+    // cannot be tested
     @Test
     public void GameController_PlayGame_ColumnNum() {
         int gameId = 1;
@@ -145,7 +154,7 @@ public class PlayGameTest {
         assertEquals(-1, response.GetWinnerId());
     }
 
-    // scenario 4.3: Column Input Test - availability 
+    // scenario 4.3: Column Input Test - availability
     @Test
     public void GameController_PlayGame_ColumnAvail() {
         int gameId = 0;
@@ -227,7 +236,8 @@ public class PlayGameTest {
         assertEquals(-1, response.GetWinnerId());
     }
 
-    // Scenario 4.7: playerid does exist and in the game- but is not the current turn player
+    // Scenario 4.7: playerid does exist and in the game- but is not the current
+    // turn player
     @Test
     public void GameController_PlayGame_PlayerIdCurrentTurn() {
         int gameId = 1;
