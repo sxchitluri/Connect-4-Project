@@ -1,12 +1,7 @@
 package Controller;
 
-//import java.util.ArrayList;
 
-// import DataObjects.PlayerDataObject;
-// import DomainObjects.BoardDomainObject;
-// import DomainObjects.PlayerDomainObject;
 import DomainObjects.GameDomainObject;
-//import Models.BoardModel;
 import Models.GameModel;
 import restService.request.CreateGameRequest;
 import restService.request.PlayGameRequest;
@@ -17,18 +12,19 @@ public class GameController {
     // GETTING GAME DETAILS - making sure game exists??? [STORY 2]
     // request is getgamedetailsrequest.java
     // reponse is gameresponse.java
+
     public static GameResponse GetGame(int gameId) {
         try {
-
-            GameResponse response = new GameResponse(gameId, 0, 0, 0, "false", 2, -1,
-                    "                                          ");
-            return response;
-
+            GameDomainObject game = GameModel.GetGameById(gameId);
+            if (game == null) {
+                return new GameResponse("Invalid GameId.");
+            }
+            // Assuming game is found, construct a successful response
+            return new GameResponse(game.GetGameId(), game.GetGameTypeId(), game.GetPlayer1Id(), game.GetPlayer2Id(),
+                                    game.GetStatus(), game.GetCurrentTurnPlayer(), game.GetWinnerId(), game.GetBoard().GetOccupancy());
         } catch (Exception ex) {
-            GameResponse response = new GameResponse(ex.getMessage());
-            return response;
+            return new GameResponse(ex.getMessage());
         }
-
     }
 
     // MAKING MOVES - STORY 4,
@@ -90,3 +86,4 @@ public class GameController {
     }
 
 }
+
