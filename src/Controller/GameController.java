@@ -60,11 +60,13 @@ public class GameController {
 
         try {
 
-            GameDomainObject domainToCreate = new GameDomainObject(request);
-            GameDomainObject domainCreated = GameModel.CreateGame(domainToCreate);
+            GameDomainObject domainCreated = GameModel.createGame(request.GetPlayer1Id(), request.GetPlayer2Id(),
+                    request.GetGameTypeId());
 
-            GameResponse response = new GameResponse(domainCreated.GetGameId(), domainCreated.GetPlayer1Id(),
-                    domainCreated.GetPlayer2Id());
+            GameResponse response = new GameResponse(domainCreated.GetGameId(), domainCreated.GetGameTypeId(),
+                    domainCreated.GetPlayer1Id(),
+                    domainCreated.GetPlayer2Id(), domainCreated.GetStatus(), domainCreated.GetCurrentTurnPlayer(),
+                    domainCreated.GetWinnerId(), domainCreated.GetBoard().GetOccupancy());
             return response;
 
         } catch (Exception ex) {
