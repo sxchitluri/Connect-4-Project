@@ -15,7 +15,7 @@ public class PlayerRegistrationTest {
     PlayerResponse response = PlayerController.registerPlayer(request);
 
     // tests for valid inputs
-    // testing scenerios #
+    // Scenario 1.6: Username and Password Input Test – Correct inputs
     @Test
     public void PlayerController_RegisterPlayer_SuccessTest() {
 
@@ -37,6 +37,8 @@ public class PlayerRegistrationTest {
         // do we need an assertEquals for password?, if we are not storing them here?
     }
 
+    // Scenario 1.7: Username and Password Input Test – Correct inputs and test
+    // sequential playerid
     @Test
     public void PlayerController_RegisterPlayer_SuccessTest_SeqPlayerId() {
 
@@ -55,6 +57,7 @@ public class PlayerRegistrationTest {
     }
 
     // tests for invalid inputs
+    // Scenario 1.1: Username Input Test – Too Short
     @Test
     public void PlayerController_RegisterPlayer_UsernameShort() {
         String username = "short";
@@ -70,6 +73,7 @@ public class PlayerRegistrationTest {
         assertEquals(-1, response.getPlayerId());
     }
 
+    // Scenario 1.2: Username Input Test – Too Long
     @Test
     public void PlayerController_RegisterPlayer_UsernameLong() {
         String username = "Immunotherapeutically";
@@ -85,6 +89,7 @@ public class PlayerRegistrationTest {
         assertEquals(-1, response.getPlayerId());
     }
 
+    // Scenario 1.3: Username Input Test – Invalid characters
     @Test
     public void PlayerController_RegisterPlayer_UsernameInvalidChar() {
         String username = "Rainbow!!!!!";
@@ -100,6 +105,7 @@ public class PlayerRegistrationTest {
         assertEquals(-1, response.getPlayerId());
     }
 
+    // Scenario 1.4: Username Input Test – Not Unique
     @Test
     public void PlayerController_RegisterPlayer_UsernameUnique() {
         String username = "doomsmith"; // already made in playerdataaccess
@@ -115,6 +121,7 @@ public class PlayerRegistrationTest {
         assertEquals(-1, response.getPlayerId());
     }
 
+    // Scenario 1.5: Password Input Test – Too Short
     @Test
     public void PlayerController_RegisterPlayer_PasswordShort() {
         String username = "username1";
@@ -130,6 +137,7 @@ public class PlayerRegistrationTest {
         assertEquals(-1, response.getPlayerId());
     }
 
+    // Scenario 1.6: Password Input Test – Too Long
     @Test
     public void PlayerController_RegisterPlayer_PasswordLong() {
         String username = "username2";
