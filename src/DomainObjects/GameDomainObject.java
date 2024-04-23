@@ -71,6 +71,10 @@ public class GameDomainObject {
         return this.status;
     }
 
+    public String SetStatus() {
+        return this.status = "Completed";
+    }
+
     public int GetWinnerId() {
         return this.winnerId;
     }
