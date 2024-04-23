@@ -8,6 +8,7 @@ package Controller;
 import DomainObjects.GameDomainObject;
 //import Models.BoardModel;
 import Models.GameModel;
+import restService.request.CreateGameRequest;
 import restService.request.PlayGameRequest;
 import restService.response.GameResponse;
 
@@ -55,9 +56,16 @@ public class GameController {
     // MAKING MOVES - STORY 3,
     // request is request.java
     // reponse is gameresponse.java
-    public static GameResponse CreateGame(PlayGameRequest request) {
+    public static GameResponse CreateGame(CreateGameRequest request) {
 
         try {
+
+            GameDomainObject domainToCreate = new GameDomainObject(request);
+            GameDomainObject domainCreated = GameModel.CreateGame(domainToCreate);
+
+            GameResponse response = new GameResponse(domainCreated.GetGameId(), domainCreated.GetPlayer1Id(),
+                    domainCreated.GetPlayer2Id());
+            return response;
 
         } catch (Exception ex) {
             GameResponse response = new GameResponse(ex.getMessage());
