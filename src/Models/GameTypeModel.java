@@ -39,5 +39,4 @@ public class GameTypeModel {
     private static void validateGameType(GameTypeDomainObject gameType) {
 
     }
-
 }
