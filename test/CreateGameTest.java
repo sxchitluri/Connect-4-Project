@@ -24,7 +24,7 @@ public class CreateGameTest {
         GameResponse response = GameController.CreateGame(request);
 
         // Check for the expected error message
-        assertEquals("Invalid player2 ID.", response.GetErrorMessage());
+        assertEquals("Invalid player2 ID", response.GetErrorMessage());
     }
 
     @Test
@@ -34,7 +34,7 @@ public class CreateGameTest {
         GameResponse response = GameController.CreateGame(request);
 
         // Check for the expected error message
-        assertEquals("Invalid gameTypeId.", response.GetErrorMessage());
+        assertEquals("Invalid gameTypeId", response.GetErrorMessage());
     }
 
     @Test
