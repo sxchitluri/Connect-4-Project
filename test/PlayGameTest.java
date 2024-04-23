@@ -4,6 +4,7 @@ import org.junit.Test;
 import Controller.GameController;
 import Controller.PlayerController;
 import DataAccess.GameTypeDataAccess;
+import DomainObjects.GameDomainObject;
 import restService.request.CreateGameRequest;
 import restService.request.PlayGameRequest;
 import restService.request.RegisterPlayerRequest;
@@ -34,6 +35,14 @@ public class PlayGameTest {
     // Create a game 2 that has player1Id and player2Id (gameid = 1)
     CreateGameRequest requestCG2 = new CreateGameRequest(1, 2, 0);
     GameResponse responseCG2 = GameController.CreateGame(requestCG2);
+    // Create a game 3 that has player1Id and player2Id (gameid = 2)
+    CreateGameRequest requestCG3 = new CreateGameRequest(0, 2, 0);
+    GameResponse responseCG3 = GameController.CreateGame(requestCG3);
+
+    // set gameid=2 's status as complete
+    String status = responseCG3.GetStatus();
+    status.SetStatus();
+    responseCG3.SetStatus(status);
 
     // play game to fill up column 7 for game 1
     // row 1
@@ -242,7 +251,7 @@ public class PlayGameTest {
     // Scenario 4.8: Status of the game - Completed
     @Test
     public void GameController_PlayGame_StatusGame() {
-        
+
     }
 
 }
