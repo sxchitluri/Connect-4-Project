@@ -3,15 +3,19 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 import Controller.GameController;
+import Controller.GameTypeController;
 import Controller.PlayerController;
 import restService.request.CreateGameRequest;
+import restService.request.GameTypeRequest;
 import restService.request.RegisterPlayerRequest;
 import restService.response.GameResponse;
+import restService.response.GameTypeResponse;
 import restService.response.PlayerResponse;
 
 public class CreateGameTest {
 
-    //new GameTypeDataObject(0,"Classic");
+    GameTypeRequest req = new GameTypeRequest(0, "Classic");
+    GameTypeResponse resp = GameTypeController.setGT2(req);
 
     RegisterPlayerRequest requestP1 = new RegisterPlayerRequest("doomsmith", "smashriptear");
     PlayerResponse responseP1 = PlayerController.registerPlayer(requestP1);
