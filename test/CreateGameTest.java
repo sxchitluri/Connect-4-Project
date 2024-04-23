@@ -8,6 +8,15 @@ import restService.response.GameResponse;
 
 public class CreateGameTest {
 
+    RegisterPlayerRequest requestP1 = new RegisterPlayerRequest("doomsmith", "smashriptear");
+    PlayerResponse responseP1 = PlayerController.registerPlayer(requestP1);
+    // register player 2 (playerid = 1)
+    RegisterPlayerRequest requestP2 = new RegisterPlayerRequest("tswizzle", "smashriptear");
+    PlayerResponse responseP2 = PlayerController.registerPlayer(requestP2);
+    // register player 3 (playerid = 2)
+    RegisterPlayerRequest requestP3 = new RegisterPlayerRequest("ttpoetsdept", "smashriptear");
+    PlayerResponse responseP3 = PlayerController.registerPlayer(requestP3);
+
     @Test
     public void testCreateGame_InvalidPlayer1Id_Failure() {
         // Test game creation with an invalid player1 ID
