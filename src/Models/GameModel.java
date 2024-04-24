@@ -91,7 +91,7 @@ public class GameModel {
             }
 
             // Debug output
-            System.out.println("Board ID before update: " + board.GetGameId());
+            //System.out.println("Board ID before update: " + board.GetGameId());
 
             // update board
             board.updateBoard(column, playerId);
@@ -186,12 +186,12 @@ public class GameModel {
         // Create a new game object with an ID obtained directly from GameDataAccess
         GameDataObject newGame = new GameDataObject(GameDataAccess.getNextId(), player1Id, player2Id, "Playing",
                 player2Id, gameTypeId);
-        // newGame = GameDataAccess.AddGame(newGame);
+        newGame = GameDataAccess.AddGame(newGame);
 
         // Similarly, create a new board object with an ID from BoardDataAccess
         BoardDataObject newBoard = new BoardDataObject(BoardDataAccess.getNextId(), newGame.id,
                 BoardDataObject.DEFAULT_GAMEBOARD);
-        // newBoard = BoardDataAccess.AddBoard(newBoard);
+        newBoard = BoardDataAccess.AddBoard(newBoard);
 
         // Return a new domain object representing the newly created game and its
         // associated board

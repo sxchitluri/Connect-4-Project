@@ -26,7 +26,7 @@ public class BoardDataAccess {
     public static ArrayList<BoardDataObject> GetAllBoards() {
         ArrayList<BoardDataObject> itemsList = new ArrayList<BoardDataObject>();
 
-        //Create a copy of itemTypes to return
+        // Create a copy of itemTypes to return
         for (BoardDataObject item : boards) {
             itemsList.add(new BoardDataObject(item));
         }
@@ -54,17 +54,17 @@ public class BoardDataAccess {
     public static void Save(BoardDataObject boardToSave) {
         for (BoardDataObject board : boards) {
             if (board.id == boardToSave.id) {
-                //The gameId cannot be changed
-                //board.gameId = boardToSave.gameId;
+                // The gameId cannot be changed
+                // board.gameId = boardToSave.gameId;
                 board.occupancy = boardToSave.occupancy;
             }
         }
     }
 
     public static BoardDataObject AddBoard(BoardDataObject newBoard) {
-        newBoard.id = getNextId();
+        // newBoard.id = getNextId();
         boards.add(newBoard);
         return newBoard;
     }
-    
+
 }

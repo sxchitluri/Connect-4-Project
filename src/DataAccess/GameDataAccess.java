@@ -44,9 +44,8 @@ public class GameDataAccess {
         return null;
     }
 
-
     public static GameDataObject AddGame(GameDataObject newGame) {
-        newGame.id = getNextId();
+        // newGame.id = getNextId();
         games.add(newGame);
         return newGame;
     }
