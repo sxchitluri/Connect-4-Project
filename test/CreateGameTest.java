@@ -26,6 +26,7 @@ public class CreateGameTest {
     RegisterPlayerRequest requestP3 = new RegisterPlayerRequest("ttpoetsdept", "smashriptear");
     PlayerResponse responseP3 = PlayerController.registerPlayer(requestP3);
 
+    // Scenario 3.1: player1id does not exist - input not found
     @Test
     public void testCreateGame_InvalidPlayer1Id_Failure() {
         // Test game creation with an invalid player1 ID
@@ -35,6 +36,7 @@ public class CreateGameTest {
         assertEquals("Invalid player1 ID", response.GetErrorMessage());
     }
 
+    // Scenario 3.2: player2id does not exist - input not found
     @Test
     public void testCreateGame_InvalidPlayer2Id_Failure() {
         // Test game creation with a valid player1 ID and an invalid player2 ID
@@ -45,6 +47,7 @@ public class CreateGameTest {
         assertEquals("Invalid player2 ID", response.GetErrorMessage());
     }
 
+    // Scenario 3.3: gametypeid does not exist - input not found
     @Test
     public void testCreateGame_InvalidGameTypeId_Failure() {
         // Assume player IDs 1 and 2 are valid, and game type ID 77 is invalid
@@ -55,6 +58,7 @@ public class CreateGameTest {
         assertEquals("Invalid gameTypeId", response.GetErrorMessage());
     }
 
+    // Scenario 3.4: player1id, player2id, gametypeid all exist - input founds
     @Test
     public void testCreateGame_AllInputsValid_Success() {
         // Test game creation with valid player IDs and game type ID
