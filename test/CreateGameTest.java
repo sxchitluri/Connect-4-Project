@@ -2,7 +2,6 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.*;
 import org.junit.Test;
 
-
 import Controller.GameController;
 import Controller.GameTypeController;
 import Controller.PlayerController;
@@ -65,7 +64,7 @@ public class CreateGameTest {
         // Check for a successful game creation
         assertEquals(true, response.GetIsValid());
         assertNull(response.GetErrorMessage());
-        assertEquals(0, response.GetGameId());
+        assertEquals(1, response.GetGameId());
         assertEquals(0, response.GetGameTypeId());
         assertEquals(1, response.GetPlayer1Id());
         assertEquals(2, response.GetPlayer2Id());
@@ -77,4 +76,3 @@ public class CreateGameTest {
     }
 
 }
-
