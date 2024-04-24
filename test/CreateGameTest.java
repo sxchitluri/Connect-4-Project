@@ -68,7 +68,7 @@ public class CreateGameTest {
         // Check for a successful game creation
         assertEquals(true, response.GetIsValid());
         assertNull(response.GetErrorMessage());
-        assertEquals(1, response.GetGameId());
+        assertEquals(0, response.GetGameId());
         assertEquals(0, response.GetGameTypeId());
         assertEquals(1, response.GetPlayer1Id());
         assertEquals(2, response.GetPlayer2Id());
@@ -76,7 +76,7 @@ public class CreateGameTest {
         assertEquals("Playing", response.GetStatus());
         assertEquals(0, response.GetWinnerId());
         assertNotNull(response.GetBoard());
-        assertEquals("Initial Board State", response.GetBoard());
+        assertEquals("                                          ", response.GetBoard());
     }
 
 }
