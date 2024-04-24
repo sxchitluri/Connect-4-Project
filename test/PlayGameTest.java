@@ -20,6 +20,10 @@ import restService.response.PlayerResponse;
 // Story 4 test
 public class PlayGameTest {
 
+    // NEED TO UPDATE CODE WHERE BOARD TOKENS 'R' AND 'G' ARE ASSIGNED TO PLAYER1ID
+    // AND PLAYER2ID OF A GAMEID
+    // INSTEAD OF A # IN UPDATEBOARD METHOD OF BOARDDOMAINOBJECT.JAVA
+
     // gametype initialized
     // GameTypeDataAccess.GameTypeDataAccess();
     // new GameTypeDataObject(0,"Classic");
