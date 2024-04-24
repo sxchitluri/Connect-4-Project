@@ -107,32 +107,28 @@ public class BoardDomainObject {
     }
 
     public void updateBoard(int column, int playerId) {
-        // Determine player token based on playerId, could be extended to more players or different token rules
+        // Determine the player's token based on the playerId
         char playerToken;
-        if (playerId == 1) {
-            playerToken = 'R';  // Assume player 1 is 'Red'
-        } else if (playerId == 2) {
-            playerToken = 'G';  // Assume player 2 is 'Green'
-        } else {
-            throw new IllegalArgumentException("Unknown player ID");
-        }
-    
-        if (column < 0 || column >= 7) {
-            throw new IllegalArgumentException("Column index out of bounds");
-        }
-    
-        // Calculate the base index from the bottom of the column
-        int baseIndex = (6 - 1) * 7 + column;  // Start from the bottom of the column
-    
-        // Traverse upwards in the column to find the first empty spot
-        for (int i = 0; i < 6; i++) {  // There are 6 rows
-            int index = baseIndex - i * 7;
+            if (playerId == 1) {
+                playerToken = 'R';  // Assume player 1 is 'Red'
+            } else if (playerId == 2) {
+                playerToken = 'G';  // Assume player 2 is 'Green'
+            } else {
+                throw new IllegalArgumentException("Unknown player ID: " + playerId);
+            }
+
+        // Start from the bottom of the column and find the first empty spot
+        for (int row = 5; row >= 0; row--) {  // Rows are indexed from 0 to 5, bottom row is 5
+            int index = row * 7 + column;  // Calculate the index in the occupancy string
             if (occupancy.charAt(index) == ' ') {  // Check if the spot is empty
                 // Update the board string with the player's token
                 occupancy = occupancy.substring(0, index) + playerToken + occupancy.substring(index + 1);
-                return;
+                return;  // Exit after placing the token
             }
         }
+
+        // If no empty spot is found, throw an exception
+        throw new IllegalStateException("No available spaces in column: " + column);
     }
 }
 
