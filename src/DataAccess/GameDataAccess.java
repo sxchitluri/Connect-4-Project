@@ -44,15 +44,6 @@ public class GameDataAccess {
         return null;
     }
 
-    // fix for game
-    // public static GameDataObject GetAvailableGame() {
-    // for( GameDataObject game : games) {
-    // if (game.id == -1) {
-    // return new GameDataObject(game);
-    // }
-    // }
-    // return null;
-    // }
 
     public static GameDataObject AddGame(GameDataObject newGame) {
         newGame.id = getNextId();
