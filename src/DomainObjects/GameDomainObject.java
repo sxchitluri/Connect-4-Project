@@ -14,7 +14,8 @@ public class GameDomainObject {
     private int currentTurnPlayer;
     private String status;
     private int winnerId;
-    // private String board;
+    private String board2; // added this to try to pass saved board for game reponse to be returned instead
+                           // of error message
     private BoardDomainObject board;
 
     public GameDomainObject(int gameId, int player1Id, int player2Id, int currentTurnPlayer, String status,
@@ -37,7 +38,8 @@ public class GameDomainObject {
         this.currentTurnPlayer = game.currentTurnPlayer;
         this.status = game.status;
         this.winnerId = game.winnerId;
-        // this.board = game.board;
+        this.board2 = game.board; // added this to try to pass saved board for game reponse to be returned instead
+                                  // of error message
     }
 
     public GameDomainObject(GameResponse response) {
@@ -91,6 +93,7 @@ public class GameDomainObject {
         return this.winnerId;
     }
 
+    // not loading the saved board after playing game move and saving it
     public BoardDomainObject GetBoard() {
         // Lazy Load the Rack
         if (this.board == null) {

@@ -91,10 +91,11 @@ public class GameModel {
             }
 
             // Debug output
-            //System.out.println("Board ID before update: " + board.GetGameId());
+            // System.out.println("Board ID before update: " + board.GetGameId());
 
             // update board
             board.updateBoard(column, playerId);
+            BoardDataAccess.Save(new BoardDataObject(board));
 
             // Step 3: Check for winner
             if (checkForWinnerGame(gameId)) {
