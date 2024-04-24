@@ -13,10 +13,12 @@ import DomainObjects.GameDomainObject;
 
 public class GameModel {
 
-    /*public static GameDomainObject GetGameById(int id) {
-        GameDataObject gameData = GameDataAccess.GetGameById(id);
-        return new GameDomainObject(gameData);
-    }*/
+    /*
+     * public static GameDomainObject GetGameById(int id) {
+     * GameDataObject gameData = GameDataAccess.GetGameById(id);
+     * return new GameDomainObject(gameData);
+     * }
+     */
 
     public static GameDomainObject GetGameById(int id) {
         GameDataObject gameData = GameDataAccess.GetGameById(id);
@@ -41,55 +43,59 @@ public class GameModel {
 
     // STORY 4
 
-    /*public static GameDomainObject playGame(int gameId, int playerId, int column) {
-        // validate inputs
-        validatePlayGame(gameId, playerId, column);
-
-        GameDataObject gameData = GameDataAccess.GetGameById(gameId);
-        BoardDomainObject board = BoardModel.GetBoardByGameId(gameData.id);
-
-        // update board
-        board.updateBoard(column, playerId);
-
-        // Step 3: Check for winner
-
-        if (checkForWinnerGame(gameId)) {
-            gameData.status = "Completed";
-            gameData.winnerId = playerId;
-        } else {
-            // Update turn to the next player
-            gameData.currentTurnPlayer = gameData.currentTurnPlayer == gameData.player1Id ? gameData.player2Id
-                    : gameData.player1Id;
-        }
-
-        // Step 4: Save updates
-        GameDataAccess.Save(new GameDataObject(gameData));
-        BoardDataAccess.Save(new BoardDataObject(board));
-
-        return new GameDomainObject(gameData);
-    }*/
+    /*
+     * public static GameDomainObject playGame(int gameId, int playerId, int column)
+     * {
+     * // validate inputs
+     * validatePlayGame(gameId, playerId, column);
+     * 
+     * GameDataObject gameData = GameDataAccess.GetGameById(gameId);
+     * BoardDomainObject board = BoardModel.GetBoardByGameId(gameData.id);
+     * 
+     * // update board
+     * board.updateBoard(column, playerId);
+     * 
+     * // Step 3: Check for winner
+     * 
+     * if (checkForWinnerGame(gameId)) {
+     * gameData.status = "Completed";
+     * gameData.winnerId = playerId;
+     * } else {
+     * // Update turn to the next player
+     * gameData.currentTurnPlayer = gameData.currentTurnPlayer == gameData.player1Id
+     * ? gameData.player2Id
+     * : gameData.player1Id;
+     * }
+     * 
+     * // Step 4: Save updates
+     * GameDataAccess.Save(new GameDataObject(gameData));
+     * BoardDataAccess.Save(new BoardDataObject(board));
+     * 
+     * return new GameDomainObject(gameData);
+     * }
+     */
 
     public static GameDomainObject playGame(int gameId, int playerId, int column) {
         try {
             // validate inputs
             validatePlayGame(gameId, playerId, column);
-    
+
             GameDataObject gameData = GameDataAccess.GetGameById(gameId);
             if (gameData == null) {
                 throw new IllegalArgumentException("Game not found with ID: " + gameId);
             }
-    
+
             BoardDomainObject board = BoardModel.GetBoardByGameId(gameData.id);
             if (board == null) {
                 throw new IllegalStateException("Board is null for Game ID: " + gameData.id);
             }
-    
+
             // Debug output
             System.out.println("Board ID before update: " + board.GetGameId());
-    
+
             // update board
             board.updateBoard(column, playerId);
-    
+
             // Step 3: Check for winner
             if (checkForWinnerGame(gameId)) {
                 gameData.status = "Completed";
@@ -99,15 +105,15 @@ public class GameModel {
                 gameData.currentTurnPlayer = gameData.currentTurnPlayer == gameData.player1Id ? gameData.player2Id
                         : gameData.player1Id;
             }
-    
+
             // Step 4: Save updates
             GameDataAccess.Save(new GameDataObject(gameData));
             BoardDataAccess.Save(new BoardDataObject(board));
-    
+
             return new GameDomainObject(gameData);
         } catch (Exception ex) {
             System.out.println("Error during playGame: " + ex.getMessage());
-            throw ex;  // Re-throw to ensure visibility of failure
+            throw ex; // Re-throw to ensure visibility of failure
         }
     }
 
@@ -176,18 +182,21 @@ public class GameModel {
         if (GameTypeDataAccess.GetGameTypeById(gameTypeId) == null) {
             throw new IllegalArgumentException("Invalid gameTypeId");
         }
-    
+
         // Create a new game object with an ID obtained directly from GameDataAccess
-        GameDataObject newGame = new GameDataObject(GameDataAccess.getNextId(), player1Id, player2Id, "Playing", player2Id, gameTypeId);
-        newGame = GameDataAccess.AddGame(newGame);
-    
+        GameDataObject newGame = new GameDataObject(GameDataAccess.getNextId(), player1Id, player2Id, "Playing",
+                player2Id, gameTypeId);
+        // newGame = GameDataAccess.AddGame(newGame);
+
         // Similarly, create a new board object with an ID from BoardDataAccess
-        BoardDataObject newBoard = new BoardDataObject(BoardDataAccess.getNextId(), newGame.id, BoardDataObject.DEFAULT_GAMEBOARD);
-        newBoard = BoardDataAccess.AddBoard(newBoard);
-    
-        // Return a new domain object representing the newly created game and its associated board
+        BoardDataObject newBoard = new BoardDataObject(BoardDataAccess.getNextId(), newGame.id,
+                BoardDataObject.DEFAULT_GAMEBOARD);
+        // newBoard = BoardDataAccess.AddBoard(newBoard);
+
+        // Return a new domain object representing the newly created game and its
+        // associated board
         return new GameDomainObject(newGame.id, newGame.player1Id, newGame.player2Id, newGame.currentTurnPlayer,
-                    newGame.status, newGame.winnerId, new BoardDomainObject(newBoard));
+                newGame.status, newGame.winnerId, new BoardDomainObject(newBoard));
     }
 
 }

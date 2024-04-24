@@ -1,6 +1,5 @@
 package Controller;
 
-
 import DomainObjects.GameDomainObject;
 import Models.GameModel;
 import restService.request.CreateGameRequest;
@@ -21,7 +20,7 @@ public class GameController {
             }
             // Assuming game is found, construct a successful response
             return new GameResponse(game.GetGameId(), game.GetGameTypeId(), game.GetPlayer1Id(), game.GetPlayer2Id(),
-                                    game.GetStatus(), game.GetCurrentTurnPlayer(), game.GetWinnerId(), game.GetBoard().GetOccupancy());
+                    game.GetStatus(), game.GetCurrentTurnPlayer(), game.GetWinnerId(), game.GetBoard().GetOccupancy());
         } catch (Exception ex) {
             return new GameResponse(ex.getMessage());
         }
@@ -86,4 +85,3 @@ public class GameController {
     }
 
 }
-
