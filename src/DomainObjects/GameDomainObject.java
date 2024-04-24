@@ -64,7 +64,7 @@ public class GameDomainObject {
     }
 
     public int GetGameTypeId() {
-        return this.gameId;
+        return this.gameTypeId;
     }
 
     public int GetPlayer1Id() {
