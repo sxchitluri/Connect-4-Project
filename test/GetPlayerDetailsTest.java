@@ -32,7 +32,7 @@ public class GetPlayerDetailsTest {
         PlayerResponse response = PlayerController.getPlayerDetails(request);
 
         // now we test the reponse
-        assertEquals(true, response.GetIsValid()); // getting false here
+        assertEquals(true, response.GetIsValid());
         assertEquals(null, response.GetErrorMessage());
         assertEquals("doomsmith", response.getUsername());
         assertEquals(0, response.getPlayerId());
@@ -64,9 +64,6 @@ public class GetPlayerDetailsTest {
         assertEquals(-1, response.getGamesPlayed());
         assertEquals(-1, response.getGamesWon());
         assertEquals(-1, response.getGamesLost());
-
-        // test is getting the wrong error message -> it is getting the error message
-        // for playerUser being null and not that the player id does not exist
     }
 
 }
