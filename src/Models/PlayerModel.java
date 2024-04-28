@@ -66,6 +66,11 @@ public class PlayerModel {
     public static PlayerDomainObject ExistingPlayer(PlayerDomainObject player) {
 
         // validatePlayer(player);
+        // validate that the player id exists
+        PlayerDataObject playerData1 = PlayerDataAccess.getPlayerById(player.GetId());
+        if (playerData1 == null) {
+            throw new IllegalArgumentException("Player ID not found");
+        }
 
         PlayerDataObject playerData = PlayerDataAccess.GetPlayerById(player.GetId()); // give id for player after
                                                                                       // validation of username/password
