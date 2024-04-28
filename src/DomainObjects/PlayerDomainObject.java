@@ -12,6 +12,9 @@ public class PlayerDomainObject {
     private int id;
     private String username;
     private String password;
+    private int gamesPlayed;
+    private int gamesWon;
+    private int gamesLost;
     private int gameTypeId;
     private GameTypeDomainObject gameType;
     private BoardDomainObject board;
@@ -57,6 +60,18 @@ public class PlayerDomainObject {
 
     public String GetPassword() {
         return this.password;
+    }
+
+    public int GetGamesPlayed() {
+        return this.gamesPlayed;
+    }
+
+    public int GetGamesWon() {
+        return this.gamesWon;
+    }
+
+    public int GetGamesLost() {
+        return this.gamesLost;
     }
 
     public BoardDomainObject GetBoard() {
