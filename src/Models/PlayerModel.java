@@ -65,7 +65,7 @@ public class PlayerModel {
     // player data access list
     public static PlayerDomainObject ExistingPlayer(PlayerDomainObject player) {
 
-        validatePlayer(player);
+        // validatePlayer(player);
 
         PlayerDataObject playerData = PlayerDataAccess.GetPlayerById(player.GetId()); // give id for player after
                                                                                       // validation of username/password
@@ -120,4 +120,3 @@ public class PlayerModel {
     }
 
 }
-
