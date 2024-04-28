@@ -1,6 +1,6 @@
 package Controller;
 
-import java.util.ArrayList;
+//import java.util.ArrayList;
 
 import DomainObjects.PlayerDomainObject;
 import Models.PlayerModel;
@@ -43,7 +43,7 @@ public class PlayerController {
     // request is getplayerdetailsrequest.java
     // reponse is playerreponse.java
     // test is ___.java
-    public static PlayerResponse GetPlayerDetails(GetPlayerDetailsRequest request) {
+    public static PlayerResponse getPlayerDetails(GetPlayerDetailsRequest request) {
 
         try {
 
@@ -73,4 +73,3 @@ public class PlayerController {
         }
     }
 }
-
