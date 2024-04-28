@@ -5,10 +5,15 @@ import static org.junit.Assert.assertNull;
 import org.junit.Test;
 
 import Controller.GameController;
+import Controller.GameTypeController;
 import Controller.PlayerController;
+import restService.request.CreateGameRequest;
+import restService.request.GameTypeRequest;
 import restService.request.GetGameDetailsRequest;
 import restService.request.GetPlayerDetailsRequest;
+import restService.request.RegisterPlayerRequest;
 import restService.response.GameResponse;
+import restService.response.GameTypeResponse;
 import restService.response.PlayerResponse;
 
 // Story 2
@@ -17,6 +22,18 @@ public class GetGameDetailsTest {
     // default game values
     // create 2 players for gameid=0
     // create a game here with gameid=0
+    GameTypeRequest reqGT = new GameTypeRequest(0, "Classic");
+    GameTypeResponse resGT = GameTypeController.setGT2(reqGT);
+
+    // register player 1 (playerid = 0)
+    RegisterPlayerRequest requestP1 = new RegisterPlayerRequest("doomsmith", "smashriptear");
+    PlayerResponse responseP1 = PlayerController.registerPlayer(requestP1);
+    // register player 2 (playerid = 1)
+    RegisterPlayerRequest requestP2 = new RegisterPlayerRequest("tswizzle", "smashriptear");
+    PlayerResponse responseP2 = PlayerController.registerPlayer(requestP2);
+    // Create a game 1 that has player1Id and player2Id (gameid = 0)
+    CreateGameRequest requestCG1 = new CreateGameRequest(0, 1, 0);
+    GameResponse responseCG1 = GameController.CreateGame(requestCG1);
 
     // tests for valid inputs
     // Scenario 2.2: gameid does exist - input found
