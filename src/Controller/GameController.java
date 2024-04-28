@@ -3,6 +3,7 @@ package Controller;
 import DomainObjects.GameDomainObject;
 import Models.GameModel;
 import restService.request.CreateGameRequest;
+import restService.request.GetGameDetailsRequest;
 import restService.request.PlayGameRequest;
 import restService.response.GameResponse;
 
@@ -12,9 +13,9 @@ public class GameController {
     // request is getgamedetailsrequest.java
     // reponse is gameresponse.java
 
-    public static GameResponse GetGame(int gameId) {
+    public static GameResponse getGameDetails(GetGameDetailsRequest gameId) {
         try {
-            GameDomainObject game = GameModel.GetGameById(gameId);
+            GameDomainObject game = GameModel.GetGameById(gameId.GetGameId());
             if (game == null) {
                 return new GameResponse("Invalid GameId.");
             }
@@ -47,7 +48,6 @@ public class GameController {
             return response;
         }
     }
-
 
     // MAKING MOVES - STORY 3,
     // request is request.java
@@ -84,6 +84,5 @@ public class GameController {
         }
 
     }
-
 
 }
