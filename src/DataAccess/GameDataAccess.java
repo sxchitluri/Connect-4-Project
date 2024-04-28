@@ -59,6 +59,7 @@ public class GameDataAccess {
                 game.currentTurnPlayer = gameToSave.currentTurnPlayer;
                 game.winnerId = gameToSave.winnerId;
                 game.status = gameToSave.status;
+                game.board = gameToSave.board;
             }
         }
     }

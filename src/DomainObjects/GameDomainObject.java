@@ -1,6 +1,9 @@
 package DomainObjects;
 
 import java.util.ArrayList;
+
+import DataAccess.BoardDataAccess;
+import DataObjects.BoardDataObject;
 import DataObjects.GameDataObject;
 import Models.GameModel;
 import restService.response.GameResponse;
@@ -95,6 +98,8 @@ public class GameDomainObject {
 
     // not loading the saved board after playing game move and saving it
     public BoardDomainObject GetBoard() {
+        // we call the board for the game using gameid
+        // BoardDomainObject board2 = BoardModel.GetBoardByGameId(board.GetGameId());
         // Lazy Load the Rack
         if (this.board == null) {
             this.board = BoardModel.GetBoardById(board.GetId());
