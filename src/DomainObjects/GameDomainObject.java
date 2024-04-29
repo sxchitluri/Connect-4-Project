@@ -1,9 +1,6 @@
 package DomainObjects;
 
 import java.util.ArrayList;
-
-import DataAccess.BoardDataAccess;
-import DataObjects.BoardDataObject;
 import DataObjects.GameDataObject;
 import Models.GameModel;
 import restService.response.GameResponse;
@@ -17,8 +14,6 @@ public class GameDomainObject {
     private int currentTurnPlayer;
     private String status;
     private int winnerId;
-    private String board2; // added this to try to pass saved board for game reponse to be returned instead
-                           // of error message
     private BoardDomainObject board;
 
     public GameDomainObject(int gameId, int player1Id, int player2Id, int currentTurnPlayer, String status,
@@ -30,19 +25,28 @@ public class GameDomainObject {
         this.currentTurnPlayer = currentTurnPlayer;
         this.winnerId = winnerId;
         this.board = board;
+        //this.board = new BoardDomainObject(board);
     }
 
-    // Copy Constructor
+
     public GameDomainObject(GameDataObject game) {
         this.gameId = game.id;
-        // this.gameTypeId = game.gameTypeId;
         this.player1Id = game.player1Id;
         this.player2Id = game.player2Id;
         this.currentTurnPlayer = game.currentTurnPlayer;
         this.status = game.status;
         this.winnerId = game.winnerId;
-        this.board2 = game.board; // added this to try to pass saved board for game reponse to be returned instead
-                                  // of error message
+        this.board = game.board;
+    }
+
+    public GameDomainObject(GameDataObject game, BoardDomainObject board) {
+        this.gameId = game.id;
+        this.player1Id = game.player1Id;
+        this.player2Id = game.player2Id;
+        this.currentTurnPlayer = game.currentTurnPlayer;
+        this.status = game.status;
+        this.winnerId = game.winnerId;
+        this.board = board;  // Ensure board is set here
     }
 
     public GameDomainObject(GameResponse response) {
@@ -98,22 +102,27 @@ public class GameDomainObject {
 
     // not loading the saved board after playing game move and saving it
     public BoardDomainObject GetBoard() {
-        // we call the board for the game using gameid
-        // BoardDomainObject board2 = BoardModel.GetBoardByGameId(board.GetGameId());
         // Lazy Load the Rack
+        System.out.println("Board state after update: " + board);
         if (this.board == null) {
             this.board = BoardModel.GetBoardById(board.GetId());
         }
         return this.board;
     }
 
-    // ?????
-    /*
-     * public void SetBoard(int id) {
-     * this.id = id;
-     * GameModel.Save(this);
-     * }
-     */
+    /*public BoardDomainObject GetBoard() {
+        if (this.board == null) {
+            // Ensure there's a valid board ID to fetch the board
+            if (this.board.GetId() > 0) { // Assuming boardId is stored and greater than 0 indicates a valid ID
+                this.board = BoardModel.GetBoardById(this.board.GetId());
+            } else {
+                // Handle the case where board ID is not valid
+                throw new IllegalStateException("Board ID is not set or invalid.");
+            }
+        }
+        return this.board;
+    }*/
+
 
     public void setBoard(BoardDomainObject board) {
         if (board == null) {
