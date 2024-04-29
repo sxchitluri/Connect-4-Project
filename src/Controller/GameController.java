@@ -27,6 +27,20 @@ public class GameController {
         }
     }
 
+    public static GameResponse GetGame(int gameId) {
+        try {
+            GameDomainObject game = GameModel.GetGameById(gameId);
+            if (game == null) {
+                return new GameResponse("Invalid GameId.");
+            }
+            // Assuming game is found, construct a successful response
+            return new GameResponse(game.GetGameId(), game.GetGameTypeId(), game.GetPlayer1Id(), game.GetPlayer2Id(),
+                    game.GetStatus(), game.GetCurrentTurnPlayer(), game.GetWinnerId(), game.GetBoard().GetOccupancy());
+        } catch (Exception ex) {
+            return new GameResponse(ex.getMessage());
+        }
+    }
+
     // MAKING MOVES - STORY 4,
     // request is playgamerequest.java
     // reponse is gameresponse.java
