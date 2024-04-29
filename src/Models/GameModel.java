@@ -13,7 +13,6 @@ import DomainObjects.GameDomainObject;
 
 public class GameModel {
 
-
     public static GameDomainObject GetGameById(int id) {
         GameDataObject gameData = GameDataAccess.GetGameById(id);
         if (gameData == null) {
@@ -22,7 +21,7 @@ public class GameModel {
         return new GameDomainObject(gameData);
     }
 
-   
+    // Story 4
     public static GameDomainObject playGame(int gameId, int playerId, int column) {
         try {
             // Validate inputs and retrieve game data
@@ -31,31 +30,33 @@ public class GameModel {
             if (gameData == null) {
                 throw new IllegalArgumentException("Game not found with ID: " + gameId);
             }
-    
+
             // Retrieve and update board
             BoardDomainObject board = BoardModel.GetBoardByGameId(gameData.id);
             if (board == null) {
                 throw new IllegalStateException("Board is null for Game ID: " + gameData.id);
             }
+            // update board and save
             board.updateBoard(column, playerId);
             BoardDataAccess.Save(new BoardDataObject(board));
-    
+
             // Check for a winner
             if (checkForWinnerGame(gameId)) {
                 gameData.status = "Completed";
                 gameData.winnerId = playerId;
             } else {
-                gameData.currentTurnPlayer = (gameData.currentTurnPlayer == gameData.player1Id) ? gameData.player2Id : gameData.player1Id;
+                gameData.currentTurnPlayer = (gameData.currentTurnPlayer == gameData.player1Id) ? gameData.player2Id
+                        : gameData.player1Id;
             }
-    
+
             // Save game state
             GameDataAccess.Save(new GameDataObject(gameData));
-    
+
             // Return game domain object with updated board
             return new GameDomainObject(gameData, board);
         } catch (Exception ex) {
             System.out.println("Error during playGame: " + ex.getMessage());
-            throw ex;  // Re-throw to ensure visibility of failure
+            throw ex; // Re-throw to ensure visibility of failure
         }
     }
 

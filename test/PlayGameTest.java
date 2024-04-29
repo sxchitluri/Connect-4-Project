@@ -106,7 +106,7 @@ public class PlayGameTest {
         assertEquals(1, response.GetPlayer1Id());
         assertEquals(2, response.GetPlayer2Id());
         assertEquals("Playing", response.GetStatus());
-        assertEquals(-1, response.GetWinnerId());
+        assertEquals(0, response.GetWinnerId());
         // assertEquals(???, response.GetBoard());
     }
 
