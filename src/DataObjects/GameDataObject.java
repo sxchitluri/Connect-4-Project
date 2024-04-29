@@ -1,5 +1,4 @@
 package DataObjects;
-package DataObjects;
 
 import DomainObjects.BoardDomainObject;
 import DomainObjects.GameDomainObject;
