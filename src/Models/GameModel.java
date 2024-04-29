@@ -13,12 +13,6 @@ import DomainObjects.GameDomainObject;
 
 public class GameModel {
 
-    /*
-     * public static GameDomainObject GetGameById(int id) {
-     * GameDataObject gameData = GameDataAccess.GetGameById(id);
-     * return new GameDomainObject(gameData);
-     * }
-     */
 
     public static GameDomainObject GetGameById(int id) {
         GameDataObject gameData = GameDataAccess.GetGameById(id);
@@ -28,93 +22,40 @@ public class GameModel {
         return new GameDomainObject(gameData);
     }
 
-    /*
-     * public static GameDomainObject GetAvailableGame() {
-     * GameDataObject gameData = GameDataAccess.GetAvailableGame(); //commented out
-     * in other code; idk what we are doing with it
-     * 
-     * if (gameData == null) {
-     * return null;
-     * }
-     * 
-     * return new GameDomainObject(gameData);
-     * }
-     */
-
-    // STORY 4
-
-    /*
-     * public static GameDomainObject playGame(int gameId, int playerId, int column)
-     * {
-     * // validate inputs
-     * validatePlayGame(gameId, playerId, column);
-     * 
-     * GameDataObject gameData = GameDataAccess.GetGameById(gameId);
-     * BoardDomainObject board = BoardModel.GetBoardByGameId(gameData.id);
-     * 
-     * // update board
-     * board.updateBoard(column, playerId);
-     * 
-     * // Step 3: Check for winner
-     * 
-     * if (checkForWinnerGame(gameId)) {
-     * gameData.status = "Completed";
-     * gameData.winnerId = playerId;
-     * } else {
-     * // Update turn to the next player
-     * gameData.currentTurnPlayer = gameData.currentTurnPlayer == gameData.player1Id
-     * ? gameData.player2Id
-     * : gameData.player1Id;
-     * }
-     * 
-     * // Step 4: Save updates
-     * GameDataAccess.Save(new GameDataObject(gameData));
-     * BoardDataAccess.Save(new BoardDataObject(board));
-     * 
-     * return new GameDomainObject(gameData);
-     * }
-     */
-
+   
     public static GameDomainObject playGame(int gameId, int playerId, int column) {
         try {
-            // validate inputs
+            // Validate inputs and retrieve game data
             validatePlayGame(gameId, playerId, column);
-
             GameDataObject gameData = GameDataAccess.GetGameById(gameId);
             if (gameData == null) {
                 throw new IllegalArgumentException("Game not found with ID: " + gameId);
             }
-
+    
+            // Retrieve and update board
             BoardDomainObject board = BoardModel.GetBoardByGameId(gameData.id);
             if (board == null) {
                 throw new IllegalStateException("Board is null for Game ID: " + gameData.id);
             }
-
-            // Debug output
-            // System.out.println("Board ID before update: " + board.GetGameId());
-
-            // update board
             board.updateBoard(column, playerId);
             BoardDataAccess.Save(new BoardDataObject(board));
-
-            // Step 3: Check for winner
+    
+            // Check for a winner
             if (checkForWinnerGame(gameId)) {
                 gameData.status = "Completed";
                 gameData.winnerId = playerId;
             } else {
-                // Update turn to the next player
-                gameData.currentTurnPlayer = gameData.currentTurnPlayer == gameData.player1Id ? gameData.player2Id
-                        : gameData.player1Id;
+                gameData.currentTurnPlayer = (gameData.currentTurnPlayer == gameData.player1Id) ? gameData.player2Id : gameData.player1Id;
             }
-
-            // Step 4: Save updates
+    
+            // Save game state
             GameDataAccess.Save(new GameDataObject(gameData));
-            BoardDataAccess.Save(new BoardDataObject(board));
-
-            return new GameDomainObject(gameData);
+    
+            // Return game domain object with updated board
+            return new GameDomainObject(gameData, board);
         } catch (Exception ex) {
             System.out.println("Error during playGame: " + ex.getMessage());
-            throw ex; // Re-throw to ensure visibility of failure
+            throw ex;  // Re-throw to ensure visibility of failure
         }
     }
 
