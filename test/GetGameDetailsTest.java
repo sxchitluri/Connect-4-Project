@@ -69,7 +69,7 @@ public class GetGameDetailsTest {
     @Test
     public void GameController_GetGameDetails_NotExistTest() {
 
-        int gameid = 0;
+        int gameid = 1;
 
         // create the request to get game details
         GetGameDetailsRequest request = new GetGameDetailsRequest(gameid);
@@ -80,8 +80,8 @@ public class GetGameDetailsTest {
         GameResponse response = GameController.getGameDetails(request);
 
         // now we test the reponse
-        assertEquals(true, response.GetIsValid());
-        assertNull(response.GetErrorMessage());
+        assertEquals(false, response.GetIsValid());
+        assertEquals("Invalid GameId.", response.GetErrorMessage());
         assertEquals(-1, response.GetGameId());
         assertEquals(-1, response.GetGameTypeId());
         assertEquals(-1, response.GetPlayer1Id());
