@@ -50,7 +50,7 @@ public class PlayGameTest {
     CreateGameRequest requestCG2 = new CreateGameRequest(1, 2, 0);
     GameResponse responseCG2 = GameController.CreateGame(requestCG2);
     // Create a game 3 that has player1Id and player2Id (gameid = 2)
-    CreateGameRequest requestCG3 = new CreateGameRequest(0, 2, 0);
+    CreateGameRequest requestCG3 = new CreateGameRequest(2, 1, 0);
     GameResponse responseCG3 = GameController.CreateGame(requestCG3);
 
     // set gameid=2 's status as complete
@@ -61,22 +61,22 @@ public class PlayGameTest {
 
     // play game to fill up column 7 for game 1
     // row 1
-    PlayGameRequest requestPG1 = new PlayGameRequest(0, 1, 6);
+    PlayGameRequest requestPG1 = new PlayGameRequest(2, 1, 6);
     GameResponse responsePG1 = GameController.PlayGame(requestPG1);
     // row 2
-    PlayGameRequest requestPG2 = new PlayGameRequest(0, 0, 6);
+    PlayGameRequest requestPG2 = new PlayGameRequest(2, 2, 6);
     GameResponse responsePG2 = GameController.PlayGame(requestPG2);
     // row 3
-    PlayGameRequest requestPG3 = new PlayGameRequest(0, 1, 6);
+    PlayGameRequest requestPG3 = new PlayGameRequest(2, 1, 6);
     GameResponse responsePG3 = GameController.PlayGame(requestPG3);
     // row 4
-    PlayGameRequest requestPG4 = new PlayGameRequest(0, 0, 6);
+    PlayGameRequest requestPG4 = new PlayGameRequest(2, 2, 6);
     GameResponse responsePG4 = GameController.PlayGame(requestPG4);
     // row 5
-    PlayGameRequest requestPG5 = new PlayGameRequest(0, 1, 6);
+    PlayGameRequest requestPG5 = new PlayGameRequest(2, 1, 6);
     GameResponse responsePG5 = GameController.PlayGame(requestPG5);
     // row 6
-    PlayGameRequest requestPG6 = new PlayGameRequest(0, 0, 6);
+    PlayGameRequest requestPG6 = new PlayGameRequest(2, 2, 6);
     GameResponse responsePG6 = GameController.PlayGame(requestPG6);
 
     // testing valid inputs
@@ -152,7 +152,7 @@ public class PlayGameTest {
     // scenario 4.3: Column Input Test - availability
     @Test
     public void GameController_PlayGame_ColumnAvail() {
-        int gameId = 0;
+        int gameId = 2;
         int playerId = 1;
         int column = 6; // this column has been filled above
 
