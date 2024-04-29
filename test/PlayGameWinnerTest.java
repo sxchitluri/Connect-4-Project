@@ -37,7 +37,6 @@ public class PlayGameWinnerTest {
         assertEquals("Invalid GameId.", response.GetErrorMessage());
     }
 
-    @Test
     /*
      * public void testGamePlayNoWin() {
      * CreateGameRequest createRequest = new CreateGameRequest(1, 2, 0);
@@ -55,6 +54,7 @@ public class PlayGameWinnerTest {
      */
 
     // Scenario 5.2.1: gameid does exist - input found but no winner yet
+    @Test
     public void testGamePlayNoWin() {
         // Create a game request
         CreateGameRequest createRequest = new CreateGameRequest(1, 2, 0);
@@ -85,5 +85,8 @@ public class PlayGameWinnerTest {
     }
 
     // Scenario 5.2.2: gameid does exist - input found and there is a winner
+    @Test
+    public void testGamePlayWin() {
 
+    }
 }
