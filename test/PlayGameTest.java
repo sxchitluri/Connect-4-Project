@@ -227,7 +227,7 @@ public class PlayGameTest {
     @Test
     public void GameController_PlayGame_StatusGame() {
         int gameId = 2;
-        int playerId = 2; // currentturnplayer should be playerid=1
+        int playerId = 2; // currentturnplayer should be playerid=2
         int column = 4;
 
         PlayGameRequest request = new PlayGameRequest(gameId, playerId, column);
