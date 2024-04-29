@@ -115,7 +115,7 @@ public class PlayGameTest {
     // scenario 4.1: Column Input Test - out of range
     @Test
     public void GameController_PlayGame_ColumnRange() {
-        int gameId = 1;
+        int gameId = 0;
         int playerId = 1;
         int column = 8;
 
@@ -211,8 +211,8 @@ public class PlayGameTest {
     // turn player
     @Test
     public void GameController_PlayGame_PlayerIdCurrentTurn() {
-        int gameId = 1;
-        int playerId = 2; // currentturnplayer should be playerid=1
+        int gameId = 0;
+        int playerId = 0; // currentturnplayer should be playerid=1
         int column = 4;
 
         PlayGameRequest request = new PlayGameRequest(gameId, playerId, column);
@@ -226,8 +226,9 @@ public class PlayGameTest {
     // Scenario 4.8: Status of the game - Completed
     @Test
     public void GameController_PlayGame_StatusGame() {
+        GameResponse responseCG3Comp = GameController.SetGameStatus(responseCG3);
         int gameId = 2;
-        int playerId = 2; // currentturnplayer should be playerid=2
+        int playerId = 1; // currentturnplayer should be playerid=2
         int column = 4;
 
         PlayGameRequest request = new PlayGameRequest(gameId, playerId, column);
