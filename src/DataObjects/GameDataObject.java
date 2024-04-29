@@ -1,5 +1,7 @@
 package DataObjects;
+package DataObjects;
 
+import DomainObjects.BoardDomainObject;
 import DomainObjects.GameDomainObject;
 
 public class GameDataObject {
@@ -10,8 +12,7 @@ public class GameDataObject {
     public String status;
     public int currentTurnPlayer;
     public int winnerId;
-    public String board; // added this to try to pass saved board for game reponse to be returned instead
-                         // of error message
+    public BoardDomainObject board;
 
     public GameDataObject(int id, int player1Id, int player2Id, String status, int currentTurnPlayer, int winnerId) {
         this.id = id;
@@ -30,8 +31,7 @@ public class GameDataObject {
         this.status = game.status;
         this.currentTurnPlayer = game.currentTurnPlayer;
         this.winnerId = game.winnerId;
-        this.board = game.board; // added this to try to pass saved board for game reponse to be returned instead
-                                 // of error message
+        this.board = game.board;
     }
 
     public GameDataObject(GameDomainObject game) {
@@ -41,10 +41,5 @@ public class GameDataObject {
         this.status = game.GetStatus();
         this.currentTurnPlayer = game.GetCurrentTurnPlayer();
         this.winnerId = game.GetWinnerId();
-        this.board = game.getBoardAsString(); // added this to try to pass saved board for game reponse to be returned
-                                              // instead of error message
     }
 }
-
-// QUESTION TO ASK: are the default values for game from the
-// GameDataAccess.initilize() or do the default values go here?
