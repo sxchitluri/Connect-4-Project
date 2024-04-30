@@ -25,7 +25,6 @@ public class GameDomainObject {
         this.currentTurnPlayer = currentTurnPlayer;
         this.winnerId = winnerId;
         this.board = board;
-        //this.board = new BoardDomainObject(board);
     }
 
 
@@ -46,7 +45,7 @@ public class GameDomainObject {
         this.currentTurnPlayer = game.currentTurnPlayer;
         this.status = game.status;
         this.winnerId = game.winnerId;
-        this.board = board;  // Ensure board is set here
+        this.board = board;
     }
 
     public GameDomainObject(GameResponse response) {
@@ -57,7 +56,6 @@ public class GameDomainObject {
         this.currentTurnPlayer = response.GetCurrentTurnPlayer();
         this.status = response.GetStatus();
         this.winnerId = response.GetWinnerId();
-        // this.board = game.board;
     }
 
     public static ArrayList<GameDomainObject> MapList(ArrayList<GameDataObject> gamedata) {
@@ -100,28 +98,14 @@ public class GameDomainObject {
         return this.winnerId;
     }
 
-    // not loading the saved board after playing game move and saving it
+
     public BoardDomainObject GetBoard() {
-        // Lazy Load the Rack
         System.out.println("Board state after update: " + board);
         if (this.board == null) {
             this.board = BoardModel.GetBoardById(board.GetId());
         }
         return this.board;
     }
-
-    /*public BoardDomainObject GetBoard() {
-        if (this.board == null) {
-            // Ensure there's a valid board ID to fetch the board
-            if (this.board.GetId() > 0) { // Assuming boardId is stored and greater than 0 indicates a valid ID
-                this.board = BoardModel.GetBoardById(this.board.GetId());
-            } else {
-                // Handle the case where board ID is not valid
-                throw new IllegalStateException("Board ID is not set or invalid.");
-            }
-        }
-        return this.board;
-    }*/
 
 
     public void setBoard(BoardDomainObject board) {
@@ -132,8 +116,4 @@ public class GameDomainObject {
         GameModel.Save(this);
     }
 
-    public String getBoardAsString() {
-        // Actual board representation logic here
-        return "Initial Board State";
-    }
 }
