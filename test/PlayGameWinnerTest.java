@@ -37,22 +37,6 @@ public class PlayGameWinnerTest {
         assertEquals("Invalid GameId.", response.GetErrorMessage());
     }
 
-    /*
-     * public void testGamePlayNoWin() {
-     * CreateGameRequest createRequest = new CreateGameRequest(1, 2, 0);
-     * GameResponse response = GameController.CreateGame(createRequest);
-     * 
-     * // Now reuse the same 'response' variable for the next call
-     * response = GameController.PlayGame(new PlayGameRequest(251, 1, 3)); // Valid
-     * move
-     * 
-     * assertEquals(true, response.GetIsValid());
-     * assertNull(response.GetErrorMessage());
-     * assertEquals("Playing", response.GetStatus());
-     * assertEquals(0, response.GetWinnerId());
-     * }
-     */
-
     // Scenario 5.2.1: gameid does exist - input found but no winner yet
     @Test
     public void testGamePlayNoWin() {
