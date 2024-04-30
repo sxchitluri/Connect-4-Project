@@ -54,15 +54,12 @@ public class BoardDataAccess {
     public static void Save(BoardDataObject boardToSave) {
         for (BoardDataObject board : boards) {
             if (board.id == boardToSave.id) {
-                // The gameId cannot be changed
-                // board.gameId = boardToSave.gameId;
                 board.occupancy = boardToSave.occupancy;
             }
         }
     }
 
     public static BoardDataObject AddBoard(BoardDataObject newBoard) {
-        // newBoard.id = getNextId();
         boards.add(newBoard);
         return newBoard;
     }
