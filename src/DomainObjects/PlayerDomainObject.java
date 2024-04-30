@@ -75,7 +75,6 @@ public class PlayerDomainObject {
     }
 
     public BoardDomainObject GetBoard() {
-        // Lazy Load the Rack
         if (this.board == null) {
             this.board = BoardModel.GetBoardById(board.GetId());
             if (this.board == null) {
@@ -85,16 +84,6 @@ public class PlayerDomainObject {
         }
         return this.board;
     }
-
-    /*
-     * public GameTypeDomainObject GetGameType() {
-     * //Lazy Load the ItemType
-     * if (this.gameType == null) {
-     * this.gameType = GameTypeModel.GetGameTypeById(gameTypeId);
-     * }
-     * return this.gameType;
-     * }
-     */
 
     public GameTypeDomainObject GetGameType() {
         // Lazy Load the ItemType
@@ -107,10 +96,5 @@ public class PlayerDomainObject {
         }
         return this.gameType;
     }
-
-    // public void SetStatus(String status) {
-    // this.status = status;
-    // PlayerModel.Save(this);
-    // }
 
 }
