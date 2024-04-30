@@ -8,16 +8,6 @@ public class GameDataAccess {
     public static ArrayList<GameDataObject> games = new ArrayList<GameDataObject>();
     private static int nextId = 0;
 
-    /*public GameDataAccess() {
-        initialize();
-    }*/
-
-    // default values for game
-    /*private void initialize() {
-        games.add(new GameDataObject(0, 0, 1, "Playing", 1, -1));
-        games.add(new GameDataObject(251, 1, 2, "Playing", 1, -1));
-        nextId = 1; // does this need to be 1?
-    }*/
 
     public static int getNextId() {
         int thisId = nextId;
@@ -27,7 +17,6 @@ public class GameDataAccess {
 
     public static ArrayList<GameDataObject> GetAllGames() {
         ArrayList<GameDataObject> gamesList = new ArrayList<GameDataObject>();
-
         // Create a copy of games to return
         for (GameDataObject game : games) {
             gamesList.add(new GameDataObject(game));
@@ -35,14 +24,6 @@ public class GameDataAccess {
         return gamesList;
     }
 
-    /*public static GameDataObject GetGameById(int id) {
-        for (GameDataObject game : games) {
-            if (game.id == id) {
-                return new GameDataObject(game);
-            }
-        }
-        return null;
-    }*/
 
     public static GameDataObject GetGameById(int id) {
         for (GameDataObject game : games) {
@@ -56,20 +37,15 @@ public class GameDataAccess {
         return null;
     }
 
-    /*public static GameDataObject AddGame(GameDataObject newGame) {
-        // newGame.id = getNextId();
-        games.add(newGame);
-        return newGame;
-    }*/
+
 
     public static GameDataObject AddGame(GameDataObject newGame) {
-        //newGame.id = getNextId();
         games.add(newGame);
         System.out.println("GameDataAccess: Added new game with ID: " + newGame.id);
         return newGame;
     }
 
-    // save the game
+ 
     public static void Save(GameDataObject gameToSave) {
         for (GameDataObject game : games) {
             if (game.id == gameToSave.id) {
@@ -86,13 +62,12 @@ public class GameDataAccess {
         for (int i = 0; i < games.size(); i++) {
             GameDataObject existingGame = games.get(i);
             if (existingGame.id == updatedGame.id) {
-                // Assuming all properties are to be updated; adjust as necessary.
                 existingGame.player1Id = updatedGame.player1Id;
                 existingGame.player2Id = updatedGame.player2Id;
                 existingGame.status = updatedGame.status;
                 existingGame.currentTurnPlayer = updatedGame.currentTurnPlayer;
                 existingGame.winnerId = updatedGame.winnerId;
-                existingGame.board = updatedGame.board; // Make sure the board is updated.
+                existingGame.board = updatedGame.board;
                 break;
             }
         }
