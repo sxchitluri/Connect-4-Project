@@ -1,7 +1,5 @@
 package Controller;
 
-//import java.util.ArrayList;
-
 import DomainObjects.PlayerDomainObject;
 import Models.PlayerModel;
 import restService.request.RegisterPlayerRequest;
@@ -16,15 +14,7 @@ public class PlayerController {
     // test is playerregistrationtest.java
     public static PlayerResponse registerPlayer(RegisterPlayerRequest request) {
         try {
-            /*
-             * PlayerDomainObject domainToCreate = new
-             * PlayerDomainObject(request.getUsername(), request.getPassword());
-             * PlayerDomainObject domainCreated =
-             * PlayerModel.RegisterPlayer(domainToCreate);
-             * PlayerResponse response = new PlayerResponse(domainCreated.GetId(),
-             * domainCreate.getUserName());
-             */
-
+            
             PlayerDomainObject domainToCreate = new PlayerDomainObject(request);
             PlayerDomainObject domainCreated = PlayerModel.RegisterPlayer(domainToCreate); // is this supposed to be add
                                                                                            // player method????
@@ -53,20 +43,12 @@ public class PlayerController {
             // validate player method in model
 
             PlayerDomainObject domainToCheck = new PlayerDomainObject(request);
-            PlayerDomainObject domainExists = PlayerModel.ExistingPlayer(domainToCheck); // is this supposed to be add
-                                                                                         // player method????
+            PlayerDomainObject domainExists = PlayerModel.ExistingPlayer(domainToCheck);
 
             PlayerResponse response = new PlayerResponse(domainExists.GetId(), domainExists.GetUsername(),
                     domainExists.GetGamesPlayed(), domainExists.GetGamesWon(), domainExists.GetGamesLost());
             return response;
 
-            // if (id = playerid) {
-            // return new PlayerResponse(1, request.getUsername(), request.getGamesPlayed(),
-            // request.getGamesWon(),
-            // request.getGamesLost());
-            // }
-
-            // return null;
         } catch (Exception ex) {
             PlayerResponse response = new PlayerResponse(ex.getMessage()); // cannot find x player id details
             return response;
