@@ -1,7 +1,5 @@
 package Controller;
 
-//import java.util.ArrayList;
-
 import DomainObjects.GameTypeDomainObject;
 import Models.GameTypeModel;
 import restService.request.GameTypeRequest;
