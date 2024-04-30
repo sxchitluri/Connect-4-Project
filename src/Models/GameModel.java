@@ -15,6 +15,7 @@ public class GameModel {
 
     public static GameDomainObject GetGameById(int id) {
         GameDataObject gameData = GameDataAccess.GetGameById(id);
+
         if (gameData == null) {
             return null;
         }
@@ -116,6 +117,7 @@ public class GameModel {
     }
 
     public static GameDomainObject createGame(int player1Id, int player2Id, int gameTypeId) {
+        // Preliminary validation
         if (PlayerDataAccess.GetPlayerById(player1Id) == null) {
             throw new IllegalArgumentException("Invalid player1 ID");
         }
@@ -125,46 +127,21 @@ public class GameModel {
         if (GameTypeDataAccess.GetGameTypeById(gameTypeId) == null) {
             throw new IllegalArgumentException("Invalid gameTypeId");
         }
-
-        // Create a new game object with an ID obtained directly from GameDataAccess
-        GameDataObject newGame = new GameDataObject(GameDataAccess.getNextId(), player1Id, player2Id, "Playing",
-                player2Id, gameTypeId);
-        newGame = GameDataAccess.AddGame(newGame);
-
-        // Similarly, create a new board object with an ID from BoardDataAccess
-        BoardDataObject newBoard = new BoardDataObject(BoardDataAccess.getNextId(), newGame.id,
-                BoardDataObject.DEFAULT_GAMEBOARD);
-        newBoard = BoardDataAccess.AddBoard(newBoard);
-
-        // Return a new domain object representing the newly created game and its
-        // associated board
-        return new GameDomainObject(newGame.id, newGame.player1Id, newGame.player2Id, newGame.currentTurnPlayer,
-                newGame.status, newGame.winnerId, new BoardDomainObject(newBoard));
+    
+        // Initially, create a new game object with minimal data to get a valid gameId
+        int gameId = GameDataAccess.getNextId();
+        GameDataObject initialGame = new GameDataObject(gameId, player1Id, player2Id, "Initial", player2Id, 0, null);
+        GameDataAccess.AddGame(initialGame);  // Store initial game object
+    
+        // Create board with the obtained gameId
+        BoardDataObject newBoard = new BoardDataObject(BoardDataAccess.getNextId(), gameId, BoardDataObject.DEFAULT_GAMEBOARD);
+        BoardDataAccess.AddBoard(newBoard);
+    
+        // Now finalize the game creation with full details and the board linked
+        GameDataObject finalGame = new GameDataObject(gameId, player1Id, player2Id, "Playing", player2Id, gameTypeId, new BoardDomainObject(newBoard));
+        GameDataAccess.UpdateGame(finalGame);  // Update stored game data with full details
+    
+        return new GameDomainObject(finalGame);
     }
-
-    /*public static GameDomainObject createGame(int player1Id, int player2Id, int gameTypeId) {
-        if (PlayerDataAccess.GetPlayerById(player1Id) == null) {
-            throw new IllegalArgumentException("Invalid player1 ID");
-        }
-        if (PlayerDataAccess.GetPlayerById(player2Id) == null) {
-            throw new IllegalArgumentException("Invalid player2 ID");
-        }
-        if (GameTypeDataAccess.GetGameTypeById(gameTypeId) == null) {
-            throw new IllegalArgumentException("Invalid gameTypeId");
-        }
-
-        // Create a new board object with an ID from BoardDataAccess first
-        BoardDataObject newBoardData = new BoardDataObject(BoardDataAccess.getNextId(), 0, BoardDataObject.DEFAULT_GAMEBOARD);
-        BoardDataAccess.AddBoard(newBoardData);
-        BoardDomainObject newBoard = new BoardDomainObject(newBoardData);
-
-        // Create a new game object including the board
-        int newGameId = GameDataAccess.getNextId();
-        GameDataObject newGame = new GameDataObject(newGameId, player1Id, player2Id, "Playing", player2Id, gameTypeId, newBoard);
-        GameDataAccess.AddGame(newGame);
-
-        // Return a new domain object representing the newly created game and its associated board
-        return new GameDomainObject(newGame.id, newGame.player1Id, newGame.player2Id, newGame.currentTurnPlayer, newGame.status, newGame.winnerId, newBoard);
-    }*/
 
 }
