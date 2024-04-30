@@ -8,16 +8,16 @@ public class GameDataAccess {
     public static ArrayList<GameDataObject> games = new ArrayList<GameDataObject>();
     private static int nextId = 0;
 
-    public GameDataAccess() {
+    /*public GameDataAccess() {
         initialize();
-    }
+    }*/
 
     // default values for game
-    private void initialize() {
+    /*private void initialize() {
         games.add(new GameDataObject(0, 0, 1, "Playing", 1, -1));
         games.add(new GameDataObject(251, 1, 2, "Playing", 1, -1));
         nextId = 1; // does this need to be 1?
-    }
+    }*/
 
     public static int getNextId() {
         int thisId = nextId;
@@ -35,18 +35,36 @@ public class GameDataAccess {
         return gamesList;
     }
 
-    public static GameDataObject GetGameById(int id) {
+    /*public static GameDataObject GetGameById(int id) {
         for (GameDataObject game : games) {
             if (game.id == id) {
                 return new GameDataObject(game);
             }
         }
         return null;
+    }*/
+
+    public static GameDataObject GetGameById(int id) {
+        for (GameDataObject game : games) {
+            if (game.id == id) {
+                System.out.println("GameDataAccess: Game found with ID: " + id);
+                return new GameDataObject(game);
+            }
+        }
+        System.out.println("GameDataAccess: No game found with ID: " + id);
+        return null;
     }
 
-    public static GameDataObject AddGame(GameDataObject newGame) {
+    /*public static GameDataObject AddGame(GameDataObject newGame) {
         // newGame.id = getNextId();
         games.add(newGame);
+        return newGame;
+    }*/
+
+    public static GameDataObject AddGame(GameDataObject newGame) {
+        //newGame.id = getNextId();
+        games.add(newGame);
+        System.out.println("GameDataAccess: Added new game with ID: " + newGame.id);
         return newGame;
     }
 
