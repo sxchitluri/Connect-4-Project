@@ -14,16 +14,6 @@ public class GameTypeModel {
         return new GameTypeDomainObject(gameTypeData);
     }
 
-    /*
-     * // idk, for playerdomainobject.java
-     * public static GameTypeDomainObject GetGameTypeById(GameTypeDomainObject
-     * gameType) {
-     * GameTypeDataObject gameTypeData =
-     * GameTypeDataAccess.GetGameTypeById(gameType);
-     * return new GameTypeDomainObject(gameTypeData);
-     * }
-     */
-
     public static ArrayList<GameTypeDomainObject> GetAllGameTypes() {
         ArrayList<GameTypeDataObject> gameTypeDataList = GameTypeDataAccess.GetAllGameTypes();
         return GameTypeDomainObject.MapList(gameTypeDataList);
@@ -31,12 +21,8 @@ public class GameTypeModel {
 
     public static GameTypeDomainObject AddGameType(GameTypeDomainObject gameType) {
         GameTypeDataObject gameTypeData = new GameTypeDataObject(gameType);
-        GameTypeDataAccess.AddGameType(gameTypeData);  // This line should now be active
+        GameTypeDataAccess.AddGameType(gameTypeData);
         return new GameTypeDomainObject(gameTypeData);
     }
 
-    // Sprint/Story 3
-    private static void validateGameType(GameTypeDomainObject gameType) {
-
-    }
 }
