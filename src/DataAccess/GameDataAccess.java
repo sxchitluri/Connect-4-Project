@@ -48,6 +48,7 @@ public class GameDataAccess {
         for (GameDataObject game : games) {
             if (game.id == id) {
                 System.out.println("GameDataAccess: Game found with ID: " + id);
+                System.out.println(game.board);
                 return new GameDataObject(game);
             }
         }
@@ -77,6 +78,22 @@ public class GameDataAccess {
                 game.currentTurnPlayer = gameToSave.currentTurnPlayer;
                 game.winnerId = gameToSave.winnerId;
                 game.status = gameToSave.status;
+            }
+        }
+    }
+
+    public static void UpdateGame(GameDataObject updatedGame) {
+        for (int i = 0; i < games.size(); i++) {
+            GameDataObject existingGame = games.get(i);
+            if (existingGame.id == updatedGame.id) {
+                // Assuming all properties are to be updated; adjust as necessary.
+                existingGame.player1Id = updatedGame.player1Id;
+                existingGame.player2Id = updatedGame.player2Id;
+                existingGame.status = updatedGame.status;
+                existingGame.currentTurnPlayer = updatedGame.currentTurnPlayer;
+                existingGame.winnerId = updatedGame.winnerId;
+                existingGame.board = updatedGame.board; // Make sure the board is updated.
+                break;
             }
         }
     }
