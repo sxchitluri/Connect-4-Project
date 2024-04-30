@@ -25,18 +25,12 @@ public class BoardModel {
 
     public static BoardDomainObject AddBoard(BoardDomainObject board) {
 
-        validateBoard(board); //validate the board as being empty/not using a already used board id??????
-
         BoardDataObject boardData = new BoardDataObject(board);
         BoardDataAccess.AddBoard(boardData);
         return new BoardDomainObject(boardData);
 
     }
     
-    //Sprint/Story #??????
-    private static void validateBoard(BoardDomainObject board) {
-
-    }
 
     public static void Save (BoardDomainObject boardToSave) {
         BoardDataObject boardDataObject = new BoardDataObject(boardToSave);
