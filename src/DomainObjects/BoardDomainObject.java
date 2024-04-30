@@ -95,35 +95,23 @@ public class BoardDomainObject {
         return false;
     }
 
-    /*
-     * public boolean isValidColumn(int column) {
-     * if (column < 0 || column >= 6) {
-     * return false; // Column index out of bounds
-     * }
-     * 
-     * else {
-     * return true;
-     * }
-     * }
-     */
+
 
     public boolean isValidColumn(int column) {
         return column >= 0 && column < 7; // Columns should be 0 through 6 for a 7-column grid
     }
 
-    // Check if the top slot of the column is empty
-    /*
-     * public boolean hasSpaceAvailable(int column) {
-     * return occupancy.charAt(column) == ' ';
-     * }
-     */
 
     public boolean hasSpaceAvailable(int column) {
-        int topRow = 0; // Topmost row for a given column in a vertical game board
+        int topRow = 0; // Top row for a given column in a vertical game board
         int index = topRow * 7 + column;
         return occupancy.charAt(index) == ' '; // Ensure the top of the column is free
     }
 
+
+
+
+    //Need to fix this to take unique playerids
     public String updateBoard(int column, int playerId) {
         // Determine the player's token based on the playerId
         char playerToken;
@@ -149,9 +137,4 @@ public class BoardDomainObject {
         throw new IllegalStateException("No available spaces in column: " + column);
     }
 
-    @Override
-    public String toString() {
-        String state = this.occupancy;
-        return state;
-    }
 }
