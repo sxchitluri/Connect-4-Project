@@ -5,7 +5,6 @@ import DomainObjects.BoardDomainObject;
 public class BoardDataObject {
     
     public final static String DEFAULT_GAMEBOARD = "                                          "; //42 spaces
-    //public final static String STATUS_ORDERED = "Ordered";
 
     public int id;
     public int gameId;
