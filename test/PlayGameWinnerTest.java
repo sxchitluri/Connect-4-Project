@@ -88,5 +88,42 @@ public class PlayGameWinnerTest {
     @Test
     public void testGamePlayWin() {
 
+        CreateGameRequest requestCG4 = new CreateGameRequest(2, 1, 0);
+        GameResponse responseCG4 = GameController.CreateGame(requestCG4);
+
+        // Retrieve the game ID from the created game response
+        int gameId = responseCG4.GetGameId();
+
+        // row 1
+        PlayGameRequest requestPG7 = new PlayGameRequest(gameId, 1, 6);
+        GameResponse responsePG7 = GameController.PlayGame(requestPG7);
+        // row 2
+        PlayGameRequest requestPG8 = new PlayGameRequest(gameId, 2, 5);
+        GameResponse responsePG8 = GameController.PlayGame(requestPG8);
+        // row 3
+        PlayGameRequest requestPG9 = new PlayGameRequest(gameId, 1, 6);
+        GameResponse responsePG9 = GameController.PlayGame(requestPG9);
+        // row 4
+        PlayGameRequest requestPG10 = new PlayGameRequest(gameId, 2, 5);
+        GameResponse responsePG10 = GameController.PlayGame(requestPG10);
+        // row 5
+        PlayGameRequest requestPG11 = new PlayGameRequest(gameId, 1, 6);
+        GameResponse responsePG11 = GameController.PlayGame(requestPG11);
+        // row 6
+        PlayGameRequest requestPG12 = new PlayGameRequest(gameId, 2, 5);
+        GameResponse responsePG12 = GameController.PlayGame(requestPG12);
+        // row 5
+        // PlayGameRequest requestPG13 = new PlayGameRequest(gameId, 1, 6);
+        // GameResponse responsePG13 = GameController.PlayGame(requestPG13);
+
+        // Play the game with the retrieved game ID
+        GameResponse response = GameController.PlayGame(new PlayGameRequest(gameId, 1, 6));
+
+        // Assertions to verify the game play results
+        assertEquals(true, response.GetIsValid());
+        assertNull(response.GetErrorMessage());
+        assertEquals("Completed", response.GetStatus());
+        assertEquals(1, response.GetWinnerId());
+
     }
 }
