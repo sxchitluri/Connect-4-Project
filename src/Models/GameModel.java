@@ -142,4 +142,29 @@ public class GameModel {
                 newGame.status, newGame.winnerId, new BoardDomainObject(newBoard));
     }
 
+    /*public static GameDomainObject createGame(int player1Id, int player2Id, int gameTypeId) {
+        if (PlayerDataAccess.GetPlayerById(player1Id) == null) {
+            throw new IllegalArgumentException("Invalid player1 ID");
+        }
+        if (PlayerDataAccess.GetPlayerById(player2Id) == null) {
+            throw new IllegalArgumentException("Invalid player2 ID");
+        }
+        if (GameTypeDataAccess.GetGameTypeById(gameTypeId) == null) {
+            throw new IllegalArgumentException("Invalid gameTypeId");
+        }
+
+        // Create a new board object with an ID from BoardDataAccess first
+        BoardDataObject newBoardData = new BoardDataObject(BoardDataAccess.getNextId(), 0, BoardDataObject.DEFAULT_GAMEBOARD);
+        BoardDataAccess.AddBoard(newBoardData);
+        BoardDomainObject newBoard = new BoardDomainObject(newBoardData);
+
+        // Create a new game object including the board
+        int newGameId = GameDataAccess.getNextId();
+        GameDataObject newGame = new GameDataObject(newGameId, player1Id, player2Id, "Playing", player2Id, gameTypeId, newBoard);
+        GameDataAccess.AddGame(newGame);
+
+        // Return a new domain object representing the newly created game and its associated board
+        return new GameDomainObject(newGame.id, newGame.player1Id, newGame.player2Id, newGame.currentTurnPlayer, newGame.status, newGame.winnerId, newBoard);
+    }*/
+
 }
