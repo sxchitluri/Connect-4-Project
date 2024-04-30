@@ -22,6 +22,17 @@ public class GameDataObject {
         this.winnerId = winnerId;
     }
 
+    public GameDataObject(int id, int player1Id, int player2Id, String status, int currentTurnPlayer, int winnerId,
+            BoardDomainObject board) {
+        this.id = id;
+        this.player1Id = player1Id;
+        this.player2Id = player2Id;
+        this.status = status;
+        this.currentTurnPlayer = currentTurnPlayer;
+        this.winnerId = winnerId;
+        this.board = board;
+    }
+
     // Copy Constructor
     public GameDataObject(GameDataObject game) {
         this.id = game.id;
@@ -40,5 +51,6 @@ public class GameDataObject {
         this.status = game.GetStatus();
         this.currentTurnPlayer = game.GetCurrentTurnPlayer();
         this.winnerId = game.GetWinnerId();
+        this.board = game.GetBoard();
     }
 }
