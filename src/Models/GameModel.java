@@ -46,8 +46,7 @@ public class GameModel {
                 gameData.status = "Completed";
                 gameData.winnerId = playerId;
             } else {
-                gameData.currentTurnPlayer = (gameData.currentTurnPlayer == gameData.player1Id) ? gameData.player2Id
-                        : gameData.player1Id;
+                gameData.currentTurnPlayer = (gameData.currentTurnPlayer == gameData.player1Id) ? gameData.player2Id : gameData.player1Id;
             }
 
             // Save game state
@@ -61,8 +60,9 @@ public class GameModel {
         }
     }
 
-    // STORY 5 - GETTING WINNER DETAILS FOR A GAME??- tied to GameResponse
-    // PlayGame???
+
+    // STORY 5 - GETTING WINNER DETAILS FOR A GAME
+
     private static boolean checkForWinnerGame(int gameId) {
         BoardDomainObject board = BoardModel.GetBoardByGameId(gameId);
         if (board == null) {
@@ -117,7 +117,6 @@ public class GameModel {
     }
 
     public static GameDomainObject createGame(int player1Id, int player2Id, int gameTypeId) {
-        // Preliminary validation
         if (PlayerDataAccess.GetPlayerById(player1Id) == null) {
             throw new IllegalArgumentException("Invalid player1 ID");
         }
