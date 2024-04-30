@@ -11,7 +11,7 @@ public class GameDataObject {
     public String status;
     public int currentTurnPlayer;
     public int winnerId;
-    public BoardDomainObject board;  // Ensure this is always handled
+    public BoardDomainObject board; 
 
     public GameDataObject(int id, int player1Id, int player2Id, String status, int currentTurnPlayer, int winnerId) {
         this.id = id;
@@ -29,7 +29,7 @@ public class GameDataObject {
         this.status = status;
         this.currentTurnPlayer = currentTurnPlayer;
         this.winnerId = winnerId;
-        this.board = board;  // Set board here
+        this.board = board;  
     }
 
     // Copy Constructor
@@ -50,6 +50,6 @@ public class GameDataObject {
         this.status = game.GetStatus();
         this.currentTurnPlayer = game.GetCurrentTurnPlayer();
         this.winnerId = game.GetWinnerId();
-        this.board = game.GetBoard();  // Ensure board is set here
+        this.board = game.GetBoard(); 
     }
 }
