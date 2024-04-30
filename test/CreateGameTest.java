@@ -12,6 +12,7 @@ import restService.response.GameResponse;
 import restService.response.GameTypeResponse;
 import restService.response.PlayerResponse;
 
+// Story 3
 public class CreateGameTest {
 
     GameTypeRequest req = new GameTypeRequest(0, "Classic");
