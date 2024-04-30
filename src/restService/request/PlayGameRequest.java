@@ -1,7 +1,5 @@
 package restService.request;
 
-import DataAccess.BoardDataAccess;
-import DataObjects.BoardDataObject;
 
 //story 4 play game request
 public class PlayGameRequest {
