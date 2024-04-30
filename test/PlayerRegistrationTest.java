@@ -15,7 +15,7 @@ public class PlayerRegistrationTest {
     PlayerResponse response = PlayerController.registerPlayer(request);
 
     // tests for valid inputs
-    // Scenario 1.6: Username and Password Input Test – Correct inputs
+    // Scenario 1.8: Username and Password Input Test – Correct inputs
     @Test
     public void PlayerController_RegisterPlayer_SuccessTest() {
 
@@ -37,7 +37,7 @@ public class PlayerRegistrationTest {
         // do we need an assertEquals for password?, if we are not storing them here?
     }
 
-    // Scenario 1.7: Username and Password Input Test – Correct inputs and test
+    // Scenario 1.9: Username and Password Input Test – Correct inputs and test
     // sequential playerid
     @Test
     public void PlayerController_RegisterPlayer_SuccessTest_SeqPlayerId() {
