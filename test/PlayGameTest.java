@@ -53,11 +53,10 @@ public class PlayGameTest {
     CreateGameRequest requestCG3 = new CreateGameRequest(2, 1, 0);
     GameResponse responseCG3 = GameController.CreateGame(requestCG3);
 
-    // set gameid=2 's status as complete
-    // String status = responseCG3.GetStatus();
-    // status.SetStatus(status);
-    // responseCG3.SetStatus(status);
-    GameResponse responseCG3Comp = GameController.SetGameStatus(responseCG3);
+    // Create a game 3 that has player1Id and player2Id (gameid = 3)  USED TO TEST STATUS
+    CreateGameRequest requestCG4 = new CreateGameRequest(2, 1, 0);
+    GameResponse responseCG4 = GameController.CreateGame(requestCG4);
+
 
     // play game to fill up column 7 for game 1
     // row 1
@@ -78,6 +77,31 @@ public class PlayGameTest {
     // row 6
     PlayGameRequest requestPG6 = new PlayGameRequest(2, 2, 6);
     GameResponse responsePG6 = GameController.PlayGame(requestPG6);
+
+
+
+    // play game to check status
+    // row 1
+    PlayGameRequest requestPG7 = new PlayGameRequest(3, 1, 6);
+    GameResponse responsePG7 = GameController.PlayGame(requestPG7);
+    // row 2
+    PlayGameRequest requestPG8 = new PlayGameRequest(3, 2, 5);
+    GameResponse responsePG8 = GameController.PlayGame(requestPG8);
+    // row 3
+    PlayGameRequest requestPG9 = new PlayGameRequest(3, 1, 6);
+    GameResponse responsePG9 = GameController.PlayGame(requestPG9);
+    // row 4
+    PlayGameRequest requestPG10 = new PlayGameRequest(3, 2, 5);
+    GameResponse responsePG10 = GameController.PlayGame(requestPG10);
+    // row 5
+    PlayGameRequest requestPG11 = new PlayGameRequest(3, 1, 6);
+    GameResponse responsePG11 = GameController.PlayGame(requestPG11);
+    // row 6
+    PlayGameRequest requestPG12 = new PlayGameRequest(3, 2, 5);
+    GameResponse responsePG12 = GameController.PlayGame(requestPG12);
+    // row 5
+    PlayGameRequest requestPG13 = new PlayGameRequest(3, 1, 6);
+    GameResponse responsePG13 = GameController.PlayGame(requestPG13);
 
     // testing valid inputs
     // Scenario 4.9: Column input, gameid input, playerid input - all valid and
@@ -226,8 +250,7 @@ public class PlayGameTest {
     // Scenario 4.8: Status of the game - Completed
     @Test
     public void GameController_PlayGame_StatusGame() {
-        GameResponse responseCG3Comp = GameController.SetGameStatus(responseCG3);
-        int gameId = 2;
+        int gameId = 3;
         int playerId = 1; // currentturnplayer should be playerid=2
         int column = 4;
 
@@ -239,12 +262,3 @@ public class PlayGameTest {
     }
 
 }
-
-/*
- * assertEquals(-1, response.GetGameId());
- * assertEquals(-1, response.GetCurrentTurnPlayer());
- * assertEquals(-1, response.GetPlayer1Id());
- * assertEquals(-1, response.GetPlayer2Id());
- * assertEquals("", response.GetStatus());
- * assertEquals(-1, response.GetWinnerId());
- */
