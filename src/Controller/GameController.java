@@ -13,7 +13,7 @@ public class GameController {
     // request is getgamedetailsrequest.java
     // reponse is gameresponse.java
 
-    public static GameResponse getGameDetails(GetGameDetailsRequest gameId) {
+    /*public static GameResponse getGameDetails(GetGameDetailsRequest gameId) {
         try {
             GameDomainObject game = GameModel.GetGameById(gameId.GetGameId());
             if (game == null) {
@@ -23,6 +23,23 @@ public class GameController {
             return new GameResponse(game.GetGameId(), game.GetGameTypeId(), game.GetPlayer1Id(), game.GetPlayer2Id(),
                     game.GetStatus(), game.GetCurrentTurnPlayer(), game.GetWinnerId(), game.GetBoard().GetOccupancy());
         } catch (Exception ex) {
+            return new GameResponse(ex.getMessage());
+        }
+    }*/
+
+    public static GameResponse getGameDetails(GetGameDetailsRequest gameId) {
+        System.out.println("GameController: Fetching details for game ID " + gameId.GetGameId());
+        try {
+            GameDomainObject game = GameModel.GetGameById(gameId.GetGameId());
+            if (game == null) {
+                System.out.println("GameController: No game found with ID " + gameId.GetGameId());
+                return new GameResponse("Invalid GameId.");
+            }
+            System.out.println("GameController: Game details retrieved successfully for ID " + gameId.GetGameId());
+            return new GameResponse(game.GetGameId(), game.GetGameTypeId(), game.GetPlayer1Id(), game.GetPlayer2Id(),
+                    game.GetStatus(), game.GetCurrentTurnPlayer(), game.GetWinnerId(), game.GetBoard().GetOccupancy());
+        } catch (Exception ex) {
+            System.out.println("GameController: Exception in getGameDetails - " + ex.getMessage());
             return new GameResponse(ex.getMessage());
         }
     }
