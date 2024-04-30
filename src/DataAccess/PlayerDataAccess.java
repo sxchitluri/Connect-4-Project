@@ -45,6 +45,8 @@ public class PlayerDataAccess {
         return null;
     }
 
+    
+    //What is happening with this/is it used in our final code? - it is in PlayerModel but somehow doesn't seem to affect testing
     public static PlayerDataObject GetPlayerByGameId(int gameId) {
         PlayerDataObject playersByGame;
 
@@ -70,6 +72,7 @@ public class PlayerDataAccess {
         }
         return playersByGame = null;
     }
+
 
     // trying to match the player id to the a game's player1Id or player2Id
     // that helps the PlayerModel.java
@@ -142,7 +145,7 @@ public class PlayerDataAccess {
         return newPlayer;
     }
 
-    // save players, Need it ??????
+
     public static void Save(PlayerDataObject playerToSave) {
         for (PlayerDataObject player : players) {
             if (player.id == playerToSave.id) {
