@@ -1,7 +1,7 @@
 package restService.response;
 
 import DomainObjects.BoardDomainObject;
-//import DomainObjects.GameDomainObject;
+
 
 // story 2's AND story 4's response definition 
 public class GameResponse {
@@ -15,8 +15,7 @@ public class GameResponse {
     private final String status;
     private final int currentTurnPlayer;
     private final int winnerId;
-    private final String board; // QUESTION: does this need to be String or the board data object that gets
-                                // returned???? and the data object takes care of the String part???
+    private final String board; 
 
     // this method is if request inputs are valid (which the game model tests)
     public GameResponse(int gameId, int gameTypeId, int player1Id, int player2Id, String status, int currentTurnPlayer,
