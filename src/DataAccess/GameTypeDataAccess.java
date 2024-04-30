@@ -2,12 +2,12 @@ package DataAccess;
 
 import java.util.ArrayList;
 import DataObjects.GameTypeDataObject;
-import DomainObjects.GameTypeDomainObject;
+
 
 public class GameTypeDataAccess {
 
     private static ArrayList<GameTypeDataObject> gameTypes = new ArrayList<GameTypeDataObject>();
-    // private static int nextId = 0;
+
 
     public GameTypeDataAccess() {
         initialize();
@@ -15,17 +15,8 @@ public class GameTypeDataAccess {
 
     private void initialize() {
         gameTypes.add(new GameTypeDataObject(0, "Classic"));
-        // gameTypes.add(new GameTypeDataObject(1, "Connect-3");
-        // nextId = 1;
     }
 
-    /*
-     * private static int getNextId(){
-     * int thisId = nextId;
-     * nextId++;
-     * return thisId;
-     * }
-     */
 
     public static ArrayList<GameTypeDataObject> GetAllGameTypes() {
         ArrayList<GameTypeDataObject> itemTypesList = new ArrayList<GameTypeDataObject>();
@@ -46,22 +37,8 @@ public class GameTypeDataAccess {
     }
 
     public static void AddGameType(GameTypeDataObject gameType) {
-        // Optionally, you can handle ID generation and avoid duplicates here
-        gameType.id = gameTypes.size();  // Simple ID assignment based on the size of the list
+        gameType.id = gameTypes.size();
         gameTypes.add(gameType);
     }
-
-    /*
-     * // idk, for playerdomainobject.java
-     * public static GameTypeDataObject GetGameTypeById(GameTypeDomainObject
-     * gameType) {
-     * for (GameTypeDataObject itemType : gameTypes) {
-     * if (itemType.id == gameType) {
-     * return new GameTypeDataObject(itemType);
-     * }
-     * }
-     * return null;
-     * }
-     */
 
 }
