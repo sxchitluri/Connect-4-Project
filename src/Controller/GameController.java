@@ -9,23 +9,9 @@ import restService.response.GameResponse;
 
 public class GameController {
 
-    // GETTING GAME DETAILS - making sure game exists??? [STORY 2]
+    // GETTING GAME DETAILS - STORY 2
     // request is getgamedetailsrequest.java
     // reponse is gameresponse.java
-
-    /*public static GameResponse getGameDetails(GetGameDetailsRequest gameId) {
-        try {
-            GameDomainObject game = GameModel.GetGameById(gameId.GetGameId());
-            if (game == null) {
-                return new GameResponse("Invalid GameId.");
-            }
-            // Assuming game is found, construct a successful response
-            return new GameResponse(game.GetGameId(), game.GetGameTypeId(), game.GetPlayer1Id(), game.GetPlayer2Id(),
-                    game.GetStatus(), game.GetCurrentTurnPlayer(), game.GetWinnerId(), game.GetBoard().GetOccupancy());
-        } catch (Exception ex) {
-            return new GameResponse(ex.getMessage());
-        }
-    }*/
 
     public static GameResponse getGameDetails(GetGameDetailsRequest gameId) {
         System.out.println("GameController: Fetching details for game ID " + gameId.GetGameId());
@@ -50,7 +36,6 @@ public class GameController {
             if (game == null) {
                 return new GameResponse("Invalid GameId.");
             }
-            // Assuming game is found, construct a successful response
             return new GameResponse(game.GetGameId(), game.GetGameTypeId(), game.GetPlayer1Id(), game.GetPlayer2Id(),
                     game.GetStatus(), game.GetCurrentTurnPlayer(), game.GetWinnerId(), game.GetBoard().GetOccupancy());
         } catch (Exception ex) {
@@ -100,20 +85,6 @@ public class GameController {
             GameResponse response = new GameResponse(ex.getMessage());
             return response;
         }
-    }
-
-    public static GameResponse SetGameStatus(GameResponse response) {
-        try {
-
-            GameDomainObject domainToCreate = new GameDomainObject(response);
-            GameResponse response2 = new GameResponse(domainToCreate.SetStatus());
-            return response2;
-
-        } catch (Exception ex) {
-            GameResponse response2 = new GameResponse(ex.getMessage());
-            return response;
-        }
-
     }
 
 }
