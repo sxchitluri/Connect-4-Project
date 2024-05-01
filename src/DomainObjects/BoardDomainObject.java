@@ -1,7 +1,10 @@
 package DomainObjects;
 
 import java.util.ArrayList;
+
+import DataAccess.GameDataAccess;
 import DataObjects.BoardDataObject;
+import DataObjects.GameDataObject;
 import Models.BoardModel;
 import Models.GameModel;
 
@@ -108,20 +111,29 @@ public class BoardDomainObject {
         return occupancy.charAt(index) == ' '; // Ensure the top of the column is free
     }
 
-
-
-
-    //Need to fix this to take unique playerids
-    public String updateBoard(int column, int playerId) {
-        // Determine the player's token based on the playerId
+    public char findToken(int gameId, int playerId){
+        GameDataObject gameData = GameDataAccess.GetGameById(gameId);
+        
         char playerToken;
-        if (playerId == 1) {
+        if (playerId == gameData.player1Id) {
             playerToken = 'R'; // Assume player 1 is 'Red'
-        } else if (playerId == 2) {
+        } else if (playerId == gameData.player2Id) {
             playerToken = 'G'; // Assume player 2 is 'Green'
         } else {
             throw new IllegalArgumentException("Unknown player ID: " + playerId);
         }
+
+        return playerToken;
+    }
+
+
+
+
+    //Need to fix this to take unique playerids
+    public String updateBoard(int gameId, int column, int playerId) {
+        // Determine the player's token based on the playerId
+
+        char playerToken = findToken(gameId, playerId);
 
         // Start from the bottom of the column and find the first empty spot
         for (int row = 5; row >= 0; row--) { // Rows are indexed from 0 to 5, bottom row is 5
