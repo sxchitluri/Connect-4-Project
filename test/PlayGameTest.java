@@ -20,10 +20,6 @@ import restService.response.PlayerResponse;
 // Story 4 test
 public class PlayGameTest {
 
-    // NEED TO UPDATE CODE WHERE BOARD TOKENS 'R' AND 'G' ARE ASSIGNED TO PLAYER1ID
-    // AND PLAYER2ID OF A GAMEID
-    // INSTEAD OF A # IN UPDATEBOARD METHOD OF BOARDDOMAINOBJECT.JAVA
-
     // gametype initialized
     // GameTypeDataAccess.GameTypeDataAccess();
     // new GameTypeDataObject(0,"Classic");
@@ -53,10 +49,10 @@ public class PlayGameTest {
     CreateGameRequest requestCG3 = new CreateGameRequest(2, 1, 0);
     GameResponse responseCG3 = GameController.CreateGame(requestCG3);
 
-    // Create a game 3 that has player1Id and player2Id (gameid = 3)  USED TO TEST STATUS
+    // Create a game 3 that has player1Id and player2Id (gameid = 3) USED TO TEST
+    // STATUS
     CreateGameRequest requestCG4 = new CreateGameRequest(2, 1, 0);
     GameResponse responseCG4 = GameController.CreateGame(requestCG4);
-
 
     // play game to fill up column 7 for game 1
     // row 1
@@ -77,8 +73,6 @@ public class PlayGameTest {
     // row 6
     PlayGameRequest requestPG6 = new PlayGameRequest(2, 2, 6);
     GameResponse responsePG6 = GameController.PlayGame(requestPG6);
-
-
 
     // play game to check status
     // row 1
