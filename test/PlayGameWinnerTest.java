@@ -40,7 +40,7 @@ public class PlayGameWinnerTest {
     // Scenario 5.2.1: gameid does exist - input found but no winner yet
     @Test
     public void testGamePlayNoWin() {
-        // Create a game request
+        // Create a game request (gameid = 0)
         CreateGameRequest createRequest = new CreateGameRequest(1, 2, 0);
         // Create the game
         GameResponse createGameResponse = GameController.CreateGame(createRequest);
@@ -68,10 +68,11 @@ public class PlayGameWinnerTest {
         assertEquals(0, response.GetWinnerId());
     }
 
-    // Scenario 5.2.2: gameid does exist - input found and there is a winner
+    // Scenario 5.2.2.1: gameid does exist - input found and there is a winner (all
+    // in vertical column)
     @Test
     public void testGamePlayWin() {
-
+        // (gameid = 1)
         CreateGameRequest requestCG4 = new CreateGameRequest(2, 1, 0);
         GameResponse responseCG4 = GameController.CreateGame(requestCG4);
 
@@ -110,4 +111,103 @@ public class PlayGameWinnerTest {
         assertEquals(1, response.GetWinnerId());
 
     }
+
+    // Scenario 5.2.2: gameid does exist - input found and there is a winner (all in
+    // horizontal column)
+    // an additional test we thought of apart from sprint plan - horiizaontal win
+    // works
+    @Test
+    public void testGamePlayWin2() {
+        // (gameid = 2)
+        CreateGameRequest requestCG4 = new CreateGameRequest(2, 1, 0);
+        GameResponse responseCG4 = GameController.CreateGame(requestCG4);
+
+        // Retrieve the game ID from the created game response
+        int gameId = responseCG4.GetGameId();
+
+        // row 0
+        PlayGameRequest requestPG7 = new PlayGameRequest(gameId, 1, 0);
+        GameResponse responsePG7 = GameController.PlayGame(requestPG7);
+        // row 0
+        PlayGameRequest requestPG8 = new PlayGameRequest(gameId, 2, 6);
+        GameResponse responsePG8 = GameController.PlayGame(requestPG8);
+        // row 0
+        PlayGameRequest requestPG9 = new PlayGameRequest(gameId, 1, 1);
+        GameResponse responsePG9 = GameController.PlayGame(requestPG9);
+        // row 0
+        PlayGameRequest requestPG10 = new PlayGameRequest(gameId, 2, 5);
+        GameResponse responsePG10 = GameController.PlayGame(requestPG10);
+        // row 0
+        PlayGameRequest requestPG11 = new PlayGameRequest(gameId, 1, 2);
+        GameResponse responsePG11 = GameController.PlayGame(requestPG11);
+        // row 0
+        PlayGameRequest requestPG12 = new PlayGameRequest(gameId, 2, 5);
+        GameResponse responsePG12 = GameController.PlayGame(requestPG12);
+
+        // Play the game with the retrieved game ID
+        GameResponse response = GameController.PlayGame(new PlayGameRequest(gameId, 1, 3));
+
+        // Assertions to verify the game play results
+        assertEquals(true, response.GetIsValid());
+        assertNull(response.GetErrorMessage());
+        assertEquals("Completed", response.GetStatus());
+        assertEquals(1, response.GetWinnerId());
+
+    }
+
+    // Scenario 5.2.3: gameid does exist - input found and there is a winner (all in
+    // diagonal column)
+    // an additional test we thought of apart from sprint plan - could not get the
+    // diagonal column win to work
+    @Test
+    public void testGamePlayWin3() {
+        // (gameid = 3)
+        CreateGameRequest requestCG4 = new CreateGameRequest(2, 1, 0);
+        GameResponse responseCG4 = GameController.CreateGame(requestCG4);
+
+        // Retrieve the game ID from the created game response
+        int gameId = responseCG4.GetGameId();
+
+        // row 0
+        PlayGameRequest requestPG7 = new PlayGameRequest(gameId, 1, 0);
+        GameResponse responsePG7 = GameController.PlayGame(requestPG7);
+        // row 0
+        PlayGameRequest requestPG8 = new PlayGameRequest(gameId, 2, 1);
+        GameResponse responsePG8 = GameController.PlayGame(requestPG8);
+        // row 1
+        PlayGameRequest requestPG9 = new PlayGameRequest(gameId, 1, 1);
+        GameResponse responsePG9 = GameController.PlayGame(requestPG9);
+        // row 0
+        PlayGameRequest requestPG10 = new PlayGameRequest(gameId, 2, 2);
+        GameResponse responsePG10 = GameController.PlayGame(requestPG10);
+        // row 0
+        PlayGameRequest requestPG11 = new PlayGameRequest(gameId, 1, 3);
+        GameResponse responsePG11 = GameController.PlayGame(requestPG11);
+        // row 1
+        PlayGameRequest requestPG12 = new PlayGameRequest(gameId, 2, 3);
+        GameResponse responsePG12 = GameController.PlayGame(requestPG12);
+        // row 1
+        PlayGameRequest requestPG13 = new PlayGameRequest(gameId, 1, 2);
+        GameResponse responsePG13 = GameController.PlayGame(requestPG13);
+        // row 2
+        PlayGameRequest requestPG14 = new PlayGameRequest(gameId, 2, 3);
+        GameResponse responsePG14 = GameController.PlayGame(requestPG13);
+        // row 3
+        PlayGameRequest requestPG15 = new PlayGameRequest(gameId, 1, 3);
+        GameResponse responsePG15 = GameController.PlayGame(requestPG13);
+        // row 0
+        PlayGameRequest requestPG16 = new PlayGameRequest(gameId, 2, 4);
+        GameResponse responsePG16 = GameController.PlayGame(requestPG13);
+
+        // Play the game with the retrieved game ID
+        GameResponse response = GameController.PlayGame(new PlayGameRequest(gameId, 1, 2));
+
+        // Assertions to verify the game play results
+        assertEquals(true, response.GetIsValid());
+        assertNull(response.GetErrorMessage());
+        assertEquals("Completed", response.GetStatus());
+        assertEquals(1, response.GetWinnerId());
+
+    }
+
 }
