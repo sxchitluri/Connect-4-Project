@@ -38,7 +38,7 @@ public class GameModel {
                 throw new IllegalStateException("Board is null for Game ID: " + gameData.id);
             }
             // update board and save
-            board.updateBoard(column, playerId);
+            board.updateBoard(gameId, column, playerId);
             BoardDataAccess.Save(new BoardDataObject(board));
 
             // Check for a winner
