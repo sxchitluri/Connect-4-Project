@@ -1,4 +1,4 @@
-## Connect 4 Game - Backend
+## Connect 4 Game - Java
 
 The Connect 4 project done for the course, CSCI 7532 Advance Software Engineering, Spring 2024, Georgia Southern University
 Project members: Lorelei Brand and Sriharshini Chitluri
